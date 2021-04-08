@@ -31,7 +31,7 @@ Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'logout'])-
 
 
 ######################### Begin Home Routes ########################
-Route::get('/mousof', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/wordsearch', [App\Http\Controllers\HomeController::class, 'wordsearch'])->name('wordsearch');
 Route::get('/wordmojjam/{id}/{searchword}', [App\Http\Controllers\HomeController::class, 'wordmojjam'])->name('wordmojjam');
 Route::get('/getwordmaningmojjam/{id}', [App\Http\Controllers\HomeController::class, 'getwordmaningmojjam'])->name('getwordmaningmojjam');
@@ -92,6 +92,13 @@ Route::get('/allsayingcharacter/{id}', [App\Http\Controllers\SayingsController::
 Route::get('/fawaed', [App\Http\Controllers\FawaedController::class, 'index'])->name('fawaed');
 Route::post('/faedasearch', [App\Http\Controllers\FawaedController::class, 'faedasearch'])->name('fawaed.faedasearch');
 
-######################### End fawaed Routes ########################
+######################### End  fawaed Routes ########################
+
+######################### Begin quaanwords Routes ########################
+Route::get('/quaanwords', [App\Http\Controllers\QuraanwordsController::class, 'index'])->name('quaanwords');
+Route::post('/faedasearch', [App\Http\Controllers\FawaedController::class, 'faedasearch'])->name('fawaed.faedasearch');
+
+######################### End quaanwords Routes ########################
+
 
 

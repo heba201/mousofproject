@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Wisdom extends Model
 {
     use HasFactory;
-    protected $table='Wisdoms';
+    protected $table='wisdoms';
     protected $fillable = ['wisdom' ,'wisdom_type','admin_id','created_at','updated_at','wisdomsayingsubject_id','character_id','wisdom_photo','wisdom_tag'];
     public function scopeSelection($query)
     {

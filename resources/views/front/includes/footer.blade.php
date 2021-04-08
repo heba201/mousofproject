@@ -1,7 +1,7 @@
 <!-- footer section -->
 <footer class="footer-section spad pb-0" >
     <div class="footer-top" dir="rtl">
-        <div class="footer-warp">
+        <div class="footer-warp" style="text-align: right">
             <div class="row">
                 <div class="widget-item">
                     <h4>النشرة البريدية</h4>

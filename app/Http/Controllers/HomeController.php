@@ -18,11 +18,11 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $characters = Character::selection()->limit(4)->get();
-        $articles = Article::selection()->limit(4)->get();
+        $characters = Character::selection()->limit(2)->get();
+        $articles = Article::selection()->limit(2)->get();
         $lessons = Lesson::selection()->limit(3)->get();
-        $sayings =Saying::with('character')->selection()->limit(4)->get();
-        $fawaed =Faeda::with('fawedsubject')->selection()->limit(4)->get();
+        $sayings =Saying::with('character')->selection()->limit(2)->get();
+        $fawaed =Faeda::with('fawedsubject')->selection()->limit(2)->get();
         $wisdomtoday = Wisdom::inRandomOrder()->first();
         $wordcount=Word::count();
         $wordtoday=Word::with('meanings')->inRandomOrder()->whereIn('word_type',['0','1'])->first();

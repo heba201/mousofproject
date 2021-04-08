@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="widget-item">
                     <h4>النشرة البريدية</h4>
-                    <form class="footer-newslatter">
+                    <form class="footer-newslatter" style="text-align: right">
                         <input type="email" placeholder="البريد الالكتروني">
                         <button class="site-btn">اشترك</button>
 

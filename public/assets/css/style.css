@@ -811,6 +811,7 @@ text-decoration: underline !important;
 	border: none;
 	font-size: 14px;
 	background: #edf4f6;
+    margin-left: 25px;
 }
 
 .footer-newslatter .site-btn {

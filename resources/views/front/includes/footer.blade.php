@@ -1,3 +1,11 @@
+<style>
+    .footer-newslatter input[type=email] ,
+    .footer-newslatter input[type=text]
+    {
+        margin-left: 20px;
+    }
+    </style>
+
 <!-- footer section -->
 <footer class="footer-section spad pb-0" >
     <div class="footer-top" dir="rtl">

@@ -6,7 +6,7 @@
 
 
 	<!-- course section -->
-	<section class="course-section spad">
+	<section class="course-section spad" style="margin-bottom:35px;">
 		<div class="container">
 		</div>
 		<div class="course-warp">

@@ -787,7 +787,7 @@ text-decoration: underline !important;
 	margin-bottom: 0;
 }
 
-.widget-item ul.contact-list li:after {
+ .widget-item ul.contact-list li:before {
 	position: absolute;
 	content: "";
 	width: 8px;

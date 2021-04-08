@@ -14,21 +14,21 @@
                 <div class="widget-item">
                     <h4>المعاجم العربية</h4>
                     <ul>
-                        <li><a href="">لسان العرب</a></li>
-                        <li><a href="">أساس البلاغة</a></li>
-                        <li><a href="">الصحاح</a></li>
-                        <li><a href="">المصباح المنير</a></li>
-                        <li><a href="">القاموس المحيط</a></li>
+                        <li><a href="#">لسان العرب</a></li>
+                        <li><a href="#">أساس البلاغة</a></li>
+                        <li><a href="#">الصحاح</a></li>
+                        <li><a href="#">المصباح المنير</a></li>
+                        <li><a href="#">القاموس المحيط</a></li>
                     </ul>
                 </div>
                 <div class="widget-item">
                     <h4>روابط تهمك </h4>
                     <ul>
-                        <li><a href="">معاني الكلمات</a></li>
-                        <li><a href="">أقوال مأثورة</a></li>
-                        <li><a href="">قصص القران</a></li>
-                        <li><a href=""></a>كلمات القران</li>
-                        <li><a href="">الصحابة والتابعين</a></li>
+                        <li><a href="#">معاني الكلمات</a></li>
+                        <li><a href="#">أقوال مأثورة</a></li>
+                        <li><a href="#">قصص القران</a></li>
+                        <li><a href="#"></a>كلمات القران</li>
+                        <li><a href="#">الصحابة والتابعين</a></li>
                     </ul>
                 </div>
                 <div class="widget-item">
@@ -39,6 +39,8 @@
                         <li><a href="">العاب لغوية</a></li>
                         <li><a href="">فوائد لغوية</a></li>
                         <li><a href="">مصطلحات</a></li>
+                        <li><a href="#">الشروط والأحكام</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
                     </ul>
                 </div>
 
@@ -51,16 +53,6 @@
                     </ul>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <div class="footer-warp">
-            <ul class="footer-menu">
-                <li><a href="#">الشروط والأحكام</a></li>
-                <li><a href="#">اشتراك</a></li>
-                <li><a href="#">سياسة الخصوصية</a></li>
-            </ul>
-            <div class="copyright"><a target="_blank" href="#">EASY SOFTWARE SOLUTIONS</a></div>
         </div>
     </div>
 </footer>

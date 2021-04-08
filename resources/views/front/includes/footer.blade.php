@@ -2,7 +2,7 @@
     .footer-newslatter input[type=email] ,
     .footer-newslatter input[type=text]
     {
-        margin-left: 20px;
+        margin-left: 50px;
     }
     </style>
 

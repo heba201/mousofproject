@@ -124,12 +124,12 @@ use Illuminate\Support\Facades\Route;
 
  ######################### Begin wisdoms Routes ########################
  Route::group(['prefix' => 'wisdoms'], function () {
-    Route::get('/','wisdomsController@index') -> name('admin.wisdoms');
-    Route::get('create','wisdomsController@create') -> name('admin.wisdoms.create');
-    Route::post('store','wisdomsController@store') -> name('admin.wisdoms.store');
-    Route::get('edit/{id}','wisdomsController@edit') -> name('admin.wisdoms.edit');
-    Route::post('update/{id}','wisdomsController@update') -> name('admin.wisdoms.update');
-    Route::get('delete/{id}','wisdomsController@destroy') -> name('admin.wisdoms.delete');
+    Route::get('/','WisdomsController@index') -> name('admin.wisdoms');
+    Route::get('create','WisdomsController@create') -> name('admin.wisdoms.create');
+    Route::post('store','WisdomsController@store') -> name('admin.wisdoms.store');
+    Route::get('edit/{id}','WisdomsController@edit') -> name('admin.wisdoms.edit');
+    Route::post('update/{id}','WisdomsController@update') -> name('admin.wisdoms.update');
+    Route::get('delete/{id}','WisdomsController@destroy') -> name('admin.wisdoms.delete');
 
     });
      ######################### End   wisdoms Routes  ########################

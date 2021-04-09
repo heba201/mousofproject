@@ -79,10 +79,43 @@
                                                                     @enderror
                                                                 </div>
                                                             </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1">   السيرة الذاتية  </label>
+                                                                    <textarea type="text" value="" id="poet_cv"
+                                                                           class="form-control"
+                                                                           placeholder=" "
+                                                                           name="poet_cv"></textarea>
+                                                                    @error("poet_cv")
+                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                            </div>
 
-
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1">الأعمال</label>
+                                                                    <textarea type="text" value="" id="poet_works[]"
+                                                                           class="form-control"
+                                                                           placeholder=" "
+                                                                           name="poet_works[]"></textarea>
+                                                                    @error("poet_works.*")
+                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <a href="javascript:void(0)"  class="btn btn-primary" id="add_button" style="margin-top: 25px;"><i class="fas fa-plus"></i></a>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <a href="javascript:void(0)"  class="btn btn-danger" id="remove_button" style="margin-top: 25px;margin-left:10px"><i class="fas fa-minus"></i></a>
+                                                                    </div>
+                                                            </div>
+                                                            <div class="row field-wrapper">
+                                                            </div>
+                                                             </div>
                                             <div class="form-actions">
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="la la-check-square-o"></i> حفظ
@@ -103,4 +136,21 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+      $(document).ready(function(){
+        $('#add_button').click(function(){
+            $('.field-wrapper').append(
+                '<div class="col-md-6" id="GFG_DIV"><textarea type="text" value="" id="poet_works[]" class="form-control" placeholder=" " name="poet_works[]" style="margin-bottom:15px"></textarea></div>'
+             );
+})
+$("#remove_button").on("click", function() {
+    $('.field-wrapper').children().last().remove();
+            });
+      });
+ </script>
 @endsection

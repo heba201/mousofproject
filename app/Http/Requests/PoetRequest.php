@@ -26,6 +26,9 @@ class PoetRequest extends FormRequest
         return [
             'poet_name' => 'required|string',
             'poet_era' => 'required|string',
+            'poet_cv' => 'required|string',
+            'poet_works' => 'required|array|min:1',
+            'poet_works.*' =>'required|string|distinct',
         ];
     }
 
@@ -34,7 +37,9 @@ class PoetRequest extends FormRequest
 
         return [
             'required'  => 'هذا الحقل مطلوب ',
-            'string'  =>'الاسم لابد ان يكون حروف فقط '
+            'string'  =>'الاسم لابد ان يكون حروف فقط ',
+            'poet_works.*.required' => 'هذا الحقل مطلوب ',
+            'poet_works.*.distinct' => 'ادخل بيانات مختلفة',
         ];
     }
 }

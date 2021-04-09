@@ -31,10 +31,20 @@ class PoetsController extends Controller
         if(getold('App\Models\Poet','poet_name',$request->poet_name)){
             return redirect()->route('admin.poets')->with(['error' => 'هذا الشاعر تم اضافته من قبل']);
             }
-            $character = Poet::create([
+            if(isset($_POST["poet_works"]) && is_array($_POST["poet_works"])){
+                $poet_works= implode(", ", $_POST["poet_works"]);
+            }
+            else{
+                $poet_works=$request->poet_works;
+            }
+
+
+            $poet = Poet::create([
                 'poet_name' => $request->poet_name,
                 'poet_era' => $request->poet_era,
                 'admin_id' =>Auth::user()->id,
+                'poet_cv'  =>$request->poet_cv,
+                'poet_works'=> $poet_works
             ]);
             return redirect()->route('admin.poets')->with(['success' => 'تم الحفظ بنجاح']);
        }
@@ -49,10 +59,11 @@ class PoetsController extends Controller
         try {
 
             $poet= Poet::Selection()->find($id);
+            $poetworks=explode(",",  $poet->poet_works);
             if (!$poet)
                 return redirect()->route('admin.poets')->with(['error' => 'هذا الشاعر غير  موجود او ربما يكون محذوف ']);
 
-            return view('admin.poets.edit', compact('poet'));
+            return view('admin.poets.edit', compact('poet','poetworks'));
 
         } catch (\Exception $exception) {
             return redirect()->route('admin.poets')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
@@ -71,12 +82,21 @@ class PoetsController extends Controller
             if (! $poet){
                 return redirect()->route('admin.poets')->with(['error' => 'هذا الشاعر غير موجود او ربما يكون محذوف ']);
             }
+            if(isset($_POST["poet_works"]) && is_array($_POST["poet_works"])){
+                $poet_works= implode(", ", $_POST["poet_works"]);
+            }
+            else{
+                $poet_works=$request->poet_works;
+            }
+
               if ($poet) {
                 $poet::where('id', $id)
                 ->update([
                     'poet_name' => $request->poet_name,
                     'poet_era' => $request->poet_era,
                     'admin_id' =>Auth::user()->id,
+                    'poet_cv'  =>$request->poet_cv,
+                    'poet_works'=> $poet_works
                 ]);
               }
             return redirect()->route('admin.poets')->with(['success' => 'تم التحديث بنجاح']);

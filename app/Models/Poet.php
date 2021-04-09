@@ -9,12 +9,12 @@ class Poet extends Model
 {
     use HasFactory;
     protected $table='poets';
-    protected $fillable = ['poet_name','poet_era','admin_id','created_at','updated_at'];
+    protected $fillable = ['poet_name','poet_era','poet_cv','poet_works','admin_id','created_at','updated_at'];
 
     public function scopeSelection($query)
     {
 
-        return $query->select('id','poet_name','poet_era','admin_id')
+        return $query->select('id','poet_name','poet_era','poet_cv','poet_works','admin_id')
         ->orderBy('id','desc');
     }
     public function abyaat(){

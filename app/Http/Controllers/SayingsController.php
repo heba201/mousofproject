@@ -88,6 +88,7 @@ class SayingsController extends Controller
 
     public function  sayingsearch(Request $request){
 
+       try{
         if ($request->has('search')) {
             $filteredsearch=filter_var($request->search,FILTER_SANITIZE_STRING);
             $sayings =Saying::with('character')->where('saying', 'LIKE', '%'.$filteredsearch.'%')->inRandomOrder()->selection()->paginate(5);
@@ -104,6 +105,35 @@ class SayingsController extends Controller
         $wisdomtoday = Wisdom::with('character')->inRandomOrder()->first();
         $faedatoday=Faeda::with('fawedsubject')->inRandomOrder()->first();
             return view('front.saying.sayingcharacter',compact('sayings','wisdomSayingsubjects','characters','wordtoday','wordtodaymeaning','wordgroups','wordgroupmeaning','wisdomtoday','faedatoday'));
+        }
+    }
+        catch(\Exception $ex){
+            return redirect()->route('sayings');
+        }
+    }
+
+    public function getsaying($id)
+    {
+        try {
+            $saying= Saying::with('character')->Selection()->find($id);
+            $wisdomSayingsubjects=WisdomSayingsubject::inRandomOrder()->selection()->limit(9)->get();
+            $characters=Character::inRandomOrder()->selection()->limit(9)->get();
+            $wordtoday=Word::with('meanings')->inRandomOrder()->whereIn('word_type',['0','1'])->first();
+            $wordtodaymeaning=Meaning::where('word_id','=',$wordtoday->id)->selection()->first();
+            $wordgroups= Word::with('meanings')->where('word', 'LIKE', '%'.$wordtoday->word.'%')->selection()->limit(3)->get();
+            $wordgroupmeaning=Meaning::where('word_id','=',$wordgroups[0]->id)->selection()->get();
+            $wisdomtoday = Wisdom::with('character')->inRandomOrder()->first();
+            $faedatoday=Faeda::with('fawedsubject')->inRandomOrder()->first();
+
+            if (!$saying) {
+                return redirect()->route('sayings');
+            }
+            return view('front.saying.getsaying',compact('saying','wisdomSayingsubjects','characters','wordtoday','wordtodaymeaning','wordgroupmeaning','wisdomtoday','faedatoday'));
+
+        } catch (\Exception $ex) {
+            return $ex;
+            return redirect()->route('sayings');
+
         }
     }
 }

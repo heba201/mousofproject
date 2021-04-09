@@ -35,4 +35,21 @@ class FawaedController extends Controller
             return redirect()->route('fawaed');
         }
     }
+
+
+    public function getfaeda($id)
+    {
+        try{
+        $faeda = Faeda::with('fawedsubject')->Selection()->find($id);
+        if (!$faeda) {
+            return redirect()->route('fawaed');
+        }
+        $faedasubjects=Faedasubject::with('fawed')->where('id','=',$faeda->faeda_subject_id)->get()->first();
+        $filteredsearch=$faeda;
+        return view('front.fawaed.fawaedsearch',compact('faedasubjects','filteredsearch'));
+    }
+         catch(\Exception $ex){
+            return redirect()->route('fawaed');
+        }
+            }
 }

@@ -8,8 +8,8 @@ text-decoration: underline;
     color: #d82a4e !important;
 }
 </style>
-@endpush
 
+@endpush
 @section('content')
 <!-- search section -->
 @include('front.saying.searchbar')
@@ -22,20 +22,18 @@ text-decoration: underline;
         <div class="row">
             <div class="col-md-12">
                 <div class="section-title text-center">
-                    <img src="{{asset('assets/'.$sayings[0]->character->character_photo)}}" alt="alt text" height="150" width="150"  class="rounded-circle">
-                    <h4>{{$sayings[0]->character->character_name}}
+                    <img src="{{asset('assets/'.$saying->character->character_photo)}}" alt="alt text" height="150" width="150"  class="rounded-circle">
+                    <h4>{{$saying->character->character_name}}
                         </h4>
-                        <p>{{$sayings[0]->character->about_character}}</p>
+                        <p>{{$saying->character->about_character}}</p>
                     </div>
             </div>
             <div class="col-lg-8">
                 <div class="contact-form-warp" style="text-align: right">
-                    @foreach($sayings as $saying)
                     <div class="section-title text-white text-right" style="background:#edf4f6;border:1px solid #474747;border-radius:5px;">
-
-                        <a href="{{route('allsayingcharacter',$saying->character->id)}}"><h4 style="color:#474747;padding-top:10px;">{{$saying->character->character_name}} <img src="{{asset('assets/'.$saying->character->character_photo)}}" alt="alt text" style="float: right" height="75" width="75"  class="rounded-circle"></h4></a>
+                        <a href="{{route('allsayingcharacter',$saying->character->id)}}"><h4 style="color:#474747;padding-top:10px;">{{$saying->character->character_name}}<img src="{{asset('assets/'.$saying->character->character_photo)}}" alt="alt text" style="float: right" height="75" width="75"  class="rounded-circle"></h4></a>
                         <p style="padding-top:10px;font-size:15px;margin-right:40px;color:#474747">{{$saying->saying}}</p>
-                        <p style="margin-right: 35px;margin-top:15px;color:#474747;margin-bottom:10px;">الوسوم :
+                        <p style="margin-right: 35px;margin-top:15px;color:#474747">الوسوم :
                             <?php
                             $sayingtags=explode(",",$saying->saying_tag);
                             ?>
@@ -43,13 +41,8 @@ text-decoration: underline;
                            <a href="{{route('sayingtag',$sayingtag)}}"><span style="margin-right:10px;color:#d82a4e">  {{$sayingtag}} </span></a>
                             @endforeach
                         </p>
-
                     </div>
-                    @endforeach
                 </div>
-                <div style="margin-top:10px">
-                    {{$sayings->links("pagination::bootstrap-4")}}
-                    </div>
             </div>
 
             <div class="col-lg-4">

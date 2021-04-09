@@ -71,15 +71,17 @@ public function getwordmaningmojjam($id){
     try {
 
 
-        $word=Word::with('meanings')->inRandomOrder()->get()->first();
+       $word=Word::with('meanings')->inRandomOrder()->get()->first();
        $mojjam_id=$id;
        $wordmeaning=Meaning::where('word_id',$word->id)->where('mojjam_id',$mojjam_id)->selection()->get()->first();
        $mojjam=Mojjam::where('id',$mojjam_id)->selection()->get()->first();
        $similarwords=Word::with('meanings')->where('word', 'LIKE','%' . $word .'%')->where('id','!=',$word->id)->selection()->limit(3)->get();
        $words_meanings_othermojjams=Meaning::with('word','mojjam')->where('word_id',$word->id)->where('mojjam_id','!=',$mojjam_id)->selection()->get();
        $sentences=Sentence::with('word')->where('word_id',$word->id)->selection()->get();
+      if (!$word ||  !$wordmeaning) {
+        return redirect()->route('home');
+      }
        return view('front.wordsearch',compact('word','mojjam','wordmeaning','similarwords','words_meanings_othermojjams','sentences'));
-
 }
     catch(\Exception $ex){
         return redirect()->route('home');

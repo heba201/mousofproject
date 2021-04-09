@@ -1,8 +1,23 @@
 <style>
+
     .footer-newslatter input[type=email]
     {
         margin-left: 30px;
     }
+
+.widget-item ul.contact-list li:after {
+	position: absolute;
+	content: "";
+	width: 8px;
+	height: 8px;
+	right:-15px;
+	top: 6px;
+	border-radius: 50%;
+	background: #d82a4e;
+}
+.footer-newslatter .site-btn {
+    margin-right: -25px !important;
+}
     </style>
 
 <!-- footer section -->

@@ -1,9 +1,59 @@
 @extends('front.layout')
 @push('style')
     <style>
-.subjecttitle .select2 .op{
-    bottom:100%;
+.subjecttitle {
+
+
  }
+/* Style The Dropdown Button */
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+   position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index:999;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
         </style>
 @endpush
 @section('content')
@@ -19,30 +69,15 @@
                 <div class="contact-form-warp sub">
                     <div class="section-title text-white text-right subjecttitle" >
                         <div class="col-md-6" style="margin: auto">
-                            <select name="surah_index" class="select2 form-control" id="selectId" dir="rtl"  data-dropup-auto="false">
-                                <optgroup label="">
-                                    @foreach ($surahs as $surah)
-                                    <option value="" class="op">{{$surah['name']}}</option>
-                                    @endforeach
-                                </optgroup>
-                            </select>
-                        </div>
-                        <div class="navbar">
-                            <a href="#home">Home</a>
-                            <a href="#news">News</a>
                             <div class="dropdown">
-                              <button class="dropbtn">Dropdown
-                                <i class="fa fa-caret-down"></i>
-                              </button>
-                              <div class="dropdown-content">
-                                <a href="#">Link 1</a>
-                                <a href="#">Link 2</a>
-                                <a href="#">Link 3</a>
+                                <button class="dropbtn">سور القرآن الكريم</button>
+                                <div class="dropdown-content">
+                                    @foreach ($surahs as $surah)
+                                  <a href="#">{{$surah['name']}}</a>
+                                  @endforeach
+                                </div>
                               </div>
-                            </div>
-                          </div>
-
-
+                        </div>
                     </div>
                     <div class="col-lg-12 fawaedsubject">
                        <h3>كلمات القرآن</h3>
@@ -59,17 +94,5 @@
     </div>
 </section>
 <!-- Page end -->
-
-
-
-
-
-
-
-
-
-
-
-
 
 @endsection

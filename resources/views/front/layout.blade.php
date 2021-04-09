@@ -44,5 +44,6 @@
 	<script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
 	<script src="{{asset('assets/js/main.js')}}"></script>
     <link href="http://vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
+    @stack('javascript')
 </body>
 </html>

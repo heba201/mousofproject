@@ -787,7 +787,7 @@ text-decoration: underline !important;
 	margin-bottom: 0;
 }
 
- .widget-item ul.contact-list li:before {
+ /*.widget-item ul.contact-list li:after {
 	position: absolute;
 	content: "";
 	width: 8px;
@@ -796,7 +796,7 @@ text-decoration: underline !important;
 	top: 6px;
 	border-radius: 50%;
 	background: #d82a4e;
-}
+}*/
 
 .footer-newslatter {
 	padding-right: 38px;

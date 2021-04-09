@@ -78,7 +78,7 @@
 							<div class="course-author">
 								<div class="ca-pic set-bg" data-setbg="{{asset('assets/img/authors/portfolio-1.jpg')}}"></div>
 								<p>القائل <span>{{$saying->character->character_name}}</span></p>
-                                <a href="#" class="site-btn">قراءة المزيد</a>
+                                <a href="{{route('getsaying',$saying->id)}}" class="site-btn">قراءة المزيد</a>
                             </div>
 						</div>
 					</div>
@@ -100,7 +100,7 @@
                           <div class="course-author">
                               <div class="ca-pic set-bg" data-setbg="{{asset('assets/img/authors/portfolio-1.jpg')}}"></div>
                               <p><span>{{$faeda->fawedsubject->faeda_subject}}</span></p>
-                              <a href="#" class="site-btn">قراءة المزيد</a>
+                              <a href="{{route('faeda',$faeda->id)}}" class="site-btn">قراءة المزيد</a>
                           </div>
                       </div>
                   </div>

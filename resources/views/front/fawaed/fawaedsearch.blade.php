@@ -26,7 +26,7 @@
                             ?>
                             @foreach ($fadatxt as $txt)
                             <li>
-                            <span  style="{{strpos($txt, $filteredsearch)==true ? 'color:red' : ''}}">{{$txt}}</span>
+                            {{$txt}}
                             </li>
                             @endforeach
                             @endforeach

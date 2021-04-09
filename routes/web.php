@@ -71,7 +71,9 @@ Route::get('/sayingcharacter/{id}', [App\Http\Controllers\SayingsController::cla
 Route::get('/sayingtag/{tag}', [App\Http\Controllers\SayingsController::class, 'sayingtag'])->name('sayingtag');
 Route::post('/sayingsearch', [App\Http\Controllers\SayingsController::class, 'sayingsearch'])->name('sayingsearch');
 Route::get('/allsayingcharacter/{id}', [App\Http\Controllers\SayingsController::class, 'allsayingcharacter'])->name('allsayingcharacter');
- ######################### End sayings Routes ########################
+Route::get('/getsaying/{id}', [App\Http\Controllers\SayingsController::class, 'getsaying'])->name('getsaying');
+
+######################### End sayings Routes ########################
 
  ######################### Begin moradfat Routes ########################
  Route::get('/moradfat', [App\Http\Controllers\MoradfatController::class, 'index'])->name('moradfat');
@@ -91,6 +93,7 @@ Route::get('/allsayingcharacter/{id}', [App\Http\Controllers\SayingsController::
 ######################### Begin fawaed Routes ########################
 Route::get('/fawaed', [App\Http\Controllers\FawaedController::class, 'index'])->name('fawaed');
 Route::post('/faedasearch', [App\Http\Controllers\FawaedController::class, 'faedasearch'])->name('fawaed.faedasearch');
+Route::get('/faeda/{id}', [App\Http\Controllers\FawaedController::class, 'getfaeda'])->name('faeda');
 
 ######################### End  fawaed Routes ########################
 

@@ -187,7 +187,7 @@ foreach($similarwords as $similarword){
   $relatedwords = App\Models\Word::where('id','!=',$wordsid)->where('word', 'LIKE','%'.$text.'%')->selection()->get();
 }
     ?>
- @if($relatedwords->count()>0)
+ @if($similarwords->count()>0)
 <section class="contact-page spad pb-0 lastsec">
     <div class="container">
         <div class="row">
@@ -195,7 +195,7 @@ foreach($similarwords as $similarword){
                 <div class="contact-form-warp wordsearchsection">
              <div class="section-title text-white text-right wordsearch">
              <h5>  كلمات ذات  صلة</h5>
-        @foreach( $relatedwords as $relatedword)
+        @foreach( $similarwords as $relatedword)
             <a href="{{route('wordmojjam',['id'=>$mojjam->id,'searchword'=>$relatedword->word])}}"><strong><span style="color:#fff;margin-right:10px">{{$relatedword->word}}</strong></span>
         </a>
         @endforeach

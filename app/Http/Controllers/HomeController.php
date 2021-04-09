@@ -35,29 +35,34 @@ class HomeController extends Controller
     public function wordsearch(Request $request){
         try {
         if(isset($_POST['search'])){
-            $filteredsearch=filter_var($request->search,FILTER_SANITIZE_STRING);
-          $word =Word::with('meanings')->where('word', 'LIKE', '%'.$filteredsearch. '%')->selection()->first();
+        $filteredsearch=filter_var($request->search,FILTER_SANITIZE_STRING);
+          $word =Word::with('meanings')->where('word', 'like', "%".$filteredsearch. "%")->selection()->first();
            $mojjam_id=$request->mojjam_id;
            $wordmeaning=Meaning::where('word_id',$word->id)->where('mojjam_id',$mojjam_id)->selection()->get()->first();
            $mojjam=Mojjam::where('id',$mojjam_id)->selection()->get()->first();
-           $similarwords=Word::with('meanings')->where('word', 'LIKE','%' . $filteredsearch .'%')->where('id','!=',$word->id)->selection()->limit(3)->get();
-           $words_meanings_othermojjams=Meaning::with('word','mojjam')->where('word_id',$word->id)->where('mojjam_id','!=',$mojjam_id)->selection()->get();
+           $similarwords=Word::with('meanings')->where('word', 'like',"%" . $filteredsearch ."%")->where('id','!=',$word->id)->selection()->limit(3)->get();
+            //$relatedwords=Word::where('word', 'like', "%".$filteredsearch."%")->get();
+          $words_meanings_othermojjams=Meaning::with('word','mojjam')->where('word_id',$word->id)->where('mojjam_id','!=',$mojjam_id)->selection()->get();
            $sentences=Sentence::with('word')->where('word_id',$word->id)->selection()->get();
-           return view('front.wordsearch',compact('word','mojjam','wordmeaning','similarwords','words_meanings_othermojjams','sentences'));
+          if (!$wordmeaning) {
+            return redirect()->route('home');
+          }
+             return view('front.wordsearch',compact('word','mojjam','wordmeaning','similarwords','words_meanings_othermojjams','sentences'));
         }
     }
-        catch(\Exception $ex){
+       catch(\Exception $ex){
             return redirect()->route('home');
         }
 
     }
+
     public function wordmojjam($id,$searchword)
     {
        try{
-        $word =Word::with('meanings')->where('word', 'LIKE', '%'.$searchword. '%')->selection()->first();
+        $word =Word::with('meanings')->where('word', 'like', "%".$searchword. "%")->selection()->first();
         $wordmeaning=Meaning::where('word_id',$word->id)->where('mojjam_id',$id)->selection()->get()->first();
         $mojjam=Mojjam::where('id',$id)->selection()->get()->first();
-        $similarwords=Word::with('meanings')->where('word', 'LIKE','%' . $searchword .'%')->where('id','!=',$word->id)->selection()->limit(3)->get();
+        $similarwords=Word::with('meanings')->where('word', 'like',"%" . $searchword ."%")->where('id','!=',$word->id)->selection()->limit(3)->get();
         $words_meanings_othermojjams=Meaning::with('word','mojjam')->where('word_id',$word->id)->where('mojjam_id','!=',$id)->selection()->get();
         $sentences=Sentence::with('word')->where('word_id',$word->id)->selection()->get();
         return view('front.wordsearch',compact('word','mojjam','wordmeaning','similarwords','words_meanings_othermojjams','sentences'));
@@ -75,7 +80,7 @@ public function getwordmaningmojjam($id){
        $mojjam_id=$id;
        $wordmeaning=Meaning::where('word_id',$word->id)->where('mojjam_id',$mojjam_id)->selection()->get()->first();
        $mojjam=Mojjam::where('id',$mojjam_id)->selection()->get()->first();
-       $similarwords=Word::with('meanings')->where('word', 'LIKE','%' . $word .'%')->where('id','!=',$word->id)->selection()->limit(3)->get();
+       $similarwords=Word::with('meanings')->where('word', 'like',"%" . $word ."%")->where('id','!=',$word->id)->selection()->limit(3)->get();
        $words_meanings_othermojjams=Meaning::with('word','mojjam')->where('word_id',$word->id)->where('mojjam_id','!=',$mojjam_id)->selection()->get();
        $sentences=Sentence::with('word')->where('word_id',$word->id)->selection()->get();
       if (!$word ||  !$wordmeaning) {
@@ -98,7 +103,7 @@ public function getwordmaningmojjam($id){
                 return redirect()->route('home');
             }
             $mojjam=Mojjam::where('id',$mojjam_id)->selection()->get()->first();
-            $similarwords=Word::with('meanings')->where('word', 'LIKE','%' . $word .'%')->where('id','!=',$word->id)->selection()->limit(3)->get();
+            $similarwords=Word::with('meanings')->where('word', 'like',"%" . $word ."%")->where('id','!=',$word->id)->selection()->limit(3)->get();
             $words_meanings_othermojjams=Meaning::with('word','mojjam')->where('word_id',$word->id)->where('mojjam_id','!=',$mojjam_id)->selection()->get();
             $sentences=Sentence::with('word')->where('word_id',$word->id)->selection()->get();
             return view('front.wordsearch',compact('word','mojjam','wordmeaning','similarwords','words_meanings_othermojjams','sentences'));
@@ -118,7 +123,7 @@ public function getwordmaningmojjam($id){
                 return redirect()->route('home');
             }
             $mojjam=Mojjam::where('id',$mojjam_id)->selection()->get()->first();
-            $similarwords=Word::with('meanings')->where('word', 'LIKE','%' . $word .'%')->where('id','!=',$word->id)->selection()->limit(3)->get();
+            $similarwords=Word::with('meanings')->where('word', 'like',"%" . $word ."%")->where('id','!=',$word->id)->selection()->limit(3)->get();
             $words_meanings_othermojjams=Meaning::with('word','mojjam')->where('word_id',$word->id)->where('mojjam_id','!=',$mojjam_id)->selection()->get();
             $sentences=Sentence::with('word')->where('word_id',$word->id)->selection()->get();
             return view('front.wordsearch',compact('word','mojjam','wordmeaning','similarwords','words_meanings_othermojjams','sentences'));

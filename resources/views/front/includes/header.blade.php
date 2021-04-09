@@ -29,7 +29,7 @@
 							<li><a href="{{route('home')}}">الرئيسية</a></li>
                             <li><a href="{{route('getwordmaningmojjam',$mojjam->id)}}">المعاجم</a>
                             </li>
-                            <li><a href="{{route('quaanwords')}}">كلمات القرآن</a></li>
+                            <li><a href="#">كلمات القرآن</a></li>
                             <li><a href="{{route('moradfat')}}">مرادفات وأضداد</a></li>
                             <li><a href="{{route('namesmeanings')}}">معاني الأسماء</a></li>
                             <li><a href="{{route('fawaed')}}">فوائد لغوية</a></li>

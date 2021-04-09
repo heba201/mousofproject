@@ -74,10 +74,10 @@ use Illuminate\Support\Facades\Route;
 
      ######################### Begin meaning Routes ########################
      Route::group(['prefix' => 'meanings'], function () {
-        Route::get('/','meaningsController@index') -> name('admin.meanings');
-        Route::get('edit/{id}','meaningsController@edit')->name('admin.meanings.edit');
-        Route::post('update/{id}','meaningsController@update')->name('admin.meanings.update');
-        Route::get('delete/{id}','meaningsController@destroy') -> name('admin.meanings.delete');
+        Route::get('/','MeaningsController@index') -> name('admin.meanings');
+        Route::get('edit/{id}','MeaningsController@edit')->name('admin.meanings.edit');
+        Route::post('update/{id}','MeaningsController@update')->name('admin.meanings.update');
+        Route::get('delete/{id}','MeaningsController@destroy') -> name('admin.meanings.delete');
 
      });
       ######################### End meaning Routes ########################

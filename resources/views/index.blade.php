@@ -2,11 +2,11 @@
 
 @section('content')
 
-@include('front.searchbar');
+@include('front.searchbar1');
 
 
 	<!-- course section -->
-	<section class="course-section spad" style="margin-bottom:35px;">
+	<section class="course-section spad" style="margin-bottom:150px;">
 		<div class="container">
 		</div>
 		<div class="course-warp">
@@ -30,7 +30,7 @@
 						<div class="course-info text-center">
 							<div class="course-text">
 								<h5>{{$character->character_name}}</h5>
-								<p>{{ Str::limit($character->about_character,100)}}</p>
+								<p>{{ Str::limit($character->about_character,30)}}</p>
 
 							</div>
 							<div class="course-author">
@@ -53,7 +53,7 @@
 						<div class="course-info text-center">
 							<div class="course-text">
 								<h5>{{$article->article_title}}</h5>
-								<p>{{ Str::limit($article->article_details, 60)}}</p>
+								<p>{{ Str::limit($article->article_details, 30)}}</p>
 
 							</div>
 							<div class="course-author">
@@ -73,7 +73,9 @@
 						</div>
 						<div class="course-info text-center">
 							<div class="course-text">
-								<h5>{{Str::limit($saying->saying,30)}}</h5>
+
+								<h5>أقوال مأثورة</h5>
+                                <p>{{Str::limit($saying->saying,30)}}</p>
 							</div>
 							<div class="course-author">
 								<div class="ca-pic set-bg" data-setbg="{{asset('assets/img/authors/portfolio-1.jpg')}}"></div>
@@ -113,12 +115,13 @@
 	<!-- course section end -->
 
 	<!-- wisdom | word section -->
-	<section class="signup-section spad" dir="ltr">
+	<section class="signup-section spad" dir="ltr" style="background: #edf4f6; padding-top:35px;width:95%;margin:auto;border:2px solid #d82a4e;
+    border-radius:5px;">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="signup-warp">
-						<div class="section-title text-white text-center">
+						<div class="section-title  text-center">
 							<h2>حكمة اليوم</h2>
 							<p>
                             {{$wisdomtoday->wisdom}}
@@ -134,8 +137,8 @@
 					</div>
 				</div>
                 <div class="col-lg-6">
-					<div class="signup-warp" style="border-left: 2px solid #fff">
-						<div class="section-title text-white text-center">
+					<div class="signup-warp" style="border-left: 2px solid #d82a4e;">
+						<div class="section-title  text-center">
 							<h2>كلمة اليوم</h2>
                             <p> {{$wordtoday->word}}
                                 @if($wordtoday->word_type==0)

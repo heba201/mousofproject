@@ -65,19 +65,26 @@
 <section class="contact-page spad pb-0">
     <div class="container">
         <div class="row">
+<div class="col-md-6" style="margin: auto">
+    <div class="dropdown">
+        <button class="dropbtn">سور القرآن الكريم</button>
+        <div class="dropdown-content">
+            @foreach ($surahs as $surah)
+          <a href="#">{{$surah['name']}}</a>
+          @endforeach
+        </div>
+      </div>
+</div>
+ </div>
+</div>
+
+<section class="contact-page spad pb-0">
+    <div class="container">
+        <div class="row">
             <div class="col-lg-8">
                 <div class="contact-form-warp sub">
                     <div class="section-title text-white text-right subjecttitle" >
-                        <div class="col-md-6" style="margin: auto">
-                            <div class="dropdown">
-                                <button class="dropbtn">سور القرآن الكريم</button>
-                                <div class="dropdown-content">
-                                    @foreach ($surahs as $surah)
-                                  <a href="#">{{$surah['name']}}</a>
-                                  @endforeach
-                                </div>
-                              </div>
-                        </div>
+
                     </div>
                     <div class="col-lg-12 fawaedsubject">
                        <h3>كلمات القرآن</h3>

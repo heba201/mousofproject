@@ -1,4 +1,18 @@
 
+    <style>
+        .main-menu ul li{
+
+        }
+    .main-menu ul li a{
+       color: #474747;
+       font-size: 17px;
+       margin-left: 7px;
+    }
+
+    .inbtn{
+        background: #474747;
+    }
+        </style>
     <!-- Header section -->
 	<header class="header-section">
 		<div class="container">

@@ -32,7 +32,8 @@
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
-@include('front.includes.header');
+{{--@include('front.includes.header');--}}
+@include('front.includes.header1');
 @yield('content');
 @include('front.includes.footer');
 

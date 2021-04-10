@@ -27,7 +27,7 @@ class WordFirstupdate extends FormRequest
             'word_derivatives' => 'required|array|min:1',
             'word_derivatives.*' =>'required|string|distinct',
             'word_meaning'=>'required|array|min:1',
-            'word_meaning.*' =>'required|string|distinct',
+           // 'word_meaning.*' =>'required|string|distinct',
         ];
     }
 
@@ -39,7 +39,7 @@ class WordFirstupdate extends FormRequest
            'word_derivatives.*.required' => 'هذا الحقل مطلوب ',
            'word_derivatives.*.distinct' => 'ادخل بيانات مختلفة',
            'word_meaning.*.required' => 'هذا الحقل مطلوب ',
-           'word_meaning.*.distinct' => 'ادخل بيانات مختلفة',
+          // 'word_meaning.*.distinct' => 'ادخل بيانات مختلفة',
         ];
     }
 }

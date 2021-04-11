@@ -26,11 +26,12 @@ class WordRequest extends FormRequest
         return [
             'word' => 'required|string',
             'word_type'  =>'required',
-            'word_gzer'  =>'required|string',
+            'word_gzer'  =>'required|integer',
             'gzer_type'  =>'required|string',
            'gzer_weight' =>'required|string',
-           'word_source'  =>'required|string',
-           'word_indication'  =>'required|string'
+           'word_source'  =>'required|integer',
+           'word_indication'  =>'required|exists:word_indication,id',
+           'weight_indication'=>'required|string',
         ];
     }
 
@@ -44,7 +45,9 @@ class WordRequest extends FormRequest
             'gzer_type.required'  => 'هذا الحقل مطلوب ',
             'gzer_weight.required'  => 'هذا الحقل مطلوب ',
             'word_source.required'  =>'هذا الحقل مطلوب ',
-            'word_indication.required'  =>'هذا الحقل مطلوب '
+            'word_indication.required'  =>'هذا الحقل مطلوب ',
+            'word_indication.exists'  =>'الدلالة غير موجودة ',
+            'weight_indication.required'  =>'هذا الحقل مطلوب '
         ];
     }
 }

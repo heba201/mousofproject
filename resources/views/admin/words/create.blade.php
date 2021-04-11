@@ -141,8 +141,8 @@
                                                                         <optgroup label="الزمن">
                                                                          <option value="0">ماضي</option>
                                                                          <option value="1">مستقبل</option>
-                                                                         <option value="0">حاضر</option>
-                                                                         <option value="1">امر</option>
+                                                                         <option value="2">حاضر</option>
+                                                                         <option value="3">امر</option>
                                                                         </optgroup>
                                                                     </select>
                                                                     @error("time")
@@ -157,8 +157,8 @@
                                                                             <optgroup label="المصدر">
                                                                                 <option value="0">ثلاثية</option>
                                                                                 <option value="1">رباعية</option>
-                                                                                <option value="0">خماسية</option>
-                                                                                <option value="1">سداسية</option>
+                                                                                <option value="2">خماسية</option>
+                                                                                <option value="3">سداسية</option>
                                                                             </optgroup>
                                                                         </select>
                                                                     @error("word_source")

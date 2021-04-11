@@ -86,10 +86,13 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1">  جذر الكلمة </label>
-                                                                    <input type="text" value="{{$word->word_gzer}}" id="word_gzer"
-                                                                           class="form-control"
-                                                                           placeholder="  "
-                                                                           name="word_gzer">
+                                                                    <select name="word_gzer" class="select2 form-control" id="selectId">
+                                                                        <optgroup label=" جذر الكلمة ">
+
+                                                                         <option value="0" {{$word->word_gzer==0 ? 'selected' : ' '}}>أب</option>
+                                                                         <option value="1" {{$word->word_gzer==1 ? 'selected' : ' '}}>أم</option>
+                                                                        </optgroup>
+                                                                    </select>
                                                                     @error("word_gzer")
                                                                     <span class="text-danger">{{$message}}</span>
                                                                     @enderror
@@ -121,11 +124,45 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label for="projectinput1">  المصدر  </label>
-                                                                    <input type="text" value="{{$word->word_source}}" id="word_source"
+                                                                    <label for="projectinput1">  دلالة الوزن </label>
+                                                                    <input type="text" value="{{$word->weight_indication}}" id="weight_indication"
                                                                            class="form-control"
                                                                            placeholder="  "
-                                                                           name="word_source">
+                                                                           name="weight_indication">
+                                                                    @error("weight_indication")
+                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1">الزمن</label>
+                                                                    <select name="time" class="select2 form-control" id="selectId">
+                                                                        <optgroup label="الزمن">
+                                                                         <option value="0" {{$word->time==0 ? 'selected' : ' '}}>ماضي</option>
+                                                                         <option value="1" {{$word->time==1 ? 'selected' : ' '}}>مستقبل</option>
+                                                                         <option value="2" {{$word->time==2 ? 'selected' : ' '}}>حاضر</option>
+                                                                         <option value="3" {{$word->time==3 ? 'selected' : ' '}}>امر</option>
+                                                                        </optgroup>
+                                                                    </select>
+                                                                    @error("time")
+                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1">  المصدر  </label>
+                                                                           <select name="word_source" class="select2 form-control" id="selectId">
+                                                                            <optgroup label="المصدر">
+                                                                                <option value="0" {{$word->word_source==0 ? 'selected' : ' '}}>ثلاثية</option>
+                                                                                <option value="1" {{$word->word_source==1 ? 'selected' : ' '}}>رباعية</option>
+                                                                                <option value="2" {{$word->word_source==2 ? 'selected' : ' '}}>خماسية</option>
+                                                                                <option value="3" {{$word->word_source==3 ? 'selected' : ' '}}>سداسية</option>
+                                                                            </optgroup>
+                                                                        </select>
                                                                     @error("word_source")
                                                                     <span class="text-danger">{{$message}}</span>
                                                                     @enderror
@@ -133,11 +170,14 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label for="projectinput1">  الدلالة  </label>
-                                                                    <input type="text" value="{{$word->word_indication}}" id="word_indication"
-                                                                           class="form-control"
-                                                                           placeholder="  "
-                                                                           name="word_indication">
+                                                                    <label for="projectinput1">   دلالة أصلية علي  </label>
+                                                                           <select name="word_indication" class="select2 form-control" id="selectId">
+                                                                            <optgroup label="الدلالة الأصلية">
+                                                                            @foreach ($word_indications as $word_indication)
+                                                                            <option value="{{$word_indication->id}}" {{$word->word_indication==$word_indication->id ? 'selected' : ' '}}>{{$word_indication->word_indication}}</option>
+                                                                            @endforeach
+                                                                            </optgroup>
+                                                                        </select>
                                                                     @error("word_indication")
                                                                     <span class="text-danger">{{$message}}</span>
                                                                     @enderror

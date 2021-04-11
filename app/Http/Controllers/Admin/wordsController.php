@@ -48,12 +48,10 @@ class wordsController extends Controller
                'gzer_weight'  => $request->gzer_weight,
               'word_source'   => $request->word_source,
                'word_indication'  => $request->word_indication,
-               'word_status' => 'n',
-                'word_plural'=> 'n',
-                'word_singular'=> 'n',
+                'weight_indication' => $request->weight_indication,
+                'time' => $request->time,
                 'word_derivatives'=> 'n',
                 'other_word_properties' => 'n',
-                'word_object'=> 'n',
                 'admin_id' =>Auth::user()->id,
             ]);
             $word_id= $word ->id;
@@ -129,6 +127,7 @@ class wordsController extends Controller
         try {
 
             $word= Word::Selection()->find($id);
+            $word_indications=Wordindication::selection()->get();
             if (!$word)
             return redirect()->route('admin.words')->with(['error' => 'هذه اكلمة غير موجودة او ربما تكون محذوفة ']);
 
@@ -163,6 +162,8 @@ class wordsController extends Controller
                      'gzer_weight'  => $request->gzer_weight,
                     'word_source'   => $request->word_source,
                      'word_indication'  => $request->word_indication,
+                      'weight_indication' => $request->weight_indication,
+                      'time' => $request->time,
                       'admin_id' =>Auth::user()->id,
                 ]);
               }

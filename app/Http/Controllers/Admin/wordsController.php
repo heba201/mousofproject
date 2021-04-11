@@ -62,7 +62,7 @@ class wordsController extends Controller
             return redirect()->route('admin.words.seccreate',$word_id)->with(['success' => 'تم الحفظ بنجاح']);
        }
        catch (\Exception $ex) {
-          return $ex;
+
             return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
    }
 
@@ -77,7 +77,7 @@ class wordsController extends Controller
             return view('admin.words.create_word_2',compact('word','mojjams'));
 
         }catch(\Exception $exception){
-            return $exception;
+
             return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
     }
@@ -117,7 +117,7 @@ class wordsController extends Controller
             }
               return redirect()->route('admin.words.thirdedit',$word->id)->with(['success' => 'تم الحفظ بنجاح']);
             } catch (\Exception $exception) {
-                return $exception;
+
 
             return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
@@ -134,7 +134,7 @@ class wordsController extends Controller
             return view('admin.words.edit', compact('word','word_indications'));
 
         } catch (\Exception $exception) {
-            return $exception;
+
             return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
     }
@@ -173,7 +173,7 @@ class wordsController extends Controller
             }
             return redirect()->route('admin.words.secedit',$word_id)->with(['success' => 'تم التحديث بنجاح']);
         } catch (\Exception $exception) {
-            return $exception;
+
             return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
 
@@ -190,7 +190,7 @@ class wordsController extends Controller
             return view('admin.words.edit_word_2',compact('word','word_derivatives','meanings'));
 
         }catch(\Exception $exception){
-            return $exception;
+
             return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
     }
@@ -238,7 +238,7 @@ class wordsController extends Controller
               return redirect()->route('admin.words.finaledit',$word->id)->with(['success' => 'تم التحديث بنجاح']);
             } catch (\Exception $exception) {
               //  DB::rollback();
-                return $exception;
+
 
             return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
@@ -276,7 +276,7 @@ class wordsController extends Controller
         return redirect()->route('admin.words')->with(['success' => 'تم الحفظ بنجاح']);
 
     } catch (\Exception $exception){
-        return $exception;
+
         return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
     }
      }
@@ -290,7 +290,7 @@ class wordsController extends Controller
                 $other_word_properties=explode(",",$word->other_word_properties);
                 return view('admin.words.final_edit_word',compact('word','other_word_properties'));
             }catch (\Exception $exception){
-                return $exception;
+
                 return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
             }
 
@@ -319,7 +319,7 @@ class wordsController extends Controller
                 }
                 return redirect()->route('admin.words')->with(['success' => 'تم التحديث بنجاح']);;
             }catch (\Exception $exception){
-                return $exception;
+
                 return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
             }
 

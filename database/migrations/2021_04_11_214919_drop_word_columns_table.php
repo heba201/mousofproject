@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeWordsColumnTable extends Migration
+class DropWordColumnsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,13 @@ class ChangeWordsColumnTable extends Migration
     public function up()
     {
         Schema::table('words', function (Blueprint $table) {
-            $table->integer('word_indication')->change();
+            $table->dropColumn('word_gzer');
+            $table->dropColumn('word_source');
+            $table->dropColumn('word_indication');
+            $table->dropColumn('word_status');
+            $table->dropColumn('word_plural');
+            $table->dropColumn('word_singular');
+            $table->dropColumn('word_object');
         });
     }
 

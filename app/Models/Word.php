@@ -14,7 +14,7 @@ class Word extends Model
     public function scopeSelection($query)
     {
 
-        return $query->select('id','word','word_type','time','admin_id','gzer_type','gzer_weight','gzer_indication','weight_indication','word_source','word_indication','word_derivatives','search_no','word_gzer','other_word_properties');
+        return $query->select('id','word','word_type','time','admin_id','gzer_type','gzer_weight','weight_indication','word_source','word_indication','word_derivatives','search_no','word_gzer','other_word_properties');
     }
 
     public function sentences(){

@@ -11,6 +11,7 @@ use App\Models\Word;
 use App\Models\Mojjam;
 use App\Models\Meaning;
 use App\Models\Sentence;
+use App\Models\Wordindication;
 use Validator;
 use DB;
 use Auth;
@@ -27,7 +28,8 @@ class wordsController extends Controller
     }
     public function create()
     {
-        return view('admin.words.create');
+       $word_indications=Wordindication::selection()->get();
+        return view('admin.words.create',compact('word_indications'));
     }
 
     public function store(WordRequest $request)

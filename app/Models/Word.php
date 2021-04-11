@@ -34,6 +34,12 @@ class Word extends Model
 
         return $this -> hasMany('App\Models\Bayt','word_id','id');
     }
+
+    public function word_indications()
+    {
+        return $this->belongsTo('App\Models\Wordindication', 'word_indication', 'id');
+    }
+
     public function admin()
     {
         return $this->belongsTo('App\Models\Admin', 'admin_id', 'id');

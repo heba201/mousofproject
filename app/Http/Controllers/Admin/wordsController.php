@@ -131,7 +131,7 @@ class wordsController extends Controller
             if (!$word)
             return redirect()->route('admin.words')->with(['error' => 'هذه اكلمة غير موجودة او ربما تكون محذوفة ']);
 
-            return view('admin.words.edit', compact('word'));
+            return view('admin.words.edit', compact('word','word_indications'));
 
         } catch (\Exception $exception) {
             return $exception;

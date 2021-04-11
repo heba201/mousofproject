@@ -15,7 +15,7 @@ class AddWordColumnsTable extends Migration
     {
         Schema::table('words', function (Blueprint $table) {
             $table->integer('word_gzer');
-            $table->string('gzer_indication');
+            $table->string('weight_indication');
             $table->integer('word_source');
             $table->integer('word_indication');
             $table->integer('time');

@@ -138,7 +138,7 @@ background:#edf4f6;
                             <p><span style="color:#d82a4e;font-size:20px;">{{$word_prop}}</span></p>
                             @endforeach
                             @endif
-                        <hr style="background: #d82a4e">
+
                         @foreach ($similarwords as $similarword)
                         <?php
 

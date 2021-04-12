@@ -59,13 +59,11 @@ background:#edf4f6;
 
                                 <span style="color:#d82a4e;">
                             @if ($word->word_type==0 )
-                            (اسم)
+                            (إسم)
                             @elseif ($word->word_type==1 )
                             (فعل)
                             @elseif ($word->word_type==2 )
-                            (مصطلح)
-                            @else
-                            (كلمة مركبة)
+                            (حرف)
                             @endif
                         </span>
                         في
@@ -76,11 +74,52 @@ background:#edf4f6;
                             <div class="section-title text-white text-right moradfat">
                             <p style="text-align:center"><span style="font-size:20px;"> {{$word->word}}</span> : <span style="color:#d82a4e;font-size:20px; " >{{$wordmeaning->word_meaning}}</span></p>
 
-                            <p><i class="fas fa-arrow-alt-circle-left"></i><span style="font-size:20px;margin-left:15px;"> جذر الكلمة</span>    <span style="color:#d82a4e;font-size:20px;margin-right:15px">{{$word->word_gzer}}</span></p>
+                            <p><i class="fas fa-arrow-alt-circle-left"></i><span style="font-size:20px;margin-left:15px;"> جذر الكلمة</span>    <span style="color:#d82a4e;font-size:20px;margin-right:15px">
+
+                                @if($word->word_gzer == 0)
+                                أب
+                                @else
+                                أم
+
+                            </span></p>
                             <p><i class="fas fa-arrow-alt-circle-left"></i> <span style="font-size:20px;margin-left:15px;">نوع الجذر </span>    <span style="color:#d82a4e;font-size:20px;margin-right:15px">{{$word->gzer_type}}</span></p>
                             <p><i class="fas fa-arrow-alt-circle-left"></i> <span style="font-size:20px;margin-left:15px;">وزن الجذر </span>    <span style="color:#d82a4e;font-size:20px;margin-right:15px">{{$word->gzer_weight}}</span></p>
-                            <p><i class="fas fa-arrow-alt-circle-left"></i> <span style="font-size:20px;margin-left:15px;">المصدر &nbsp; &nbsp;</span><span style="color:#d82a4e;font-size:20px;margin-right:15px">{{$word->word_source}}</span></p>
-                            <p style="margin-bottom: 10px"><i class="fas fa-arrow-alt-circle-left"></i><span style="font-size: 20px;margin-left:15px;" > الدلالة&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span> <span style="color:#d82a4e;font-size:20px;">{{$word->word_indication}}</span></p>
+                            <p><i class="fas fa-arrow-alt-circle-left"></i> <span style="font-size:20px;margin-left:15px;">وزن الجذر </span>    <span style="color:#d82a4e;font-size:20px;margin-right:15px">{{$word->weight_indication}}</span></p>
+                            @if($word->time !=null)
+                            <p><i class="fas fa-arrow-alt-circle-left"></i> <span style="font-size:20px;margin-left:15px;"> الزمن </span>
+                                <span style="color:#d82a4e;font-size:20px;margin-right:15px">
+                                @if($word->time==0)
+
+                            ماضي
+                            @elseif ($word->time==1)
+                                مستقبل
+                                @elseif ($word->time==2)
+                                حاضر
+                            @else
+                               امر
+                            @endif
+                                </span></p>
+                            @endif
+                            <p><i class="fas fa-arrow-alt-circle-left"></i> <span style="font-size:20px;margin-left:15px;">المصدر &nbsp; &nbsp;</span><span style="color:#d82a4e;font-size:20px;margin-right:15px">
+
+
+                              @if($word->word_source==0)
+                              ثلاثية
+                              @elseif($word->word_source==1)
+                              رباعية
+                              @elseif($word->word_source==2)
+                              خماسية
+                              @else
+                              سداسية
+                              @endif
+                            </span></p>
+                            <p style="margin-bottom: 10px"><i class="fas fa-arrow-alt-circle-left"></i><span style="font-size: 20px;margin-left:15px;" > دلالة أصلية علي &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span> <span style="color:#d82a4e;font-size:20px;">
+                                @foreach ($word_indications as $wordindication)
+                                @if($word->word_indication==$wordindication->id)
+                                {{$wordindication->word_indication}}
+                                @endif
+                                @endforeach
+                            </span></p>
                             <?php
                             $word_derivatives=explode(",",$word->word_derivatives);
                             $other_word_properties=explode(",",$word->other_word_properties);

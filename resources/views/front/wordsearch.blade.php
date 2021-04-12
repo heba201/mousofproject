@@ -80,7 +80,7 @@ background:#edf4f6;
                                 أب
                                 @else
                                 أم
-
+                                @endif
                             </span></p>
                             <p><i class="fas fa-arrow-alt-circle-left"></i> <span style="font-size:20px;margin-left:15px;">نوع الجذر </span>    <span style="color:#d82a4e;font-size:20px;margin-right:15px">{{$word->gzer_type}}</span></p>
                             <p><i class="fas fa-arrow-alt-circle-left"></i> <span style="font-size:20px;margin-left:15px;">وزن الجذر </span>    <span style="color:#d82a4e;font-size:20px;margin-right:15px">{{$word->gzer_weight}}</span></p>

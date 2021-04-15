@@ -67,6 +67,83 @@
                                                                     @enderror
                                                                 </div>
                                                             </div>
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1">المؤلف</label>
+                                                                    <select name="author_id" class="select2 form-control" id="selectId">
+                                                                        <optgroup label="المؤلف">
+                                                                            @foreach ($mojjamsauthors as $mojjamauthor)
+                                                                            <option value="{{$mojjamauthor->id}}">{{$mojjamauthor->author_name}}</option>
+                                                                            @endforeach
+
+                                                                    </select>
+                                                                    @error("author_id")
+                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1">نوع ترتيب المعجم</label>
+                                                                    <select name="mojjamarrangetype_id" class="select2 form-control" id="selectId2">
+                                                                        <optgroup label="نوع ترتيب المعجم">
+                                                                     @foreach ($mojjamarrangetypes as $mojjamarrangetype)
+                                                                     <option value="{{$mojjamarrangetype->id}}">{{$mojjamarrangetype->mojjam_arrangetype}}</option>
+                                                                     @endforeach
+                                                                    </select>
+                                                                    @error("mojjamarrangetype_id")
+                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1"> منهج المعجم</label>
+                                                                    <select name="mojjammethod_id" class="select2 form-control" id="selectId3">
+                                                                        <optgroup label=" منهج المعجم">
+                                                                     @foreach ($mojjammethods as $mojjammethod)
+                                                                     <option value="{{$mojjammethod->id}}">{{$mojjammethod->mojjam_method}}</option>
+                                                                     @endforeach
+
+                                                                    </select>
+                                                                    @error("mojjammethod_id")
+                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1">مثال</label>
+                                                                    <textarea type="text" value="" id="example"
+                                                                           class="form-control"
+                                                                           placeholder="  "
+                                                                           name="example"></textarea>
+                                                                    @error("example")
+                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1"> تخصص المعجم</label>
+                                                                    <select name="mojjamspecialty_id" class="select2 form-control" id="selectId4">
+                                                                        <optgroup label=" تخصص المعجم">
+                                                                        @foreach ($mojjamspecialties as $mojjamspecialty)
+                                                                        <option value="{{$mojjamspecialty->id}}">{{$mojjamspecialty->mojjam_specialty}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    @error("mojjamspecialty_id")
+                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                             </div>
 

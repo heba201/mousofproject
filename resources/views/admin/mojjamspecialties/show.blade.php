@@ -17,7 +17,7 @@
                                 </li>
                                 <li class="breadcrumb-item"><a href=""> موضوعات الفوائد اللغوية </a>
                                 </li>
-                                <li class="breadcrumb-item active"> إضافة موضوعات للفوائد اللغوية
+                                <li class="breadcrumb-item active">  موضوعات الفوائد اللغوية
                                 </li>
                             </ol>
                         </div>
@@ -31,7 +31,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form">  إضافة  موضوعات للفوائد اللغوية  </h4>
+                                    <h4 class="card-title" id="basic-layout-form">    موضوعات الفوائد اللغوية  </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -47,9 +47,9 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.fawaedsubjects.store')}}"
-                                              method="POST">
-                                              {{ csrf_field() }}
+                                        <form class="form">
+
+
 
                                             <div class="form-body">
 
@@ -58,8 +58,8 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1"> الموضوع  </label>
-                                                                    <input type="text" value="" id="faeda_subject"
-                                                                           class="form-control"
+                                                                    <input type="text" value="{{$fawaedsubject->faeda_subject}}" id="faeda_subject"
+                                                                           class="form-control" readonly
                                                                            placeholder="  "
                                                                            name="faeda_subject">
                                                                     @error("faeda_subject")
@@ -69,12 +69,8 @@
                                                             </div>
                                                         </div>
                                             </div>
-
-
                                             <div class="form-actions">
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> حفظ
-                                                </button>
+
                                                 <button type="button" class="btn btn-warning mr-1"
                                                 onclick="history.back();">
                                             <i class="ft-x"></i> تراجع

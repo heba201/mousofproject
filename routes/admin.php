@@ -37,6 +37,31 @@ use Illuminate\Support\Facades\Route;
     });
      ######################### End   mojjams Routes  ########################
 
+    ######################### Begin mojjamsauthors Routes ########################
+    Route::group(['prefix' => 'mojjamsauthors'], function () {
+    Route::get('/','mojjamsauthorsController@index') -> name('admin.mojjamsauthors');
+    Route::get('create','mojjamsauthorsController@create') -> name('admin.mojjamsauthors.create');
+    Route::post('store','mojjamsauthorsController@store') -> name('admin.mojjamsauthors.store');
+    Route::get('edit/{id}','mojjamsauthorsController@edit') -> name('admin.mojjamsauthors.edit');
+    Route::post('update/{id}','mojjamsauthorsController@update') -> name('admin.mojjamsauthors.update');
+    Route::get('delete/{id}','mojjamsauthorsController@destroy') -> name('admin.mojjamsauthors.delete');
+
+    });
+     ######################### End   mojjamsauthors Routes  ########################
+
+    ######################### Begin mojjamspecialties Routes ########################
+    Route::group(['prefix' => 'mojjamspecialties'], function () {
+    Route::get('/','mojjamspecialtiesController@index') -> name('admin.mojjamspecialties');
+    Route::get('create','mojjamspecialtiesController@create') -> name('admin.mojjamspecialties.create');
+    Route::post('store','mojjamspecialtiesController@store') -> name('admin.mojjamspecialties.store');
+    Route::get('edit/{id}','mojjamspecialtiesController@edit') -> name('admin.mojjamspecialties.edit');
+    Route::post('update/{id}','mojjamspecialtiesController@update') -> name('admin.mojjamspecialties.update');
+    Route::get('delete/{id}','mojjamspecialtiesController@destroy') -> name('admin.mojjamspecialties.delete');
+
+    });
+     ######################### End   mojjamspecialties Routes  ########################
+
+
      ######################### Begin words Routes ########################
     Route::group(['prefix' => 'words'], function () {
     Route::get('/','wordsController@index') -> name('admin.words');
@@ -69,8 +94,6 @@ use Illuminate\Support\Facades\Route;
 
     });
      ######################### End sentences Routes ########################
-
-
 
      ######################### Begin meaning Routes ########################
      Route::group(['prefix' => 'meanings'], function () {

@@ -8,6 +8,25 @@
 
             <li class="nav-item open">
                 <a href=""><i class="la la-home"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main"> مؤلفي المعاجم</span>
+                    <span
+                        class="badge badge badge-info badge-pill float-right mr-2">{{App\Models\MojjamAuthor::count()}}</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="active"><a class="menu-item" href="{{route('admin.mojjamsauthors')}}"
+                                          data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                    </li>
+                    @if( Auth::user()->role_id==2)
+                    <li><a class="menu-item" href="{{route('admin.mojjamsauthors.create')}}" data-i18n="nav.dash.crypto">إضافة
+                            مؤلف </a>
+                    </li>
+                    @endif
+                </ul>
+            </li>
+
+
+            <li class="nav-item open">
+                <a href=""><i class="la la-home"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">المعاجم</span>
                     <span
                         class="badge badge badge-info badge-pill float-right mr-2">{{App\Models\Mojjam::count()}}</span>
@@ -16,7 +35,14 @@
                     <li class="active"><a class="menu-item" href="{{route('admin.mojjams')}}"
                                           data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                     </li>
+                    <li class="active"><a class="menu-item" href="{{route('admin.mojjamspecialties')}}"
+                        data-i18n="nav.dash.ecommerce">تخصصات المعاجم</a>
+                    </li>
                     @if( Auth::user()->role_id==2)
+                    <li><a class="menu-item" href="{{route('admin.mojjamspecialties.create')}}" data-i18n="nav.dash.crypto">إضافة
+                        تخصص  للمعجم </a>
+
+                    </li>
                     <li><a class="menu-item" href="{{route('admin.mojjams.create')}}" data-i18n="nav.dash.crypto">إضافة
                           معجم  جديد </a>
                     </li>

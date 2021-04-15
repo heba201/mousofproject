@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MojjamRequest extends FormRequest
+class MojjamAuthorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,21 +24,16 @@ class MojjamRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:100',
-            'author_id' => 'required|exists:mojjams_authors,id',
-            'mojjamarrangetype_id' => 'exists:mojjam_arrangetypes,id',
-            'mojjammethod_id' => 'required|exists:mojjam_methods,id',
+            'author_name' => 'required|string|max:100',
         ];
     }
+
     public function messages(){
 
         return [
             'required'  => 'هذا الحقل مطلوب ',
             'max'  => 'هذا الحقل طويل',
             'name.string'  =>'الاسم لابد ان يكون حروف فقط ',
-            'author_id.exists'  => 'المؤلف غير موجود ',
-            'mojjamarrangetype_id.exists'  => 'نوع ترتيب المعجم  غير موجود ',
-            'mojjammethod_id.exists'  => 'منهج المعجم غير موجود ',
         ];
     }
 }

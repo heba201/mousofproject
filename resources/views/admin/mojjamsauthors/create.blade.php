@@ -15,9 +15,9 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="">الرئيسية </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href=""> موضوعات الفوائد اللغوية </a>
+                                <li class="breadcrumb-item"><a href=""> مؤلفي المعاجم العربية </a>
                                 </li>
-                                <li class="breadcrumb-item active"> إضافة موضوعات للفوائد اللغوية
+                                <li class="breadcrumb-item active"> إضافة مؤلف
                                 </li>
                             </ol>
                         </div>
@@ -31,7 +31,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form">  إضافة  موضوعات للفوائد اللغوية  </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> إضافة مؤلف </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -47,26 +47,40 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.fawaedsubjects.store')}}"
+                                        <form class="form" action="{{route('admin.mojjamsauthors.store')}}"
                                               method="POST">
                                               {{ csrf_field() }}
 
                                             <div class="form-body">
 
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات الموضوع </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات المؤلف </h4>
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label for="projectinput1"> الموضوع  </label>
-                                                                    <input type="text" value="" id="faeda_subject"
+                                                                    <label for="projectinput1"> اسم المؤلف </label>
+                                                                    <input type="text" value="" id="author_name"
                                                                            class="form-control"
                                                                            placeholder="  "
-                                                                           name="faeda_subject">
-                                                                    @error("faeda_subject")
+                                                                           name="author_name">
+                                                                    @error("author_name")
                                                                     <span class="text-danger">{{$message}}</span>
                                                                     @enderror
                                                                 </div>
                                                             </div>
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1"> نبذة عن المؤلف </label>
+                                                                    <textarea type="text" value="" id="about_author"
+                                                                           class="form-control"
+                                                                           placeholder="  "
+                                                                           name="about_author"></textarea>
+                                                                    @error("about_author")
+                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                             </div>
 

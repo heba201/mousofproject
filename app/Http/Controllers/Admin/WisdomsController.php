@@ -130,7 +130,23 @@ class WisdomsController extends Controller
             }
 
     }
+    public function show($id)
+    {
+        try {
 
+            $wisdom= Wisdom::Selection()->find($id);
+            $wisdomSayingsubjects=WisdomSayingsubject::selection()->get();
+            $characters=Character::selection()->get();
+            $wisdomtags=explode(",",$wisdom->wisdom_tag);
+            if (!$wisdom)
+                return redirect()->route('admin.wisdoms')->with(['error' => 'هذه الحكمة غير موجودة او ربما تكون محذوفة ']);
+
+            return view('admin.wisdoms.show', compact('wisdom','wisdomSayingsubjects','characters','wisdomtags'));
+
+        } catch (\Exception $exception) {
+            return redirect()->route('admin.wisdoms')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
+    }
     public function destroy($id)
     {
 

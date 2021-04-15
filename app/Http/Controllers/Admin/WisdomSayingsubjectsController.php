@@ -84,6 +84,21 @@ class WisdomSayingsubjectsController extends Controller
 
     }
 
+    public function show($id)
+    {
+        try {
+
+            $wisdomSayingsubject= WisdomSayingsubject::Selection()->find($id);
+            if (!$wisdomSayingsubject)
+                return redirect()->route('admin.wisdomsayingsubjects')->with(['error' => 'هذا الموضوع غير موجود او ربما يكون محذوفا ']);
+
+            return view('admin.wisdomsayingsubjects.show', compact('wisdomSayingsubject'));
+
+        } catch (\Exception $exception) {
+            return redirect()->route('admin.wisdomsayingsubjects')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
+    }
+
     public function destroy($id)
     {
      //if there is sayings or wisdoms in this  subject no delete

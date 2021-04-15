@@ -61,7 +61,7 @@
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
-                                                                 <a href="#"
+                                                                 <a href="{{route('admin.sayings.show',$saying ->id)}}"
                                                                     class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">عرض</a>
                                                                  @if( Auth::user()->role_id==2)
                                                                 <a href="{{route('admin.sayings.editsaying',$saying ->id)}}"

@@ -93,6 +93,7 @@ use Illuminate\Support\Facades\Route;
         Route::post('createforword/{id}','sentencesController@createforword') -> name('admin.sentences.createforword');
         Route::get('editsentence/{id}','sentencesController@editsentence') -> name('admin.sentences.editsentence');
         Route::post('updateforword/{id}','sentencesController@updateforword') -> name('admin.sentences.updateforword');
+        Route::get('show/{id}','sentencesController@show') -> name('admin.sentences.show');
         Route::get('delete/{id}','sentencesController@destroy') -> name('admin.sentences.delete');
 
     });
@@ -103,6 +104,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('/','MeaningsController@index') -> name('admin.meanings');
         Route::get('edit/{id}','MeaningsController@edit')->name('admin.meanings.edit');
         Route::post('update/{id}','MeaningsController@update')->name('admin.meanings.update');
+        Route::get('show/{id}','MeaningsController@show') -> name('admin.meanings.show');
         Route::get('delete/{id}','MeaningsController@destroy') -> name('admin.meanings.delete');
 
      });
@@ -129,6 +131,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('store','WisdomSayingsubjectsController@store') -> name('admin.wisdomsayingsubjects.store');
     Route::get('edit/{id}','WisdomSayingsubjectsController@edit') -> name('admin.wisdomsayingsubjects.edit');
     Route::post('update/{id}','WisdomSayingsubjectsController@update') -> name('admin.wisdomsayingsubjects.update');
+    Route::get('show/{id}','WisdomSayingsubjectsController@show') -> name('admin.wisdomsayingsubjects.show');
     Route::get('delete/{id}','WisdomSayingsubjectsController@destroy') -> name('admin.wisdomsayingsubjects.delete');
 
     });
@@ -142,6 +145,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('createforcharacter/{id}','sayingsController@createforcharacter') -> name('admin.sayings.createforcharacter');
     Route::get('editsaying/{id}','sayingsController@editsaying') -> name('admin.sayings.editsaying');
     Route::post('updatesaying/{id}','sayingsController@updatesaying') -> name('admin.sayings.updatesaying');
+    Route::get('show/{id}','sayingsController@show') -> name('admin.sayings.show');
     Route::get('delete/{id}','sayingsController@destroy') -> name('admin.sayings.delete');
 
 });
@@ -155,6 +159,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('store','WisdomsController@store') -> name('admin.wisdoms.store');
     Route::get('edit/{id}','WisdomsController@edit') -> name('admin.wisdoms.edit');
     Route::post('update/{id}','WisdomsController@update') -> name('admin.wisdoms.update');
+    Route::get('show/{id}','WisdomsController@show') -> name('admin.wisdoms.show');
     Route::get('delete/{id}','WisdomsController@destroy') -> name('admin.wisdoms.delete');
 
     });
@@ -207,6 +212,7 @@ use Illuminate\Support\Facades\Route;
         Route::post('store','LessonsController@store') -> name('admin.lessons.store');
         Route::get('edit/{id}','LessonsController@edit') -> name('admin.lessons.edit');
         Route::post('update/{id}','LessonsController@update') -> name('admin.lessons.update');
+        Route::get('show/{id}','LessonsController@show') -> name('admin.lessons.show');
         Route::get('delete/{id}','LessonsController@destroy') -> name('admin.lessons.delete');
 
         });
@@ -219,6 +225,7 @@ use Illuminate\Support\Facades\Route;
         Route::post('store/{id}','MoradfatController@store') -> name('admin.moradfat.store');
         Route::get('edit/{id}','MoradfatController@edit') -> name('admin.moradfat.edit');
         Route::post('update/{id}','MoradfatController@update') -> name('admin.moradfat.update');
+        Route::get('show/{id}','MoradfatController@show') -> name('admin.moradfat.show');
         Route::get('delete/{id}','MoradfatController@destroy') -> name('admin.moradfat.delete');
 
 });
@@ -231,6 +238,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('store','PoetsController@store') -> name('admin.poets.store');
     Route::get('edit/{id}','PoetsController@edit')->name('admin.poets.edit');
     Route::post('update/{id}','PoetsController@update')->name('admin.poets.update');
+    Route::get('show/{id}','PoetsController@show') -> name('admin.poets.show');
     Route::get('delete/{id}','PoetsController@destroy') -> name('admin.poets.delete');
 
  });
@@ -281,6 +289,7 @@ use Illuminate\Support\Facades\Route;
         Route::post('store','NamesoriginsController@store') -> name('admin.namesorigins.store');
         Route::get('edit/{id}','NamesoriginsController@edit') -> name('admin.namesorigins.edit');
         Route::post('update/{id}','NamesoriginsController@update') -> name('admin.namesorigins.update');
+        Route::get('show/{id}','NamesoriginsController@show') -> name('admin.namesorigins.show');
         Route::get('delete/{id}','NamesoriginsController@destroy') -> name('admin.namesorigins.delete');
 
         });
@@ -293,6 +302,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('store','NamesmeaningsController@store') -> name('admin.namesmeanings.store');
     Route::get('edit/{id}','NamesmeaningsController@edit') -> name('admin.namesmeanings.edit');
     Route::post('update/{id}','NamesmeaningsController@update') -> name('admin.namesmeanings.update');
+    Route::get('show/{id}','NamesmeaningsController@show') -> name('admin.namesmeanings.show');
     Route::get('delete/{id}','NamesmeaningsController@destroy') -> name('admin.namesmeanings.delete');
 
     });

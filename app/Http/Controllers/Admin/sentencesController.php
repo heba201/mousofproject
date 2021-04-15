@@ -125,6 +125,26 @@ public function editsentence($id)
 
 }
 
+        public function show($id)
+        {
+
+        $sentence=Sentence::with('word')->Selection()->find($id);
+        try{
+
+            if (!$sentence){
+                return redirect()->route('admin.sentences')->with(['error' => 'هذه الجملة غير موجودة او ربما تكون محذوفة ']);
+            }
+                if($sentence){
+                return view('admin.sentences.show', compact('sentence'));
+                }
+
+        }
+        catch(\Exception $exception){
+            return $exception;
+            return redirect()->route('admin.sentences')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
+        }
+
 public function destroy($id)
 {
 

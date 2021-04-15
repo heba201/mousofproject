@@ -69,7 +69,25 @@ class MeaningsController extends Controller
 
     }
 
+    public function show($id)
+    {
+        try {
+            //$meaning = Meaning::with('word','mojjam')->where('id',$id)->get();
+            $meaning = Meaning::select('meanings.*','mojjam_name','word')
+            ->join('mojjams', 'mojjams.id', '=', 'meanings.mojjam_id')
+            ->join('words', 'words.id', '=', 'meanings.word_id')
+            ->orderBy('meanings.id','desc')
+            ->where('meanings.id',$id)->get();
+            if (!$meaning)
+                return redirect()->route('admin.meanings')->with(['error' => 'هذا المعني غير موجود او ربما يكون محذوفا ']);
 
+            return view('admin.meanings.show', compact('meaning'));
+
+        } catch (\Exception $exception) {
+            return $exception;
+            return redirect()->route('admin.meanings')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
+    }
 
     public function destroy($id)
     {

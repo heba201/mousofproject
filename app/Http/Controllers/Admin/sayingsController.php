@@ -140,6 +140,24 @@ class sayingsController extends Controller
                 }
         }
 
+        public function show($id)
+        {
+            try {
+
+                $saying= Saying::Selection()->find($id);
+                $sayingtags=explode(",",$saying->saying_tag);
+                $characters = Character::selection()->get();
+                $wisdomSayingsubjects=WisdomSayingsubject::selection()->get();
+                if (!$saying)
+                    return redirect()->route('admin.sayings')->with(['error' => 'هذه القول غير موجود او ربما يكون محذوف ']);
+
+                return view('admin.sayings.show', compact('saying','characters','wisdomSayingsubjects','sayingtags'));
+
+            } catch (\Exception $exception) {
+                return redirect()->route('admin.sayings')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+            }
+        }
+
         public function destroy($id)
         {
 

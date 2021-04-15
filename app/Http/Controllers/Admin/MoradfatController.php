@@ -117,6 +117,25 @@ class MoradfatController extends Controller
         }
 }
 
+        public function show($id)
+        {
+            try {
+
+                $moradf= Moradfat::with('word')->Selection()->find($id);
+                $moradfs=explode(", ",$moradf->moradf);
+                $modads=explode(", ",$moradf->modad);
+                if (!$moradf)
+                    return redirect()->route('admin.moradfat')->with(['error' => 'هذه المرادفات غير موجودة او ربما تكون محذوفة ']);
+
+                return view('admin.moradfat.show', compact('moradf','moradfs','modads'));
+
+            } catch (\Exception $exception) {
+                return $exception;
+                return redirect()->route('admin.moradfat')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+            }
+        }
+
+
 public function destroy($id)
 {
 

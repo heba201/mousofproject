@@ -88,6 +88,21 @@ class NamesoriginsController extends Controller
 
     }
 
+    public function show($id)
+    {
+        try {
+
+            $name_origin= Nameorigin::Selection()->find($id);
+            if (!$name_origin)
+                return redirect()->route('admin.namesorigins')->with(['error' => ' اصل الاسم هذا غير موجود او ربما يكون محذوفا ']);
+
+            return view('admin.namesorigins.show', compact('name_origin'));
+
+        } catch (\Exception $exception) {
+            return redirect()->route('admin.namesorigins')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
+    }
+
     public function destroy($id)
     {
       // if this name origin is in names meanings no delete

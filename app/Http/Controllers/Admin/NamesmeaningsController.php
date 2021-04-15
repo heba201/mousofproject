@@ -99,6 +99,24 @@ class NamesmeaningsController extends Controller
 
     }
 
+
+    public function show($id)
+    {
+        try {
+
+            $namemeaning= Namemeaning::Selection()->find($id);
+            $namesorigins = Nameorigin::selection()->get();
+            if (!$namemeaning)
+                return redirect()->route('admin.namesmeanings')->with(['error' => ' هذا الاسم  غير موجود او ربما يكون محذوفا ']);
+
+            return view('admin.namesmeanings.show', compact('namemeaning','namesorigins'));
+
+        } catch (\Exception $exception) {
+            return $exception;
+            return redirect()->route('admin.namesmeanings')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
+    }
+
     public function destroy($id)
     {
 

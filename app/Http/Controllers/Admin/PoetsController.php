@@ -107,6 +107,24 @@ class PoetsController extends Controller
 
     }
 
+
+    public function show($id)
+    {
+        try {
+
+            $poet= Poet::Selection()->find($id);
+            $poetworks=explode(",",  $poet->poet_works);
+            if (!$poet)
+                return redirect()->route('admin.poets')->with(['error' => 'هذا الشاعر غير  موجود او ربما يكون محذوف ']);
+
+            return view('admin.poets.show', compact('poet','poetworks'));
+
+        } catch (\Exception $exception) {
+            return redirect()->route('admin.poets')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
+    }
+
+
     public function destroy($id)
     {
         // if there is abyaat by this poet it will not deletd

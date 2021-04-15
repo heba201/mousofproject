@@ -55,7 +55,7 @@
 
                                                 <h4 class="form-section"><i class="ft-home"></i> بيانات الموضوع </h4>
                                                         <div class="row">
-                                                            <div class="col-md-12">
+                                                            <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1"> الموضوع  </label>
                                                                     <input type="text" value="" id="subject"

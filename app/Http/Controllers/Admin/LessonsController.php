@@ -105,6 +105,22 @@ class LessonsController extends Controller
         }
 
     }
+
+    public function show($id)
+    {
+        try {
+            $lessoncategories=Lessoncategory::selection()->get();
+            $lesson = Lesson::Selection()->find($id);
+            if (!$lesson)
+                return redirect()->route('admin.lessons')->with(['error' => 'هذا الدرس غير موجود او ربما يكون محذوف ']);
+
+            return view('admin.lessons.show', compact('lesson','lessoncategories'));
+
+        } catch (\Exception $exception) {
+            return redirect()->route('admin.lessons')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
+    }
+
     public function destroy($id)
     {
 

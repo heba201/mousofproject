@@ -325,6 +325,19 @@ class wordsController extends Controller
 
             }
 
+            public function show($id)
+        {
+       $word_indications=Wordindication::selection()->get();
+       $word=Word::Selection()->find($id);
+       $other_word_properties=explode(",",$word->other_word_properties);
+       $word_derivatives=explode(",",$word-> word_derivatives);
+       if (!$word){
+           return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة ']);
+       }
+        return view('admin.words.show',compact('word','word_indications','other_word_properties','word_derivatives'));
+        }
+
+
     public function destroy($id)
     {
 

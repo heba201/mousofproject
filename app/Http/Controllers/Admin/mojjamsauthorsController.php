@@ -93,6 +93,25 @@ class mojjamsauthorsController extends Controller
 
     }
 
+
+            public function show($id)
+        {
+            try {
+
+                $mojjamauthor= MojjamAuthor::Selection()->find($id);
+
+                if (!$mojjamauthor)
+                return redirect()->route('admin.mojjamsauthors')->with(['error' => 'هذا المؤلف غير موجود او ربما يكون محذوفا ']);
+
+                return view('admin.mojjamsauthors.show', compact('mojjamauthor'));
+
+            } catch (\Exception $exception) {
+                return $exception;
+                return redirect()->route('admin.mojjamsauthors')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+            }
+        }
+
+
     public function destroy($id)
     {
 

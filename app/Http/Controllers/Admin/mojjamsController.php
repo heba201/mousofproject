@@ -132,6 +132,19 @@ class mojjamsController extends Controller
 
     }
 
+
+    public function show($id)
+    {
+        $mojjamsauthors = MojjamAuthor::selection()->get();
+        $mojjamspecialties =MojjamSpecialty::selection()->get();
+        $mojjamarrangetypes=MojjamArrangetype::selection()->get();
+        $mojjammethods=MojjamMethod::selection()->get();
+        $mojjam = mojjam::Selection()->find($id);
+        if (!$mojjam)
+            return redirect()->route('admin.mojjams')->with(['error' => 'هذاالمعجم غير موجود او ربما يكون محذوفا ']);
+        return view('admin.mojjams.show',compact('mojjam','mojjamsauthors','mojjamspecialties','mojjamarrangetypes','mojjammethods'));
+    }
+
     public function destroy($id)
     {
 

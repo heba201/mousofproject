@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('store','mojjamsController@store') -> name('admin.mojjams.store');
     Route::get('edit/{id}','mojjamsController@edit') -> name('admin.mojjams.edit');
     Route::post('update/{id}','mojjamsController@update') -> name('admin.mojjams.update');
+    Route::get('show/{id}','mojjamsController@show') -> name('admin.mojjams.show');
     Route::get('delete/{id}','mojjamsController@destroy') -> name('admin.mojjams.delete');
 
     });
@@ -44,6 +45,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('store','mojjamsauthorsController@store') -> name('admin.mojjamsauthors.store');
     Route::get('edit/{id}','mojjamsauthorsController@edit') -> name('admin.mojjamsauthors.edit');
     Route::post('update/{id}','mojjamsauthorsController@update') -> name('admin.mojjamsauthors.update');
+    Route::get('show/{id}','mojjamsauthorsController@show') -> name('admin.mojjamsauthors.show');
     Route::get('delete/{id}','mojjamsauthorsController@destroy') -> name('admin.mojjamsauthors.delete');
 
     });
@@ -77,6 +79,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('thirdupdate/{id}','wordsController@thirdupdate') -> name('admin.words.thirdupdate');
     Route::get('finaledit/{id}','wordsController@finaledit') -> name('admin.words.finaledit');
     Route::post('finalupdate/{id}','wordsController@finalupdate') -> name('admin.words.finalupdate');
+    Route::get('show/{id}','wordsController@show') -> name('admin.words.show');
     Route::get('delete/{id}','wordsController@destroy') -> name('admin.words.delete');
 
     });

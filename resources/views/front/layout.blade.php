@@ -26,8 +26,15 @@
 	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
     @stack('style')
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=607a10b5f4ad800018621493&product=inline-share-buttons" async="async"></script>
 </head>
 <body>
+
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=607a10b5f4ad800018621493&product=inline-share-buttons" async="async"></script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ar_AR/sdk.js#xfbml=1&version=v10.0" nonce="2mXI4za2"></script>
+
+
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>

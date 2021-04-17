@@ -44,7 +44,8 @@ Route::get('/expression/{id}', [App\Http\Controllers\HomeController::class, 'exp
  ######################### Begin articles Routes ########################
 Route::get('/articles', [App\Http\Controllers\ArticlesController::class, 'index'])->name('articles');
 Route::get('/articleshow/{id}', [App\Http\Controllers\ArticlesController::class, 'articleshow'])->name('article');
-
+Route::get('/articlecategory/{id}', [App\Http\Controllers\ArticlesController::class, 'articlesbycategory'])->name('articlecategory');
+Route::get('/articlesbydate/{date}', [App\Http\Controllers\ArticlesController::class, 'articlesbydate'])->name('articlesbydate');
  ######################### End articles Routes ########################
 
 ######################### Begin lessons Routes ########################

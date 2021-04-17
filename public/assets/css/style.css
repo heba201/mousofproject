@@ -1243,18 +1243,18 @@ margin-bottom:10px;
 	margin-bottom: 5px;
 }
 
-.blog-post .blog-metas .blog-meta:last-child:after {
+.blog-post .blog-metas .blog-meta:first-child::before {
 	display: none;
 }
 
-.blog-post .blog-metas .blog-meta:after {
+.blog-post .blog-metas .blog-meta:before {
 	position: absolute;
 	content: "";
 	width: 2px;
 	height: 30px;
-	right: 0;
+	right:0;
 	top: calc(50% - 15px);
-	background: #c5ced0;
+	background: #d82a4e;
 }
 
 .blog-post .blog-metas .blog-meta.author {

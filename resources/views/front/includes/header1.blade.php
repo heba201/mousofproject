@@ -51,8 +51,8 @@
 							<li><a href="#">مقالات</a></li>
 							<li><a href="{{route('wisdoms')}}">حكم وأمثال</a></li>
                             <li><a href="{{route('sayings')}}">أقوال مأثورة</a></li>
-                            <li><a href="{{route('expression',$mojjam->id)}}">مصطلحات</a></li>
-                            <li><a href="{{route('composedword',$mojjam->id)}}">كلمات مركبة</a></li>
+                            <li><a href="{{route('articles')}}">مقالات</a></li>
+                            <li><a href="#">دروس دينية</a></li>
 							<li><a href="#">سؤال وجواب</a></li>
 							<li><a href="#">مرئيات وسمعيات</a></li>
 						</ul>

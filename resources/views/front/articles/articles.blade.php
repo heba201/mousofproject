@@ -43,6 +43,9 @@ border-radius: 6px;
 margin-bottom: 30px;
 transition: all 0.3s ease-in-out;
 }
+.sidebar{
+        float: left;
+    }
 .sidebar h4{
     margin: 40px 0px;
 }

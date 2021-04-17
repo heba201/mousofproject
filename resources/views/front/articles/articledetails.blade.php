@@ -43,6 +43,10 @@ transition: all 0.3s ease-in-out;
 	display: none;
 }
 
+.blog-post .blog-metas .blog-meta:last-child::after {
+	display: none;
+}
+
     </style>
 @endpush
 @section('content')

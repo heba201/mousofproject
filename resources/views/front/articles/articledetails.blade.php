@@ -28,9 +28,6 @@ transition: all 0.3s ease-in-out;
     color:#403a3a;
 }
 
-.blog-post .blog-metas .blog-meta:first-child::before {
-	display: none;
-}
 
 .blog-post .blog-metas .blog-meta:before {
 	position: absolute;
@@ -41,6 +38,11 @@ transition: all 0.3s ease-in-out;
 	top: calc(50% - 15px);
 	background: #d82a4e;
 }
+
+.blog-post .blog-metas .blog-meta:first-child::before {
+	display: none;
+}
+
     </style>
 @endpush
 @section('content')

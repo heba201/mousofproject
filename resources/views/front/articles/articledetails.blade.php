@@ -10,7 +10,7 @@
 	content: "";
 	width: 2px;
 	height: 30px;
-	right:0;
+	left:0;
 	top: calc(50% - 15px);
 	background: #d82a4e;
 }

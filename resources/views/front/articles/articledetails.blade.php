@@ -4,6 +4,23 @@
     .ar{
         float: right;
     }
+
+    .blog-post .blog-metas .blog-meta:before {
+	position: absolute;
+	content: "";
+	width: 2px;
+	height: 30px;
+	right:0;
+	top: calc(50% - 15px);
+	background: #d82a4e;
+}
+
+.blog-post .blog-metas .blog-meta:first-child::before {
+	display: none;
+}
+
+
+
     .side{
         float: left;
     }
@@ -29,23 +46,6 @@ transition: all 0.3s ease-in-out;
 }
 
 
-.blog-post .blog-metas .blog-meta:before {
-	position: absolute;
-	content: "";
-	width: 2px;
-	height: 30px;
-	right:0;
-	top: calc(50% - 15px);
-	background: #d82a4e;
-}
-
-.blog-post .blog-metas .blog-meta:first-child::before {
-	display: none;
-}
-
-.blog-post .blog-metas .blog-meta:last-child::after {
-	display: none;
-}
 
     </style>
 @endpush

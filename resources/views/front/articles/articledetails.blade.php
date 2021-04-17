@@ -5,7 +5,7 @@
         float: right;
     }
 
-    .blog-post .blog-metas .blog-meta::after {
+    .blog-post .blog-metas .blog-meta::before {
 	position: absolute;
 	content: "";
 	width: 2px;

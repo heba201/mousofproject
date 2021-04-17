@@ -36,8 +36,21 @@ transition: all 0.3s ease-in-out;
      border-radius:50%;
 
 }
-.side{
+.sidebar{
+padding:50px;
+background: white;
+border-radius: 6px;
+margin-bottom: 30px;
+transition: all 0.3s ease-in-out;
+}
+.sidebar h4{
+    margin: 40px 0px;
+}
 
+.sidebar:hover{
+    border-top:  6px solid #d82a4e;
+    padding-top: 45px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0,0.1);
 }
 
     </style>
@@ -80,7 +93,7 @@ transition: all 0.3s ease-in-out;
                 </div>
         <!-- sidebar -->
             <div class="col-md-3 col-sm-6 ">
-                <div class="feature-text text-right side">
+                <div class="feature-text text-right sidebar">
                     <div class="sb-widget-item">
                         <h4 class="sb-w-title">تصنيفات</h4>
                         <ul>

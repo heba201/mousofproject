@@ -21,7 +21,7 @@
 
 
 
-    .side{
+    .sidebar{
         float: left;
     }
 .sidebar{

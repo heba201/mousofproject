@@ -48,7 +48,6 @@
                             <li><a href="{{route('moradfat')}}">مرادفات وأضداد</a></li>
                             <li><a href="{{route('namesmeanings')}}">معاني الأسماء</a></li>
                             <li><a href="{{route('fawaed')}}">فوائد لغوية</a></li>
-							<li><a href="#">مقالات</a></li>
 							<li><a href="{{route('wisdoms')}}">حكم وأمثال</a></li>
                             <li><a href="{{route('sayings')}}">أقوال مأثورة</a></li>
                             <li><a href="{{route('articles')}}">مقالات</a></li>

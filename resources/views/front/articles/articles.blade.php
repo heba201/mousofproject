@@ -37,7 +37,7 @@ transition: all 0.3s ease-in-out;
 
 }
 .side{
-    border: 2px solid #d82a4e;
+
 }
 
     </style>

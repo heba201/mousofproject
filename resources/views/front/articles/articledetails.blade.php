@@ -26,7 +26,6 @@
     }
 .sidebar{
 padding:50px;
-border: 2px solid #d82a4e;
 background: white;
 border-radius: 6px;
 margin-bottom: 30px;

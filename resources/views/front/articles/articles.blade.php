@@ -36,7 +36,7 @@ transition: all 0.3s ease-in-out;
      border-radius:50%;
 
 }
-.sidebar{
+.feature-text .sidebar{
 padding:50px;
 background: white;
 border-radius: 6px;
@@ -47,7 +47,7 @@ transition: all 0.3s ease-in-out;
     margin: 40px 0px;
 }
 
-.sidebar:hover{
+.feature-text .sidebar:hover{
     border-top:  6px solid #d82a4e;
     padding-top: 45px;
     box-shadow: 0 5px 15px rgba(0, 0, 0,0.1);

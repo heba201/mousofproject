@@ -15,7 +15,7 @@
 	background: #d82a4e;
 }
 
-.blog-post .blog-metas .blog-meta:last-child::after {
+.blog-post .blog-metas .blog-meta:first-child::after {
 	display: none;
 }
 

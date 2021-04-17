@@ -27,6 +27,20 @@ transition: all 0.3s ease-in-out;
 .blog-page p{
     color:#403a3a;
 }
+
+.blog-post .blog-metas .blog-meta:first-child::before {
+	display: none;
+}
+
+.blog-post .blog-metas .blog-meta:before {
+	position: absolute;
+	content: "";
+	width: 2px;
+	height: 30px;
+	right:0;
+	top: calc(50% - 15px);
+	background: #d82a4e;
+}
     </style>
 @endpush
 @section('content')

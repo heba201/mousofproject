@@ -93,7 +93,7 @@ transition: all 0.3s ease-in-out;
                 </div>
         <!-- sidebar -->
             <div class="col-md-3 col-sm-6 ">
-                <div class="feature-text text-right sidebar">
+                <div class="text-right sidebar">
                     <div class="sb-widget-item">
                         <h4 class="sb-w-title">تصنيفات</h4>
                         <ul>

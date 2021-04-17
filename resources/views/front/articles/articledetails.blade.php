@@ -39,7 +39,7 @@ transition: all 0.3s ease-in-out;
 	background: #d82a4e;
 }
 
-.blog-post .blog-metas .blog-meta:last-child::before {
+.blog-post .blog-metas .blog-meta:first-child::before {
 	display: none;
 }
 

@@ -53,7 +53,7 @@ transition: all 0.3s ease-in-out;
 <section class="blog-page spad pb-0"  style="text-align: right">
     <div class="container">
         <div class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-9 ">
                 <!-- blog post -->
                 <div class="blog-post" >
                     <img src="{{asset('assets/'.$article->article_photo)}}" alt="articl-img" width="700" height="300">
@@ -76,7 +76,7 @@ transition: all 0.3s ease-in-out;
                 <div class="col-md-12 text-center" style="margin-bottom: 15px;">
                     <h4>مشاركة</h4>
                 </div>
-                <div class="col-md-9 text-center">
+                <div class="col-md-9 col-md-5 col-sm-9 text-center">
                     <div class="sharethis-inline-share-buttons text-center" style="margin-right:150px;margin-bottom:15px;"></div>
                 </div>
                 <div class="col-md-9">

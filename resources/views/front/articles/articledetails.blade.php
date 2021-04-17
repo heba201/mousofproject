@@ -53,7 +53,7 @@ transition: all 0.3s ease-in-out;
 <section class="blog-page spad pb-0"  style="text-align: right">
     <div class="container">
         <div class="row">
-            <div class="col-lg-9 ">
+            <div class="col-lg-9 col-md-7 col-sm-9">
                 <!-- blog post -->
                 <div class="blog-post" >
                     <img src="{{asset('assets/'.$article->article_photo)}}" alt="articl-img" width="700" height="300">

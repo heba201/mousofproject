@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}"/>
 	<link rel="stylesheet" href="{{asset('assets/css/owl.carousel.css')}}"/>
 	<link rel="stylesheet" href="{{asset('assets/css/style.css')}}"/>
-
+    <link rel="stylesheet" href="{{asset('assets/css/styleresponsive.css')}}"/>
 
 
 	<!--[if lt IE 9]>

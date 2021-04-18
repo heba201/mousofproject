@@ -14,7 +14,12 @@ body {
 	font-family: 'Raleway', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
+
 }
+body {
+    /*max-width: 100%;*/
+    overflow-x: hidden;
+ }
 
 h1,
 h2,

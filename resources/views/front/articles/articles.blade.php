@@ -55,7 +55,47 @@ transition: all 0.3s ease-in-out;
     padding-top: 45px;
     box-shadow: 0 5px 15px rgba(0, 0, 0,0.1);
 }
+/*responsive*/
+@media only screen and (min-width: 500px) and (max-width: 992px) {
+.feature-text{
+padding-right:0;
+padding-left:0;
+}
+.sidebar{
+        float: right;
+    }
 
+.feature-text .readmore{
+min-width: 100px;
+}
+.sidebar{
+        float: right;
+    }
+}
+@media only screen and (min-width:770px) {
+    .row {
+  display: flex; /* equal height of the children */
+}
+.feature-text {
+  flex: 1; /* additionally, equal width */
+
+  padding: 1em;
+
+}
+}
+@media only screen and (min-width:439px) and  (max-width: 766px) {
+    .feature-text img{
+    width: 200px;
+    height: 200px;
+
+}
+}
+@media only screen and (min-width:300px) and  (max-width: 567px) {
+    .all{
+        width: 100%;
+    }
+
+}
     </style>
 @endpush
 @section('content')
@@ -71,14 +111,14 @@ transition: all 0.3s ease-in-out;
                     </div>
                 </div>
 
-                <div class="col-md-9 col-sm-6" style="background: #d82a4e;padding-top:30px;height:1%;width:1%;overflow: hidden;">
+                <div class="col-lg-9 col-md-12 col-sm-12 all" style="background: #d82a4e;padding-top:30px;height:1%;overflow: hidden;">
               <!-- article -->
               @if($articles->isEmpty())
               <h5 style="color:#fff;" class="text-center"> عفوا لا يوجد مقالات </h5>
                   @endif
                   @if($articles)
               @foreach($articles as $article)
-            <div class="col-md-4 col-sm-6 ar">
+            <div class="col-lg-4 col-md-4 ar">
                 <div class="feature-text text-center">
                     <img src="{{asset('assets/'.$article->article_photo)}}" class="img" width="400" height="100">
                     <h6>{{$article->article_title}}</h6>
@@ -95,7 +135,7 @@ transition: all 0.3s ease-in-out;
                 @endif
                 </div>
         <!-- sidebar -->
-            <div class="col-md-3 col-sm-6 ">
+            <div class="col-md-3">
                 <div class="text-right sidebar">
                     <div class="sb-widget-item">
                         <h4 class="sb-w-title">تصنيفات</h4>

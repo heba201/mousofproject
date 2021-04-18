@@ -82,6 +82,11 @@ min-width: 100px;
   padding: 1em;
 
 }
+.feature-text img{
+    width: 400px;
+    height: 100px;
+
+}
 }
 @media only screen and (min-width:439px) and  (max-width: 766px) {
     .feature-text img{

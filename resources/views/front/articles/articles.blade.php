@@ -120,7 +120,7 @@ min-width: 100px;
               @foreach($articles as $article)
             <div class="col-lg-4 col-md-4 ar">
                 <div class="feature-text text-center">
-                    <img src="{{asset('assets/'.$article->article_photo)}}" class="img" width="400" height="100">
+                    <img src="{{asset('assets/'.$article->article_photo)}}" class="img" width="300" height="100">
                     <h6>{{$article->article_title}}</h6>
                         <p>{{ Str::limit($article->article_details, 60)}}</p>
                             <a href="{{route('article',$article->id)}}" class="site-btn readmore">قراءة المزيد</a>

@@ -83,7 +83,7 @@ min-width: 100px;
 
 }
 .feature-text img{
-    width: 100px !important;
+    width: 150px !important;
     height: 100px !important;
 
 }

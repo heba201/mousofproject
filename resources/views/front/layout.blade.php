@@ -27,6 +27,13 @@
 	<![endif]-->
     @stack('style')
     <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=607a10b5f4ad800018621493&product=inline-share-buttons" async="async"></script>
+<style>
+    body {
+    /*max-width: 100%;*/
+    overflow-x: hidden;
+ }
+
+</style>
 </head>
 <body>
 

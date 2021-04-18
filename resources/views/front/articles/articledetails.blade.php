@@ -43,7 +43,32 @@ transition: all 0.3s ease-in-out;
 .blog-page p{
     color:#403a3a;
 }
+/*responsive*/
+@media only screen and (min-width:770px) {
+    .sidebar{
+        margin-top: 35px;
+    }
+}
+@media only screen and (min-width:439px) and  (max-width: 766px) {
+    .sidebar{
+        margin-top: 35px;
 
+
+    }
+    .sidebar:hover{
+
+        border-top:  6px solid #d82a4e;
+    }
+}
+@media only screen and (min-width:300px) and  (max-width: 567px) {
+    .sidebar{
+        margin-top: 35px;
+    }
+    .sidebar:hover{
+        border:none;
+
+    }
+}
 
 
     </style>

@@ -19,6 +19,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        try{
         $characters = Character::selection()->limit(2)->get();
         $articles = Article::selection()->limit(2)->get();
         $lessons = Lesson::selection()->limit(3)->get();
@@ -45,7 +46,10 @@ class HomeController extends Controller
         $wordsgroup=$wordtoday::where('word','=',$wordtoday->word)->selection()->get();
         return view('index2',compact('characters','articles','lessons','sayings','fawaed','wisdomtoday','wordtoday','meanings','wordsgroup'
     ,'word','word_indications','mojjam','wordmeaning','similarwords','words_meanings_othermojjams','sentences'));
-    }
+        }catch(\Exception $ex){
+            return redirect()->route('home');
+        }
+}
 
     public function wordsearch(Request $request){
         try {

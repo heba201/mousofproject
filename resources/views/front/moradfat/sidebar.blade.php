@@ -35,7 +35,7 @@ use App\Models\Wisdom;
             <span>{{$wisdomtoday->character->character_name}} </span>
         </div>
         <div class="phone-number text-center fawedbox">
-            <h3>فوائد لغوية</h3>
+            <h3>فائدة لغوية</h3>
             <span>{{$faedatoday->fawedsubject->faeda_subject}} </span>
             <?php
             $faedatodaytexts=explode(",",$faedatoday->faeda);

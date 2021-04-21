@@ -10,8 +10,8 @@
 	<link href="img/favicon.ico" rel="shortcut icon"/>
 
 	<!-- Google Fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
-<!-- fontawsome -->
+	<!--<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">-->
+    <!-- fontawsome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}"/>
@@ -27,10 +27,12 @@
 	<![endif]-->
     @stack('style')
     <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=607a10b5f4ad800018621493&product=inline-share-buttons" async="async"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
 <style>
     body {
     /*max-width: 100%;*/
     overflow-x: hidden;
+    font-family: 'Cairo', sans-serif;
  }
 
 </style>

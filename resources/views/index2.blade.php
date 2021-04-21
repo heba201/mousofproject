@@ -43,9 +43,8 @@ background:#edf4f6;
 </style>
 @endpush
 @section('content')
-<!-- search section -->
-@include('front.searchbar1')
-<!-- search section end -->
+
+@include('front.searchbar1');
 
 <section class="contact-page spad pb-0">
     <div class="container">
@@ -246,4 +245,10 @@ foreach($similarwords as $similarword){
 </section>
 @endif
 <!-- related words end -->
+
+
+
+
+
+
 @endsection

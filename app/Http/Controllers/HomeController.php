@@ -25,12 +25,26 @@ class HomeController extends Controller
         $sayings =Saying::with('character')->selection()->limit(2)->get();
         $fawaed =Faeda::with('fawedsubject')->selection()->limit(2)->get();
         $wisdomtoday = Wisdom::inRandomOrder()->first();
+        //get random word
+        $word =Word::with('meanings')->inRandomOrder()->selection()->first();
+        $mojjam=Mojjam::inRandomOrder()->selection()->first();
+        $wordmeaning=Meaning::where('word_id',$word->id)->where('mojjam_id',$mojjam->id)->selection()->get()->first();
+        $similarwords=Word::with('meanings')->where('word', 'like',"%" . $word ."%")->where('id','!=',$word->id)->selection()->limit(3)->get();
+        $words_meanings_othermojjams=Meaning::with('word','mojjam')->where('word_id',$word->id)->where('mojjam_id','!=',$mojjam->id)->selection()->get();
+        $sentences=Sentence::with('word')->where('word_id',$word->id)->selection()->get();
+        $word_indications=Wordindication::selection()->get();
+
+        if (!$wordmeaning) {
+          return redirect()->route('home');
+        }
+
         $wordcount=Word::count();
         $wordtoday=Word::with('meanings')->inRandomOrder()->whereIn('word_type',['0','1'])->first();
         $meanings=Meaning::where('word_id','=',$wordtoday->id)->selection()->get();
         //print_r($meanings);
         $wordsgroup=$wordtoday::where('word','=',$wordtoday->word)->selection()->get();
-        return view('index',compact('characters','articles','lessons','sayings','fawaed','wisdomtoday','wordtoday','meanings','wordsgroup'));
+        return view('index2',compact('characters','articles','lessons','sayings','fawaed','wisdomtoday','wordtoday','meanings','wordsgroup'
+    ,'word','word_indications','mojjam','wordmeaning','similarwords','words_meanings_othermojjams','sentences'));
     }
 
     public function wordsearch(Request $request){

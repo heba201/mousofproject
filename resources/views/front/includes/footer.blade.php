@@ -34,20 +34,21 @@
                     </form>
                 </div>
                 <div class="widget-item">
+                    <?php
+            $mojjams =App\Models\Mojjam::selection()->get();
+                    ?>
                     <h4>المعاجم العربية</h4>
                     <ul>
-                        <li><a href="#">لسان العرب</a></li>
-                        <li><a href="#">أساس البلاغة</a></li>
-                        <li><a href="#">الصحاح</a></li>
-                        <li><a href="#">المصباح المنير</a></li>
-                        <li><a href="#">القاموس المحيط</a></li>
+                    @foreach($mojjams as $mojjam)
+                    <li><a href="{{route('getwordmaningmojjam',$mojjam->id)}}">{{$mojjam->mojjam_name}}</a></li>
+                    @endforeach
                     </ul>
                 </div>
                 <div class="widget-item">
                     <h4>روابط تهمك </h4>
                     <ul>
-                        <li><a href="#">معاني الكلمات</a></li>
-                        <li><a href="#">أقوال مأثورة</a></li>
+                        <li><a href="{{route('namesmeanings')}}">معاني الأسماء</a></li>
+                        <li><a href="{{route('sayings')}}">أقوال مأثورة</a></li>
                         <li><a href="#">قصص القران</a></li>
                         <li><a href="#"></a>كلمات القران</li>
                         <li><a href="#">الصحابة والتابعين</a></li>
@@ -56,11 +57,10 @@
                 <div class="widget-item">
                     <h4></h4>
                     <ul>
-                        <li><a href="">مقالات</a></li>
+                        <li><a href="{{route('articles')}}">مقالات</a></li>
                         <li><a href="">سؤال وجواب</a></li>
                         <li><a href="">العاب لغوية</a></li>
-                        <li><a href="">فوائد لغوية</a></li>
-                        <li><a href="">مصطلحات</a></li>
+                        <li><a href="{{route('fawaed')}}">فوائد لغوية</a></li>
                         <li><a href="#">الشروط والأحكام</a></li>
                         <li><a href="#">سياسة الخصوصية</a></li>
                     </ul>

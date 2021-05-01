@@ -25,6 +25,21 @@ use Illuminate\Support\Facades\Route;
         Route::get('logout', 'LogoutController@logout')->name('admin.logout');
 
 
+
+    ######################### Begin languages Routes ########################
+    Route::group(['prefix' => 'languages'], function () {
+    Route::get('/','LanguagesController@index') -> name('admin.languages');
+    Route::get('create','LanguagesController@create') -> name('admin.languages.create');
+    Route::post('store','LanguagesController@store') -> name('admin.languages.store');
+    Route::get('edit/{id}','LanguagesController@edit') -> name('admin.languages.edit');
+    Route::post('update/{id}','LanguagesController@update') -> name('admin.languages.update');
+    Route::get('show/{id}','LanguagesController@show') -> name('admin.languages.show');
+    Route::get('delete/{id}','LanguagesController@destroy') -> name('admin.languages.delete');
+
+    });
+     ######################### End   languages Routes  ########################
+
+
  ######################### Begin mojjams Routes ########################
     Route::group(['prefix' => 'mojjams'], function () {
     Route::get('/','mojjamsController@index') -> name('admin.mojjams');
@@ -69,16 +84,16 @@ use Illuminate\Support\Facades\Route;
     Route::get('/','wordsController@index') -> name('admin.words');
     Route::get('create','wordsController@create') -> name('admin.words.create');
     Route::post('store','wordsController@store') -> name('admin.words.store');
-    Route::get('seccreate/{id}','wordsController@seccreate') -> name('admin.words.seccreate');
-    Route::post('firstupdate/{id}','wordsController@firstupdate') -> name('admin.words.firstupdate');
+    Route::get('seccreate/{id}/{mojjam_id}','wordsController@seccreate') -> name('admin.words.seccreate');
+    Route::post('firstupdate/{id}/{mojjam_id}','wordsController@firstupdate') -> name('admin.words.firstupdate');
     Route::get('edit/{id}','wordsController@edit') -> name('admin.words.edit');
     Route::post('update/{id}','wordsController@update') -> name('admin.words.update');
-    Route::get('secedit/{id}','wordsController@secedit') -> name('admin.words.secedit');
-    Route::post('secupdate/{id}','wordsController@secupdate') -> name('admin.words.secupdate');
-    Route::get('thirdedit/{id}','wordsController@thirdedit') -> name('admin.words.thirdedit');
-    Route::post('thirdupdate/{id}','wordsController@thirdupdate') -> name('admin.words.thirdupdate');
-    Route::get('finaledit/{id}','wordsController@finaledit') -> name('admin.words.finaledit');
-    Route::post('finalupdate/{id}','wordsController@finalupdate') -> name('admin.words.finalupdate');
+    Route::get('secedit/{id}/{mojjam_id}','wordsController@secedit') -> name('admin.words.secedit');
+    Route::post('secupdate/{id}/{mojjam_id}','wordsController@secupdate') -> name('admin.words.secupdate');
+    Route::get('thirdedit/{id}/{mojjam_id}','wordsController@thirdedit') -> name('admin.words.thirdedit');
+    Route::post('thirdupdate/{id}/{mojjam_id}','wordsController@thirdupdate') -> name('admin.words.thirdupdate');
+    Route::get('finaledit/{id}/{mojjam_id}','wordsController@finaledit') -> name('admin.words.finaledit');
+    Route::post('finalupdate/{id}/{mojjam_id}','wordsController@finalupdate') -> name('admin.words.finalupdate');
     Route::get('show/{id}','wordsController@show') -> name('admin.words.show');
     Route::get('delete/{id}','wordsController@destroy') -> name('admin.words.delete');
 

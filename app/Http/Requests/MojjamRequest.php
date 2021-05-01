@@ -26,6 +26,7 @@ class MojjamRequest extends FormRequest
         return [
             'name' => 'required|string|max:100',
             'author_id' => 'required|exists:mojjams_authors,id',
+            'language_id' => 'required|exists:languages,id',
             'mojjamarrangetype_id' => 'exists:mojjam_arrangetypes,id',
             'mojjammethod_id' => 'required|exists:mojjam_methods,id',
         ];
@@ -37,6 +38,7 @@ class MojjamRequest extends FormRequest
             'max'  => 'هذا الحقل طويل',
             'name.string'  =>'الاسم لابد ان يكون حروف فقط ',
             'author_id.exists'  => 'المؤلف غير موجود ',
+            'language_id.exists'  => 'اللغة غير موجودة ',
             'mojjamarrangetype_id.exists'  => 'نوع ترتيب المعجم  غير موجود ',
             'mojjammethod_id.exists'  => 'منهج المعجم غير موجود ',
         ];

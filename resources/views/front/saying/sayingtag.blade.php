@@ -49,7 +49,7 @@ text-decoration: underline;
                     <div class="section-title text-center p-0 wordbox">
                         <h3>كلمة اليوم</h3>
                         <p dir="rtl">
-                            {{$wordtoday->word}} {{$wordtoday->word_type==0 ?'(اسم)' :'(فعل)'}}
+                            {{$wordname->word}} {{$wordtoday->word_type==0 ?'(اسم)' :'(فعل)'}}
                         </p>
                         <p>
                             {{--$wordtodaymeaning->word_meaning--}}

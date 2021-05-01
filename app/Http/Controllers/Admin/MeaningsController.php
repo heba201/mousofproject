@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Meaning;
 use App\Models\Word;
+use App\Models\Wordname;
 use App\Http\Requests\MeaningRequest;
 use Auth;
 
@@ -15,10 +16,10 @@ class MeaningsController extends Controller
     {
 
 
-        $words=Word::with('meanings')->get();
+        $words=Wordname::with('meanings')->get();
         $meanings = Meaning::select('meanings.*','mojjam_name','word')
         ->join('mojjams', 'mojjams.id', '=', 'meanings.mojjam_id')
-        ->join('words', 'words.id', '=', 'meanings.word_id')
+        ->join('wordnames', 'wordnames.id', '=', 'meanings.word_id')
         ->orderBy('meanings.id','desc')
         ->get();
        return view('admin.meanings.index', compact('meanings'));
@@ -32,7 +33,7 @@ class MeaningsController extends Controller
             //$meaning = Meaning::with('word','mojjam')->where('id',$id)->get();
             $meaning = Meaning::select('meanings.*','mojjam_name','word')
             ->join('mojjams', 'mojjams.id', '=', 'meanings.mojjam_id')
-            ->join('words', 'words.id', '=', 'meanings.word_id')
+            ->join('wordnames', 'wordnames.id', '=', 'meanings.word_id')
             ->orderBy('meanings.id','desc')
             ->where('meanings.id',$id)->get();
             if (!$meaning)
@@ -75,7 +76,7 @@ class MeaningsController extends Controller
             //$meaning = Meaning::with('word','mojjam')->where('id',$id)->get();
             $meaning = Meaning::select('meanings.*','mojjam_name','word')
             ->join('mojjams', 'mojjams.id', '=', 'meanings.mojjam_id')
-            ->join('words', 'words.id', '=', 'meanings.word_id')
+            ->join('wordnames', 'wordnames.id', '=', 'meanings.word_id')
             ->orderBy('meanings.id','desc')
             ->where('meanings.id',$id)->get();
             if (!$meaning)

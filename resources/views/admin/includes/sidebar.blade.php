@@ -6,6 +6,28 @@
                         class="menu-title" data-i18n="nav.add_on_drag_drop.main">الرئيسية </span></a>
             </li>
 
+
+            <li class="nav-item open">
+                <a href=""><i class="la la-home"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main"> لغات المعاجم</span>
+                    <span
+                        class="badge badge badge-info badge-pill float-right mr-2">{{App\Models\Language::count()}}</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="active"><a class="menu-item" href="{{route('admin.languages')}}"
+                                          data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                    </li>
+                    @if( Auth::user()->role_id==2)
+                    <li><a class="menu-item" href="{{route('admin.languages.create')}}" data-i18n="nav.dash.crypto">إضافة
+                            لغة جديدة  </a>
+                    </li>
+                    @endif
+                </ul>
+            </li>
+
+
+
+
             <li class="nav-item open">
                 <a href=""><i class="la la-home"></i>
                     <span class="menu-title" data-i18n="nav.dash.main"> مؤلفي المعاجم</span>

@@ -9,6 +9,7 @@ use App\Models\Character;
 use App\Models\Saying;
 use App\Models\Meaning;
 use App\Models\Word;
+use App\Models\Wordname;
 use App\Models\Faeda;
 
 class SayingsController extends Controller
@@ -21,13 +22,15 @@ class SayingsController extends Controller
        if ($sayings->count()==0 || $sayings->count()==0 || $characters->count()==0 || $wisdomSayingsubjects->count()==0) {
            return redirect()->route('home');
        }
-       $wordtoday=Word::with('meanings')->inRandomOrder()->whereIn('word_type',['0','1'])->first();
-       $wordtodaymeaning=Meaning::where('word_id','=',$wordtoday->id)->selection()->first();
-       $wordgroups= Word::with('meanings')->where('word', 'LIKE', '%'.$wordtoday->word.'%')->selection()->limit(3)->get();
+
+       $wordtoday=Word::inRandomOrder()->whereIn('word_type',['0','1'])->first();
+       $wordname=Wordname::where('id',$wordtoday->word_id)->selection()->first();
+       $wordtodaymeaning=Meaning::where('word_id','=',$wordname->id)->selection()->first();
+       $wordgroups= Wordname::with('meanings')->where('word', 'like',"%".$wordname->word."%")->selection()->limit(3)->get();
        $wordgroupmeaning=Meaning::where('word_id','=',$wordgroups[0]->id)->selection()->get();
        $wisdomtoday = Wisdom::with('character')->inRandomOrder()->first();
        $faedatoday=Faeda::with('fawedsubject')->inRandomOrder()->first();
-       return view('front.saying.sayings',compact('characters','wisdomSayingsubjects','sayings','wordtoday','wordtodaymeaning','wordgroups','wordgroupmeaning','wisdomtoday','faedatoday'));
+       return view('front.saying.sayings',compact('characters','wordname','wisdomSayingsubjects','sayings','wordtoday','wordtodaymeaning','wordgroups','wordgroupmeaning','wisdomtoday','faedatoday'));
     }
 
      public function allsayingcharacter($id)
@@ -35,10 +38,11 @@ class SayingsController extends Controller
         $sayings = Saying::with('character')->where('character_id',$id)->inRandomOrder()->selection()->paginate(5);
         $wisdomSayingsubjects=WisdomSayingsubject::inRandomOrder()->selection()->limit(9)->get();
         $characters=Character::inRandomOrder()->selection()->limit(9)->get();
-        $wordtoday=Word::with('meanings')->inRandomOrder()->whereIn('word_type',['0','1'])->first();
-        $wordtodaymeaning=Meaning::where('word_id','=',$wordtoday->id)->selection()->first();
+        $wordtoday=Word::inRandomOrder()->whereIn('word_type',['0','1'])->first();
+        $wordname=Wordname::where('id',$wordtoday->word_id)->selection()->first();
+        $wordtodaymeaning=Meaning::where('word_id','=',$wordname->id)->selection()->first();
         //print_r($wordtoday);
-        $wordgroups= Word::with('meanings')->where('word', 'LIKE', '%'.$wordtoday->word.'%')->selection()->limit(3)->get();
+        $wordgroups= Wordname::with('meanings')->where('word', 'like',"%".$wordname->word."%")->selection()->limit(3)->get();
         $wordgroupmeaning=Meaning::where('word_id','=',$wordgroups[0]->id)->selection()->get();
         $wisdomtoday = Wisdom::with('character')->inRandomOrder()->first();
         $faedatoday=Faeda::with('fawedsubject')->inRandomOrder()->first();
@@ -46,7 +50,7 @@ class SayingsController extends Controller
         if ( $sayings->count() ==0) {
             return redirect()->route('sayings');
         }
-        return view('front.saying.allsayingscharacter',compact('sayings','wisdomSayingsubjects','characters','wordtoday','wordtodaymeaning','wordgroups','wordgroupmeaning','wisdomtoday','faedatoday'));
+        return view('front.saying.allsayingscharacter',compact('sayings','wordname','wisdomSayingsubjects','characters','wordtoday','wordtodaymeaning','wordgroups','wordgroupmeaning','wisdomtoday','faedatoday'));
     }
 
     public function sayingtag($tag){
@@ -57,15 +61,16 @@ class SayingsController extends Controller
         if ($sayings->count() ==0) {
             return redirect()->route('sayings');
         }
-        $wordtoday=Word::with('meanings')->inRandomOrder()->whereIn('word_type',['0','1'])->first();
-        $wordtodaymeaning=Meaning::where('word_id','=',$wordtoday->id)->selection()->first();
+        $wordtoday=Word::inRandomOrder()->whereIn('word_type',['0','1'])->first();
+        $wordname=Wordname::where('id',$wordtoday->word_id)->selection()->first();
+        $wordtodaymeaning=Meaning::where('word_id','=',$wordname->id)->selection()->first();
         //print_r($wordtoday);
-        $wordgroups= Word::with('meanings')->where('word', 'LIKE', '%'.$wordtoday->word.'%')->selection()->limit(3)->get();
+        $wordgroups= Wordname::with('meanings')->where('word', 'like',"%".$wordname->word."%")->selection()->limit(3)->get();
         $wordgroupmeaning=Meaning::where('word_id','=',$wordgroups[0]->id)->selection()->get();
         $wisdomtoday = Wisdom::with('character')->inRandomOrder()->first();
         $faedatoday=Faeda::with('fawedsubject')->inRandomOrder()->first();
        // return view('front.wisdoms.wisdomscharacter',compact('wisdoms','wisdomSayingsubjects','characters'));
-        return view('front.saying.sayingtag',compact('sayings','wisdomSayingsubjects','characters','wordtoday','wordtodaymeaning','wordgroups','wordgroupmeaning','wisdomtoday','faedatoday'));
+        return view('front.saying.sayingtag',compact('sayings','wordname','wisdomSayingsubjects','characters','wordtoday','wordtodaymeaning','wordgroups','wordgroupmeaning','wisdomtoday','faedatoday'));
     }
      public function sayingsubject($id)
     {
@@ -75,15 +80,16 @@ class SayingsController extends Controller
         }
         $wisdomSayingsubjects=WisdomSayingsubject::inRandomOrder()->selection()->limit(9)->get();
         $characters=Character::inRandomOrder()->selection()->limit(9)->get();
-        $wordtoday=Word::with('meanings')->inRandomOrder()->whereIn('word_type',['0','1'])->first();
-        $wordtodaymeaning=Meaning::where('word_id','=',$wordtoday->id)->selection()->first();
+        $wordtoday=Word::inRandomOrder()->whereIn('word_type',['0','1'])->first();
+        $wordname=Wordname::where('id',$wordtoday->word_id)->selection()->first();
+        $wordtodaymeaning=Meaning::where('word_id','=',$wordname->id)->selection()->first();
         //print_r($wordtoday);
-        $wordgroups= Word::with('meanings')->where('word', 'LIKE', '%'.$wordtoday->word.'%')->selection()->limit(3)->get();
+        $wordgroups= Wordname::with('meanings')->where('word', 'like',"%".$wordname->word."%")->selection()->limit(3)->get();
         $wordgroupmeaning=Meaning::where('word_id','=',$wordgroups[0]->id)->selection()->get();
         $wisdomtoday = Wisdom::with('character')->inRandomOrder()->first();
         $faedatoday=Faeda::with('fawedsubject')->inRandomOrder()->first();
 
-        return view('front.saying.sayingsubject',compact('sayings','wisdomSayingsubjects','characters','wordtoday','wordtodaymeaning','wordgroups','wordgroupmeaning','wisdomtoday','faedatoday'));
+        return view('front.saying.sayingsubject',compact('sayings','wordname','wisdomSayingsubjects','characters','wordtoday','wordtodaymeaning','wordgroups','wordgroupmeaning','wisdomtoday','faedatoday'));
     }
 
     public function  sayingsearch(Request $request){
@@ -97,14 +103,15 @@ class SayingsController extends Controller
             if ($sayings->count() ==0) {
                 return redirect()->route('sayings');
             }
-        $wordtoday=Word::with('meanings')->inRandomOrder()->whereIn('word_type',['0','1'])->first();
-        $wordtodaymeaning=Meaning::where('word_id','=',$wordtoday->id)->selection()->first();
+        $wordtoday=Word::inRandomOrder()->whereIn('word_type',['0','1'])->first();
+        $wordname=Wordname::where('id',$wordtoday->word_id)->selection()->first();
+        $wordtodaymeaning=Meaning::where('word_id','=',$wordname->id)->selection()->first();
         //print_r($wordtoday);
-        $wordgroups= Word::with('meanings')->where('word', 'LIKE', '%'.$wordtoday->word.'%')->selection()->limit(3)->get();
+        $wordgroups= Wordname::with('meanings')->where('word', 'like',"%".$wordname->word."%")->selection()->limit(3)->get();
         $wordgroupmeaning=Meaning::where('word_id','=',$wordgroups[0]->id)->selection()->get();
         $wisdomtoday = Wisdom::with('character')->inRandomOrder()->first();
         $faedatoday=Faeda::with('fawedsubject')->inRandomOrder()->first();
-            return view('front.saying.sayingcharacter',compact('sayings','wisdomSayingsubjects','characters','wordtoday','wordtodaymeaning','wordgroups','wordgroupmeaning','wisdomtoday','faedatoday'));
+            return view('front.saying.sayingcharacter',compact('sayings','wordname','wisdomSayingsubjects','characters','wordtoday','wordtodaymeaning','wordgroups','wordgroupmeaning','wisdomtoday','faedatoday'));
         }
     }
         catch(\Exception $ex){
@@ -118,9 +125,10 @@ class SayingsController extends Controller
             $saying= Saying::with('character')->Selection()->find($id);
             $wisdomSayingsubjects=WisdomSayingsubject::inRandomOrder()->selection()->limit(9)->get();
             $characters=Character::inRandomOrder()->selection()->limit(9)->get();
-            $wordtoday=Word::with('meanings')->inRandomOrder()->whereIn('word_type',['0','1'])->first();
-            $wordtodaymeaning=Meaning::where('word_id','=',$wordtoday->id)->selection()->first();
-            $wordgroups= Word::with('meanings')->where('word', 'LIKE', '%'.$wordtoday->word.'%')->selection()->limit(3)->get();
+            $wordtoday=Word::inRandomOrder()->whereIn('word_type',['0','1'])->first();
+            $wordname=Wordname::where('id',$wordtoday->word_id)->selection()->first();
+            $wordtodaymeaning=Meaning::where('word_id','=',$wordname->id)->selection()->first();
+            $wordgroups= Wordname::with('meanings')->where('word', 'like',"%".$wordname->word."%")->selection()->limit(3)->get();
             $wordgroupmeaning=Meaning::where('word_id','=',$wordgroups[0]->id)->selection()->get();
             $wisdomtoday = Wisdom::with('character')->inRandomOrder()->first();
             $faedatoday=Faeda::with('fawedsubject')->inRandomOrder()->first();
@@ -128,7 +136,7 @@ class SayingsController extends Controller
             if (!$saying) {
                 return redirect()->route('sayings');
             }
-            return view('front.saying.getsaying',compact('saying','wisdomSayingsubjects','characters','wordtoday','wordtodaymeaning','wordgroupmeaning','wisdomtoday','faedatoday'));
+            return view('front.saying.getsaying',compact('saying','wordname','wisdomSayingsubjects','characters','wordtoday','wordtodaymeaning','wordgroupmeaning','wisdomtoday','faedatoday'));
 
         } catch (\Exception $ex) {
             return $ex;

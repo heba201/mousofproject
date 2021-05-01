@@ -27,7 +27,7 @@ class AbyaatController extends Controller
     public function create($id)
     {
 
-        $word=Word::Selection()->find($id);
+        $word=Word::with('word')->where('word_id',$id)->Selection()->first();
         $poets=Poet::Selection()->get();
         if (!$word){
             return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة ']);
@@ -37,13 +37,13 @@ class AbyaatController extends Controller
 
     public function store(BaytRequest $request, $id){
         try{
-        $word=Word::Selection()->find($id);
+            $word=Word::with('word')->where('word_id',$id)->Selection()->first();
 
         if (!$word){
             return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة ']);
         }
         /* no repeat for bayt for the same word*/
-        $abyaat=Bayt::with('word')->Selection()->where('word_id','=',$word->id)->get();
+        $abyaat=Bayt::with('word')->Selection()->where('word_id','=',$word->word_id)->get();
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         if (isset($_POST['bayt']))
         {
@@ -68,7 +68,7 @@ class AbyaatController extends Controller
 
 
         $baytow = Bayt::create([
-            'word_id' =>$word->id,
+            'word_id' =>$word->word_id,
               'bayt'   => $bayt,
               'poet_id'   =>$request-> poet_id,
                 'admin_id' =>Auth::user()->id

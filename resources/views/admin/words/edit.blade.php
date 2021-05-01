@@ -17,7 +17,7 @@
                                 </li>
                                 <li class="breadcrumb-item"><a href="">الكلمات </a>
                                 </li>
-                                <li class="breadcrumb-item active"> تعديل كلمة
+                                <li class="breadcrumb-item active"> تعديل كلمة حسب معجم
                                 </li>
                             </ol>
                         </div>
@@ -31,7 +31,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> تعديل كلمة </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> تعديل كلمة حسب معجم </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -47,16 +47,34 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.words.update',$word->id)}}"
+                                        <form class="form" action="{{route('admin.words.update',$word->word_id)}}"
                                               method="POST">
                                               {{ csrf_field() }}
                                             <div class="form-body">
                                                 <h4 class="form-section"><i class="ft-home"></i> بيانات الكلمة </h4>
                                                         <div class="row">
+
+                                                                <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1">اختر المعجم</label>
+                                                                           <select name="mojjam_id" class="select2 form-control" id="selectId0">
+                                                                            <optgroup label=" اختر المعجم">
+                                                                            @foreach ($mojjams as $mojjam)
+                                                                            <option value="{{$mojjam->mojjam->id}}">{{$mojjam->mojjam->mojjam_name}}</option>
+                                                                            @endforeach
+                                                                            </optgroup>
+                                                                        </select>
+                                                                    @error("mojjam_id")
+                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+
+
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1">  الكلمة </label>
-                                                                    <input type="text" value="{{$word->word}}" id="word"
+                                                                    <input type="text" value="{{$word->word->word}}" id="word"
                                                                            class="form-control"
                                                                            placeholder="  "
                                                                            name="word">
@@ -72,10 +90,10 @@
                                                                     <select name="word_type" class="select2 form-control" id="selectId">
                                                                         <optgroup label=" نوع الكلمة ">
 
-                                                                                    <option value="0" {{$word->word_type==0 ? "selected" : ""}}>اسم</option>
-                                                                                    <option value="1" {{$word->word_type==1 ? "selected" : ""}}>فعل</option>
-                                                                                    <option value="2" {{$word->word_type==2 ? "selected" : ""}}>مصطلح</option>
-                                                                                    <option value="3" {{$word->word_type==3 ? "selected" : ""}}>كلمة مركبة</option>
+                                                                                    <option value="0">إسم</option>
+                                                                                    <option value="1">فعل</option>
+                                                                                    <option value="2">حرف</option>
+
                                                                         </optgroup>
                                                                     </select>
                                                                     @error('word_type')

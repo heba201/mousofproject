@@ -19,7 +19,7 @@
                             @foreach( $moradfat as   $moradf)
                             <div class="section-title text-white text-right moradfat">
                             <h5> مرادفات كلمة {{$moradf->word->word}} <span style="color: #d82a4e">({{$moradf->word->word_type==0 ? 'اسم' : 'فعل'}}) </span> : </h5>
-                            <p>{{$moradf->moradf}}</p>
+                            <p><strong>{{$moradf->moradf}}</strong></p>
                         </div>
                             @endforeach
                             <!-- moradfat section end  -->
@@ -28,7 +28,7 @@
                             @foreach(   $moradfat as   $moradf)
                             <div class="section-title text-white text-right modad">
                             <h5> أضداد كلمة {{$moradf->word->word}} <span style="color: #d82a4e">({{$moradf->word->word_type==0 ? 'اسم' : 'فعل'}}) </span> : </h5>
-                            <p>{{$moradf->modad}}</p>
+                            <p><strong>{{$moradf->modad}}</strong></p>
                             </div>
                             @endforeach
                             <!-- modad section end  -->
@@ -50,10 +50,10 @@
                         <h5>   أبيات ظهرت فيها الكلمة {{$moradfat[0]->word->word}} <span style="color: #d82a4e">({{$moradfat[0]->word->word_type==0 ? 'اسم' : 'فعل'}}) </span> : </h5>
                         @foreach ($abyaat as $bayt)
                         <p>
-                        {{$bayt->bayt}}
+                        <strong>{{$bayt->bayt}}</strong>
                         </p>
                         <p class="poet">
-                            {{$bayt->poet->poet_name}} - {{$bayt->poet->poet_era}}
+                            <strong>{{$bayt->poet->poet_name}} - {{$bayt->poet->poet_era}} </strong>
                         </p>
                         @endforeach
 
@@ -82,10 +82,10 @@
              <div class="section-title text-white text-right wordsearch">
              <h5>  ابحث عن معني كلمة<span style="color:#d82a4e"> {{$word->word}}</span> </h5>
             @foreach($mojjams  as $mojjam)
-            <a href="{{route('moradfat.moradfatmojjam',['id'=>$mojjam->id,'searchword'=>$word->word])}}"> <p>معني كلمة <span style="color:#37383d">{{$word->word}}</span>
+            <a href="{{route('moradfat.moradfatmojjam',['id'=>$mojjam->id,'searchword'=>$word->word])}}"> <p><strong>  معني كلمة <span style="color:#37383d">{{$word->word}}</span>
             في
-            {{$mojjam->mojjam_name}}
-        </p></a>
+                 {{$mojjam->mojjam_name}}
+        </p></strong></a>
 
             @endforeach
 

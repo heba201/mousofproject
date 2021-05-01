@@ -47,13 +47,13 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.words.firstupdate',$word->id)}}"
+                                        <form class="form" action="{{route('admin.words.firstupdate',['id' => $word->word_id, 'mojjam_id' => $word->mojjam_id])}}"
                                               method="POST">
                                               {{ csrf_field() }}
 
                                             <div class="form-body">
 
-                                                <h2 class="form-section"><i class="ft-home"></i>{{$word->word}}</h2>
+                                                <h2 class="form-section"><i class="ft-home"></i>{{$word->word->word}}</h2>
                                                         <div class="row">
                                                             <div class="col-md-5">
                                                                 <div class="form-group">
@@ -85,25 +85,22 @@
                                                                 </div>
                                                                 <div class="row field-wrapper">
                                                             </div>
-                                                            @isset($mojjams)
-                                                            @foreach($mojjams as $mojjam)
                                                             <div class="row">
-                                                                <div class="col-md-12">
+                                                                <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         <label for="projectinput1">  معني الكلمة في {{$mojjam->mojjam_name}}  </label>
-                                                                        <textarea  value="" id="word_meaning[]"
+                                                                        <textarea  value="" id="word_meaning"
                                                                                class="form-control"
                                                                                placeholder="  "
-                                                                               name="word_meaning[]"></textarea>
-                                                                               <input type="hidden" value="{{$mojjam->id}}" name="mojjam_id[]">
-                                                                               @error("word_meaning.*")
+                                                                               name="word_meaning"></textarea>
+                                                                               <input type="hidden" value="{{$mojjam->id}}" name="mojjam_id">
+                                                                               @error("word_meaning")
                                                                                <span class="text-danger">{{$message}}</span>
                                                                                @enderror
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            @endforeach
-                                                            @endisset
+
                                                             <div class="form-actions">
                                                                 <button type="submit" class="btn btn-primary">
                                                                     <i class="la la-check-square-o"></i> التالي

@@ -82,10 +82,30 @@
                                                                     @enderror
                                                                 </div>
                                                             </div>
+
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1">لغة المعجم</label>
+                                                                    <select name="language_id" class="select2 form-control" id="selectId0">
+                                                                        <optgroup label="لغة المعجم">
+                                                                            @foreach ($languages as $language)
+                                                                            <option value="{{$language->id}}" {{$mojjam->language_id==$language->id ? 'selected':''}} >{{$language->language}}</option>
+                                                                            @endforeach
+
+                                                                    </select>
+                                                                    @error("language_id")
+                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+
+
+
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1">نوع ترتيب المعجم</label>
-                                                                    <select name="mojjamarrangetype_id" class="select2 form-control" id="selectId2">
+                                                                    <select name="mojjamarrangetype_id" class="select2 form-control" id="selectId2" onchange="myNewFunction(this);">
                                                                         <optgroup label="نوع ترتيب المعجم">
                                                                      @foreach ($mojjamarrangetypes as $mojjamarrangetype)
                                                                      <option value="{{$mojjamarrangetype->id}}" {{$mojjam->mojjamarrangetype_id==$mojjamarrangetype->id ? 'selected':''}}>{{$mojjamarrangetype->mojjam_arrangetype}}</option>
@@ -99,7 +119,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1"> منهج المعجم</label>
-                                                                    <select name="mojjammethod_id" class="select2 form-control" id="selectId3">
+                                                                    <select name="mojjammethod_id" class="select2 form-control" id="mojjammethod_id">
                                                                         <optgroup label=" منهج المعجم">
                                                                      @foreach ($mojjammethods as $mojjammethod)
                                                                      <option value="{{$mojjammethod->id}}" {{$mojjam->mojjammethod_id==$mojjammethod->id ? 'selected':''}}>{{$mojjammethod->mojjam_method}}</option>
@@ -166,4 +186,39 @@
         </div>
     </div>
 
+@endsection
+@section('script')
+<script>
+function myNewFunction(sel) {
+  //alert(sel.options[sel.selectedIndex].text);
+  var defaultVal = sel.options[sel.selectedIndex].value;
+  var mojjammethod = document.getElementById("mojjammethod_id");
+  if(defaultVal==1){
+  $('#mojjammethod_id').val("1").change();
+  }
+
+  if(defaultVal==3){
+  $('#mojjammethod_id').val("2").change();
+  }
+
+  if(defaultVal==4){
+  $('#mojjammethod_id').val("3").change();
+  }
+
+  if(defaultVal==7){
+  $('#mojjammethod_id').val("4").change();
+  }
+
+  if(defaultVal==8){
+  $('#mojjammethod_id').val("5").change();
+  }
+
+  if(defaultVal==10){
+  $('#mojjammethod_id').val("6").change();
+  }
+  if(defaultVal==13){
+  $('#mojjammethod_id').val("7").change();
+  }
+}
+</script>
 @endsection

@@ -17,7 +17,7 @@
                                 </li>
                                 <li class="breadcrumb-item"><a href="">الكلمات </a>
                                 </li>
-                                <li class="breadcrumb-item active"> إضافة كلمة
+                                <li class="breadcrumb-item active"> إضافة كلمة حسب معجم
                                 </li>
                             </ol>
                         </div>
@@ -31,7 +31,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> إضافة كلمة </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> إضافة كلمة حسب معجم </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -53,6 +53,24 @@
                                             <div class="form-body">
                                                 <h4 class="form-section"><i class="ft-home"></i> بيانات الكلمة </h4>
                                                         <div class="row">
+
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1">اختر المعجم</label>
+                                                                           <select name="mojjam_id" class="select2 form-control" id="selectId0">
+                                                                            <optgroup label=" اختر المعجم">
+                                                                            @foreach ($mojjams as $mojjam)
+                                                                            <option value="{{$mojjam->id}}">{{$mojjam->mojjam_name}}</option>
+                                                                            @endforeach
+                                                                            </optgroup>
+                                                                        </select>
+                                                                    @error("mojjam_id")
+                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1">  الكلمة </label>

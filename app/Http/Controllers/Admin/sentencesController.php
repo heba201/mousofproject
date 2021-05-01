@@ -20,18 +20,18 @@ class sentencesController extends Controller
     public function addsentence($id)
     {
 
-        $word=Word::Selection()->find($id);
+        $word=Word::with('word')->where('word_id',$id)->Selection()->first();
         return view('admin.sentences.create', compact('word'));
     }
 
     public function createforword(SentenceRequest $request,$id)
     {
-        $word=Word::Selection()->find($id);
+        $word=Word::with('word')->where('word_id',$id)->Selection()->first();
         try{
             if (!$word)
             return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة او ربما تكون محذوفة ']);
             /* no repeat for sentence for word*/
-            $sentences=Sentence::with('word')->Selection()->where('word_id','=',$word->id)->get();
+            $sentences=Sentence::with('word')->where('word_id','=',$word->word_id)->Selection()->get();
            // print_r($sentences);
             if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             if (isset($_POST['word_sentense']))
@@ -53,7 +53,7 @@ class sentencesController extends Controller
             foreach( $request->word_sentense as $key=>$val)
             {
                 $sentence = Sentence::create(['word_sentence' => $_POST["word_sentense"][$key],
-                                             'word_id' =>$word->id,
+                                             'word_id' =>$word->word_id,
                                              'admin_id' => Auth::user()->id
                                              ]);
              }

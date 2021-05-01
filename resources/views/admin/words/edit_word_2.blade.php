@@ -47,13 +47,13 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.words.secupdate',$word->id)}}"
+                                        <form class="form" action="{{route('admin.words.secupdate',['id'=>$word->word_id,'mojjam_id' =>$word->mojjam_id])}}"
                                               method="POST">
                                               {{ csrf_field() }}
 
                                             <div class="form-body">
 
-                                                <h2 class="form-section"><i class="ft-home"></i>{{$word->word}}</h2>
+                                                <h2 class="form-section"><i class="ft-home"></i>{{$word->word->word}}</h2>
                                                         <div class="row">
                                                                <div class="col-md-5">
                                                                 <div class="form-group">
@@ -81,7 +81,7 @@
                                                             @endif
 
                                                                 <div class="col-md-5">
-                                                                    <input type="hidden" value="{{$word->id}}" id="word_id"
+                                                                    <input type="hidden" value="{{$word->word_id}}" id="word_id"
                                                                     class="form-control"
                                                                     placeholder=" "
                                                                     name="word_id">

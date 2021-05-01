@@ -10,6 +10,7 @@ use App\Models\MojjamAuthor;
 use App\Models\MojjamSpecialty;
 use App\Models\MojjamArrangetype;
 use App\Models\MojjamMethod;
+use App\Models\Language;
 use Auth;
 use DB;
 class mojjamsController extends Controller
@@ -25,10 +26,11 @@ class mojjamsController extends Controller
     public function create()
     {
         $mojjamsauthors = MojjamAuthor::selection()->get();
+        $languages = Language::selection()->get();
         $mojjamspecialties =MojjamSpecialty::selection()->get();
         $mojjamarrangetypes=MojjamArrangetype::selection()->get();
         $mojjammethods=MojjamMethod::selection()->get();
-        return view('admin.mojjams.create',compact('mojjamsauthors','mojjamspecialties','mojjamarrangetypes','mojjammethods'));
+        return view('admin.mojjams.create',compact('mojjamsauthors','languages','mojjamspecialties','mojjamarrangetypes','mojjammethods'));
     }
 
     public function store(MojjamRequest $request)
@@ -52,6 +54,7 @@ class mojjamsController extends Controller
                 'mojjam_name' => $request->name,
                 'admin_id' =>Auth::user()->id,
                 'author_id' => $request->author_id,
+                'language_id' => $request->language_id,
                 'mojjamarrangetype_id' =>$request->mojjamarrangetype_id,
                 'mojjammethod_id' =>$request->mojjammethod_id,
                 'example' =>$example,
@@ -72,13 +75,14 @@ class mojjamsController extends Controller
 
             $mojjam= Mojjam::Selection()->find($id);
             $mojjamsauthors = MojjamAuthor::selection()->get();
+            $languages = Language::selection()->get();
             $mojjamspecialties =MojjamSpecialty::selection()->get();
             $mojjamarrangetypes=MojjamArrangetype::selection()->get();
             $mojjammethods=MojjamMethod::selection()->get();
             if (!$mojjam)
                 return redirect()->route('admin.mojjams')->with(['error' => 'هذا المعجم غير موجود او ربما يكون محذوفا ']);
 
-            return view('admin.mojjams.edit', compact('mojjam','mojjamsauthors','mojjamspecialties','mojjamarrangetypes','mojjammethods'));
+            return view('admin.mojjams.edit', compact('mojjam','mojjamsauthors','languages','mojjamspecialties','mojjamarrangetypes','mojjammethods'));
 
         } catch (\Exception $exception) {
             return redirect()->route('admin.mojjams')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
@@ -117,6 +121,7 @@ class mojjamsController extends Controller
                     'mojjam_name' => $request->name,
                     'admin_id'=> Auth::user()->id,
                     'author_id' => $request->author_id,
+                    'language_id' => $request->language_id,
                     'mojjamarrangetype_id' =>$request->mojjamarrangetype_id,
                     'mojjammethod_id' =>$request->mojjammethod_id,
                     'example' =>$example,
@@ -136,13 +141,14 @@ class mojjamsController extends Controller
     public function show($id)
     {
         $mojjamsauthors = MojjamAuthor::selection()->get();
+        $languages = Language::selection()->get();
         $mojjamspecialties =MojjamSpecialty::selection()->get();
         $mojjamarrangetypes=MojjamArrangetype::selection()->get();
         $mojjammethods=MojjamMethod::selection()->get();
         $mojjam = mojjam::Selection()->find($id);
         if (!$mojjam)
             return redirect()->route('admin.mojjams')->with(['error' => 'هذاالمعجم غير موجود او ربما يكون محذوفا ']);
-        return view('admin.mojjams.show',compact('mojjam','mojjamsauthors','mojjamspecialties','mojjamarrangetypes','mojjammethods'));
+        return view('admin.mojjams.show',compact('mojjam','languages','mojjamsauthors','mojjamspecialties','mojjamarrangetypes','mojjammethods'));
     }
 
     public function destroy($id)

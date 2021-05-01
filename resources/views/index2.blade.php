@@ -137,7 +137,7 @@ background:#edf4f6;
                             <p><span style="color:#d82a4e;font-size:20px;">{{$word_prop}}</span></p>
                             @endforeach
                             @endif
-
+                            @if($similarwords)
                         @foreach ($similarwords as $similarword)
                         <?php
 
@@ -146,6 +146,7 @@ background:#edf4f6;
                         <p><span style="font-size:18px;">{{$similarword->word}} : </span><span style="color:#d82a4e;font-size:18px;">&nbsp;{{$word_meaning->word_meaning}}</span>
                         </p>
                         @endforeach
+                        @endif
                         </div>
 
                             <!-- word fields section end  -->
@@ -220,9 +221,9 @@ foreach($similarwords as $similarword){
  //echo( $similarword->word);
  //$relatedwords =App\Models\Word::where('word', 'LIKE', '%'.$similarword->word .'%')->where('id','!=',$similarword->id)->selection()->get();
     $wordsearch=$similarword->word;
-    $text = substr($wordsearch,0,2);
+    //$text = substr($wordsearch,0,2);
     //echo $text;
-  $relatedwords = App\Models\Word::where('id','!=',$wordsid)->where('word', 'LIKE','%'.$text.'%')->selection()->get();
+  $relatedwords = App\Models\Wordname::where('id','!=',$wordsid)->where('word', 'like',"%".$similarword->word."%")->selection()->get();
 }
     ?>
  @if($similarwords->count()>0)

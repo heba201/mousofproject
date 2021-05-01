@@ -223,7 +223,7 @@ foreach($similarwords as $similarword){
     $wordsearch=$similarword->word;
     $text = substr($wordsearch,0,2);
     //echo $text;
-  $relatedwords = App\Models\Word::where('id','!=',$wordsid)->where('word', 'LIKE','%'.$text.'%')->selection()->get();
+  $relatedwords = App\Models\Wordname::where('id','!=',$wordsid)->where('word', 'LIKE','%'.$text.'%')->selection()->get();
 }
     ?>
  @if($similarwords->count()>0)

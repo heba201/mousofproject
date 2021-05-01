@@ -47,12 +47,12 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.words.thirdupdate',$word->id)}}"
+                                        <form class="form" action="{{route('admin.words.thirdupdate',['id'=>$word->word_id,'mojjam_id'=>$word->mojjam_id])}}"
                                               method="POST">
                                               {{ csrf_field() }}
 
                                             <div class="form-body">
-                                                <h2 class="form-section"><i class="ft-home"></i>{{$word->word}}</h2>
+                                                <h2 class="form-section"><i class="ft-home"></i>{{$word->word->word}}</h2>
                                                         <div class="row">
                                                             <div class="col-md-12 text-center">
                                                                 <h2>اضف خصائص اخري للكلمة</h2>

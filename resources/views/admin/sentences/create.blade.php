@@ -47,7 +47,7 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.sentences.createforword',$word->id)}}"
+                                        <form class="form" action="{{route('admin.sentences.createforword',$word->word_id)}}"
                                               method="POST">
                                               {{ csrf_field() }}
                                             <div class="form-body">
@@ -56,7 +56,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1">  الكلمة </label>
-                                                                    <input type="text" value="{{$word->word}}" id="word"
+                                                                    <input type="text" value="{{$word->word->word}}" id="word"
                                                                            class="form-control" readonly
                                                                            placeholder="  "
                                                                            name="word">

@@ -5,13 +5,13 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title">  الكلمات </h3>
+                    <h3 class="content-header-title"> لغات المعاجم </h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية</a>
                                 </li>
-                                <li class="breadcrumb-item active">  الكلمات
+                                <li class="breadcrumb-item active"> لغات المعاجم
 
                                 </li>
                             </ol>
@@ -26,7 +26,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title"> جميع الكلمات </h4>
+                                    <h4 class="card-title"> جميع اللغات </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -45,43 +45,36 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
                                         <table
-                                            class="table display nowrap table-striped table-bordered scroll-horizontal" id="example">
+                                            class="table display nowrap table-striped table-bordered scroll-horizontal">
                                             <thead class="">
                                             <tr>
-                                                <th>الكلمات </th>
+                                                <th>اللغات </th>
                                                 <th>الإجراءات</th>
                                             </tr>
                                             </thead>
                                             <tbody>
 
-
-                                                @foreach($words as $word)
+                                            @isset($languages)
+                                                @foreach($languages as $language)
                                                     <tr>
-                                                        <td>{{$word ->word}}</td>
+                                                        <td>{{$language -> language}}</td>
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
-                                                                 <a href="{{route('admin.words.show',$word->word_id)}}"
+                                                                 <a href="{{route('admin.languages.show',$language->id)}}"
                                                                     class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">عرض</a>
                                                                  @if( Auth::user()->role_id==2)
-                                                                <a href="{{route('admin.words.edit',$word ->word_id)}}"
+                                                                <a href="{{route('admin.languages.edit',$language ->id)}}"
                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
-
-                                                                   <a href="{{route('admin.moradfat.create',$word->word_id)}}"
-                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">إضافة  مرادفات وأضداد  للكلمة</a>
-
-                                                                    <a href="{{route('admin.sentences.addsentence',$word ->word_id)}}"
-                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">إضافة جملة سياقية للكلمة</a>
-
-                                                                    <a href="{{route('admin.abyaat.create',$word ->word_id)}}"
-                                                                        class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">إضافة أبيات شعرية للكلمة</a>
-                                                                        <a href="{{route('admin.words.delete',$word ->word_id)}}"
+                                                                <a href="{{route('admin.languages.delete',$language ->id)}}"
                                                                    class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1" onclick="return confirm('هل تريد الحذف?')">حذف</a>
                                                             @endif
                                                                 </div>
                                                         </td>
                                                     </tr>
                                                 @endforeach
+                                            @endisset
+
 
                                             </tbody>
                                         </table>
@@ -125,12 +118,4 @@
 
   }
   </script>
-  <script>
-    $(document).ready(function() {
-        $('#example').dataTable( {
-            "order": [[ 0, "desc" ]]
-        } );
-    } );
-    </script>
 @endpush
-

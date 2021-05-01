@@ -23,7 +23,7 @@ class FawaedController extends Controller
         try{
         if(isset($_POST['search'])){
             $filteredsearch=filter_var($request->search,FILTER_SANITIZE_STRING);
-            $faedasearch = Faeda::with('fawedsubject')->where('faeda', 'LIKE', '%'.$filteredsearch.'%')->selection()->get()->first();
+            $faedasearch = Faeda::with('fawedsubject')->where('faeda', 'like', "%".$filteredsearch."%")->selection()->get()->first();
            $faedatexts=explode(",", $faedasearch->faeda);
            if (!$faedasearch) {
                 return redirect()->route('fawaed');

@@ -8,7 +8,10 @@ use App\Http\Requests\WordRequest;
 use App\Http\Requests\WordFirstupdate;
 use App\Http\Requests\otherWordPropertiesRequest;
 use App\Models\Word;
+use App\Models\Wordname;
 use App\Models\Mojjam;
+use App\Models\MojjamArrangetype;
+use App\Models\MojjamMethod;
 use App\Models\Meaning;
 use App\Models\Sentence;
 use App\Models\Wordindication;
@@ -22,14 +25,22 @@ class wordsController extends Controller
     public function index()
     {
 
-        $words = Word::selection()->get();
+       // $words = Word::with('word')->selection()->groupBy('word_id')->get()->toArray() ;;
+       $words =DB::table('words')
+       ->select('words.*','wordnames.word')
+       ->join('wordnames','wordnames.id','=','words.word_id')
+       ->get()->keyBy('word');
+
         $sentences = Sentence::selection()->get();
         return view('admin.words.index', compact('words','sentences'));
     }
     public function create()
     {
        $word_indications=Wordindication::selection()->get();
-        return view('admin.words.create',compact('word_indications'));
+       $mojjams = Mojjam::selection()->get();
+       $mojjamarrangetypes=MojjamArrangetype::selection()->get();
+       $mojjammethods=MojjamMethod::selection()->get();
+        return view('admin.words.create',compact('word_indications','mojjams','mojjamarrangetypes','mojjammethods'));
     }
 
     public function store(WordRequest $request)
@@ -37,11 +48,29 @@ class wordsController extends Controller
 
         //return $request;
        try {
-        if(getold('App\Models\Word','word',$request->word)){
-            return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة تم اضافتها من قبل']);
+        $wordsnames = Wordname::selection()->get();
+        $words = Word::selection()->get();
+        foreach ($wordsnames as $wordname) {
+            if ($request->word==$wordname->word) {
+                $word_id=$wordname->id;
+            foreach($words as $word){
+                if($word->word_id==$word_id && $word->mojjam_id==$request->mojjam_id){
+                    return redirect()->route('admin.words')->with(['error' => 'تم ادخال هذه الكلمة من قبل']);
+                }
             }
+        }
+        }
+
+        if(!getold('App\Models\Wordname','word',$request->word)){
+
+            DB::beginTransaction();
+            $word_id = Wordname::insertGetId([
+                'word' => $request->word,
+                'admin_id' =>Auth::user()->id
+                ]);
             $word = Word::create([
-            'word' => $request->word,
+            'word_id' => $word_id,
+            'mojjam_id' => $request->mojjam_id,
               'word_type'   => $request->word_type,
               'word_gzer'   => $request->word_gzer,
                'gzer_type'  => $request->gzer_type,
@@ -54,53 +83,65 @@ class wordsController extends Controller
                 'other_word_properties' => 'n',
                 'admin_id' =>Auth::user()->id,
             ]);
-            $word_id= $word ->id;
-       /*     if ($request->word_type==2 || $request->word_type==3) {
-                return redirect()->route('admin.words.thirdedit',$word_id)->with(['success' => 'تم الحفظ بنجاح']);
-            } */
-            //return redirect()->route('admin.words.seccreate')->with(['success' => 'تم الحفظ بنجاح']);
-            return redirect()->route('admin.words.seccreate',$word_id)->with(['success' => 'تم الحفظ بنجاح']);
+            DB::commit();
+        }
+        else{
+            $wordname=Wordname::where('word',$request->word)->selection()->first();
+            $word_id=$wordname->id;
+            $word = Word::create([
+                'word_id' => $word_id,
+                'mojjam_id' => $request->mojjam_id,
+                  'word_type'   => $request->word_type,
+                  'word_gzer'   => $request->word_gzer,
+                   'gzer_type'  => $request->gzer_type,
+                   'gzer_weight'  => $request->gzer_weight,
+                  'word_source'   => $request->word_source,
+                   'word_indication'  => $request->word_indication,
+                    'weight_indication' => $request->weight_indication,
+                    'time' => $request->time,
+                    'word_derivatives'=> 'n',
+                    'other_word_properties' => 'n',
+                    'admin_id' =>Auth::user()->id,
+                ]);
+        }
+            return redirect()->route('admin.words.seccreate',['id' =>$word_id,'mojjam_id' => $word->mojjam_id])->with(['success' => 'تم الحفظ بنجاح']);
        }
        catch (\Exception $ex) {
-
-            return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        DB::rollback();
+        return $ex;
+        return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
    }
 
     }
-    public function seccreate($id)
+    public function seccreate($id,$mojjam_id)
     {
-        $word=Word::Selection()->find($id);
-        $mojjams = Mojjam::selection()->get();
+        $word=Word::with('word')->where('word_id',$id)->where('mojjam_id',$mojjam_id)->Selection()->first();
+        $mojjam = Mojjam::where('id',$word->mojjam_id)->selection()->first();
         try{
             if (!$word)
             return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة او ربما تكون محذوفة ']);
-            return view('admin.words.create_word_2',compact('word','mojjams'));
+            return view('admin.words.create_word_2',compact('word','mojjam'));
 
         }catch(\Exception $exception){
-
             return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
     }
 
 
-    public function firstupdate(Request $request,$id)
+    public function firstupdate(WordFirstupdate $request,$id,$mojjam_id)
     {
         try {
-
-            $word = Word::Selection()->find($id);
-
+            $word=Word::with('word')->where('word_id',$id)->where('mojjam_id',$mojjam_id)->Selection()->first();
             if (!$word){
                 return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة او ربما تكون محذوفة ']);
             }
-            if (isset($_POST["word_meaning"]) && is_array($_POST["word_meaning"])) {
-                foreach( $request->word_meaning as $key=>$val){
-                    $meaningword = Meaning::create(['word_meaning' => $request->word_meaning[$key],
-                                                 'mojjam_id'  => $_POST['mojjam_id'][$key],
-                                                 'word_id' =>$word->id,
+            DB::beginTransaction();
+
+        $meaningword = Meaning::create(['word_meaning' => $request->word_meaning,
+                                                 'mojjam_id'  => $request->mojjam_id,
+                                                 'word_id' =>$word->word_id,
                                                  'admin_id' => Auth::user()->id
                                                  ]);
-                 }
-            }
 
             if ($request->has('word_derivatives')) {
                 if(isset($_POST["word_derivatives"]) && is_array($_POST["word_derivatives"])){
@@ -110,14 +151,16 @@ class wordsController extends Controller
                     $word_derivatives=$request->word_derivatives;
                 }
 
-                $word::where('id', $id)
+                $word::where('word_id', $id)
             ->update([
                 'word_derivatives'=> $word_derivatives
             ]);
             }
-              return redirect()->route('admin.words.thirdedit',$word->id)->with(['success' => 'تم الحفظ بنجاح']);
+            DB::commit();
+              return redirect()->route('admin.words.thirdedit',['id'=>$word->word_id,'mojjam_id'=>$word->mojjam_id])->with(['success' => 'تم الحفظ بنجاح']);
             } catch (\Exception $exception) {
-
+                DB::rollback();
+                return $exception;
 
             return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
@@ -126,12 +169,13 @@ class wordsController extends Controller
     {
         try {
 
-            $word= Word::Selection()->find($id);
+            $word=Word::with('word')->where('word_id',$id)->Selection()->first();
+            $mojjams = Word::with('mojjam')->where('word_id',$id)->selection()->get();
             $word_indications=Wordindication::selection()->get();
             if (!$word)
             return redirect()->route('admin.words')->with(['error' => 'هذه اكلمة غير موجودة او ربما تكون محذوفة ']);
 
-            return view('admin.words.edit', compact('word','word_indications'));
+            return view('admin.words.edit', compact('word','mojjams','word_indications'));
 
         } catch (\Exception $exception) {
 
@@ -144,18 +188,28 @@ class wordsController extends Controller
     {
 
         try {
-
-            $word= Word::Selection()->find($id);
-            if(getresult('App\Models\Word','word',$request->word,'id',$id)){
-                return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة تم اضافتها من قبل']);
+            $word=Word::with('word')->where('word_id',$id)->where('mojjam_id',$request->mojjam_id)->Selection()->first();
+            $wordupdate_id=$word->id;
+            $wordnames=Wordname::where('id','!=',$id)->Selection()->get();
+            foreach ($wordnames as $wordname) {
+                if($wordname->word== $request->word && $word->mojjam_id==$request->mojjam_id){
+                    return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة تم اضافتها من قبل']);
+                }
             }
             if (!$word){
                 return redirect()->route('admin.words')->with(['error' => 'هذه اكلمة غير موجودة او ربما تكون محذوفة ']);
             }
               if ($word) {
-                $word::where('id', $id)
+                DB::beginTransaction();
+                $wordname::where('id', $id)
                 ->update([
-                    'word' => $request->word,
+                    'word'=>$request->word,
+                    'admin_id' =>Auth::user()->id
+                ]);
+                $word::where('id', $wordupdate_id)
+                ->update([
+                    'word_id' => $id,
+                    'mojjam_id' => $request->mojjam_id,
                     'word_type'   => $request->word_type,
                     'word_gzer'   => $request->word_gzer,
                      'gzer_type'  => $request->gzer_type,
@@ -167,20 +221,22 @@ class wordsController extends Controller
                       'admin_id' =>Auth::user()->id,
                 ]);
               }
-              $word_id= $word ->id;
-              if ($request->word_type==2||$request->word_type==3) {
-                return redirect()->route('admin.words.finaledit',$word_id)->with(['success' => 'تم التحديث بنجاح']);
+              $word_id= $word ->word_id;
+              if ($request->word_type==3) {
+                return redirect()->route('admin.words.finaledit',['id'=>$word_id,'mojjam_id'=>$request->mojjam_id])->with(['success' => 'تم التحديث بنجاح']);
             }
-            return redirect()->route('admin.words.secedit',$word_id)->with(['success' => 'تم التحديث بنجاح']);
+            DB::commit();
+            return redirect()->route('admin.words.secedit',['id'=>$word_id,'mojjam_id'=>$request->mojjam_id])->with(['success' => 'تم التحديث بنجاح']);
         } catch (\Exception $exception) {
-
+            DB::rollback();
+            return $exception;
             return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
 
     }
-    public function secedit($id)
+    public function secedit($id,$mojjam_id)
     {
-        $word=Word::Selection()->find($id);
+        $word=Word::with('word')->where('word_id',$id)->where('mojjam_id',$mojjam_id)->Selection()->first();
         $word_derivatives= explode(", ",$word->word_derivatives);
         $meanings=Meaning::where('word_id','=',$word->id);
 
@@ -195,12 +251,13 @@ class wordsController extends Controller
         }
     }
 
-    public function secupdate(Request $request,$id)
+    public function secupdate(Request $request,$id,$mojjam_id)
     {
         try {
 
-            $word = Word::Selection()->find($id);
-           // $meaning=Meaning::where('word_id','=',$word->id);
+            $word=Word::with('word')->where('word_id',$id)->where('mojjam_id',$mojjam_id)->Selection()->first();
+            // $meaning=Meaning::where('word_id','=',$word->id);
+            $wordupdate_id=$word->id;
             if (!$word){
                 return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة او ربما تكون محذوفة ']);
             }
@@ -214,7 +271,7 @@ class wordsController extends Controller
             }
           //  DB::beginTransaction();
 
-            $word::where('id', $id)
+            $word::where('id', $wordupdate_id)
             ->update([
                 'word_derivatives'=> $word_derivatives,
             ]);
@@ -235,7 +292,7 @@ class wordsController extends Controller
                 }
             }*/
            // DB::commit();
-              return redirect()->route('admin.words.finaledit',$word->id)->with(['success' => 'تم التحديث بنجاح']);
+              return redirect()->route('admin.words.finaledit',['id'=>$word->word_id,'mojjam_id'=>$word->mojjam_id])->with(['success' => 'تم التحديث بنجاح']);
             } catch (\Exception $exception) {
               //  DB::rollback();
 
@@ -243,17 +300,18 @@ class wordsController extends Controller
             return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
     }
-     public function thirdedit($id){
-        $word=Word::Selection()->find($id);
+     public function thirdedit($id,$mojjam_id){
+        $word=Word::with('word')->where('word_id',$id)->where('mojjam_id',$mojjam_id)->Selection()->first();
         if (!$word){
             return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة ']);
         }
         return view('admin.words.third_wordedit',compact('word'));
      }
 
-     public function thirdupdate(otherWordPropertiesRequest $request,$id){
+     public function thirdupdate(otherWordPropertiesRequest $request,$id,$mojjam_id){
          try{
-        $word=Word::Selection()->find($id);
+
+            $word=Word::with('word')->where('word_id',$id)->where('mojjam_id',$mojjam_id)->Selection()->first();
         if (!$word){
             return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة ']);
         }
@@ -265,12 +323,12 @@ class wordsController extends Controller
                 $other_word_properties=$request->other_word_properties;
             }
 
-            $word::where('id', $id)
+            $word::where('word_id', $id)
         ->update([
             'other_word_properties'=> $other_word_properties
         ]);
          if ($request->has('moradfaat')){
-            return redirect()->route('admin.moradfat.create',$word->id)->with(['success' => 'تم الحفظ بنجاح']);
+            return redirect()->route('admin.moradfat.create',$word->word_id)->with(['success' => 'تم الحفظ بنجاح']);
         }
         }
         return redirect()->route('admin.words')->with(['success' => 'تم الحفظ بنجاح']);
@@ -281,24 +339,29 @@ class wordsController extends Controller
     }
      }
 
-    public function finaledit($id){
+    public function finaledit($id,$mojjam_id){
                 try{
-                $word=Word::Selection()->find($id);
-                if (!$word){
+                    $word=Word::with('word')->where('word_id',$id)->where('mojjam_id',$mojjam_id)->Selection()->first();
+                    $word_meaning=Meaning::with('mojjam')->where('word_id',$id)->where('mojjam_id',$mojjam_id)->Selection()->first();
+                    if (!$word){
                     return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة ']);
                 }
                 $other_word_properties=explode(",",$word->other_word_properties);
-                return view('admin.words.final_edit_word',compact('word','other_word_properties'));
-            }catch (\Exception $exception){
+                return view('admin.words.final_edit_word',compact('word','other_word_properties','word_meaning'));
+            }
+            catch (\Exception $exception){
 
                 return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
             }
-
             }
 
-            public function finalupdate(otherWordPropertiesRequest $request,$id){
+            public function finalupdate(otherWordPropertiesRequest $request,$id,$mojjam_id){
                 try{
-                $word=Word::Selection()->find($id);
+                $wordname=Wordname::where('id',$id)->Selection()->first();
+                $word=Word::where('word_id',$wordname->id)->where('mojjam_id',$mojjam_id)->Selection()->first();
+                $wordupdate_id=$word->id;
+                $wordmeaning=Meaning::where('word_id',$id)->where('mojjam_id',$mojjam_id)->Selection()->first();
+                $wordmeaningupdate_id=$wordmeaning->id;
                 if (!$word){
                     return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة ']);
                 }
@@ -309,32 +372,44 @@ class wordsController extends Controller
                     else{
                         $other_word_properties=$request->other_word_properties;
                     }
-                    $word::where('id', $id)
+                    DB::beginTransaction();
+                    $wordmeaning::where('id', $wordmeaningupdate_id)
+                    ->update([
+                        'word_meaning'=> $request->word_meaning,
+
+                    ]);
+                    $word::where('id', $wordupdate_id)
                     ->update([
                         'other_word_properties'=> $other_word_properties
                     ]);
                 }
                 if ($request->has('moradfaat')){
-                    return redirect()->route('admin.moradfat.create',$word->id)->with(['success' => 'تم الحفظ بنجاح']);
+                    DB::commit();
+                    return redirect()->route('admin.moradfat.create',$word->word_id)->with(['success' => 'تم الحفظ بنجاح']);
                 }
+                DB::commit();
                 return redirect()->route('admin.words')->with(['success' => 'تم التحديث بنجاح']);;
             }catch (\Exception $exception){
-
+                DB::rollback();
                 return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
             }
 
             }
 
-            public function show($id)
+        public function show($id)
         {
+     $word=Word::with('word','mojjam')->where('word_id',$id)->Selection()->get();
        $word_indications=Wordindication::selection()->get();
-       $word=Word::Selection()->find($id);
-       $other_word_properties=explode(",",$word->other_word_properties);
-       $word_derivatives=explode(",",$word-> word_derivatives);
+      /* foreach($word as $w){
+       $other_word_properties=explode(",",$w->other_word_properties);
+       } */
+      /* foreach($word as $w){
+       $word_derivatives=explode(",",$w-> word_derivatives);
+       } */
        if (!$word){
            return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة ']);
        }
-        return view('admin.words.show',compact('word','word_indications','other_word_properties','word_derivatives'));
+        return view('admin.words.show',compact('word','word_indications'));
         }
 
 
@@ -342,7 +417,7 @@ class wordsController extends Controller
     {
 
         try {
-            $word=Word::Selection()->find($id);
+            $word=Wordname::Selection()->find($id);
             if (!$word){
                 return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة ']);
             }
@@ -350,6 +425,7 @@ class wordsController extends Controller
             $meanings=$word->meanings();
             $moradfat=$word->moradfat();
             $abyaat=$word->abyaat();
+            $words=$word->words();
             if ($sentences->count()>0) {
                 $sentences->delete();
             }
@@ -361,6 +437,9 @@ class wordsController extends Controller
             }
             if ($abyaat->count()>0) {
                 $abyaat->delete();
+            }
+            if ($words->count()>0) {
+                $words->delete();
             }
 
             $word->delete();

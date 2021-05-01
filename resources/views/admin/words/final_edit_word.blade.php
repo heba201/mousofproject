@@ -47,12 +47,12 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.words.finalupdate',$word->id)}}"
+                                        <form class="form" action="{{route('admin.words.finalupdate',['id'=>$word->word_id,'mojjam_id'=>$word->mojjam_id])}}"
                                               method="POST">
                                               {{ csrf_field() }}
 
                                             <div class="form-body">
-                                                <h2 class="form-section"><i class="ft-home"></i>{{$word->word}}</h2>
+                                                <h2 class="form-section"><i class="ft-home"></i>{{$word->word->word}}</h2>
                                                         <div class="row">
                                                             <div class="col-md-12 text-center">
                                                                 <h2>اضف خصائص اخري للكلمة</h2>
@@ -81,6 +81,20 @@
                                                                     </div>
                                                                         <div class="row field-wrapper">
                                                                         </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="word_meaning">  معني الكلمة في {{$word_meaning->mojjam->mojjam_name}} </label>
+                                                                                <textarea
+                                                                                    class="form-control"
+                                                                                    placeholder=" "
+                                                                                    name="word_meaning">{{$word_meaning->word_meaning}}</textarea>
+                                                                            </div>
+                                                                            @error("word_meaning")
+                                                                            <span class="text-danger">{{$message}}</span>
+                                                                            @enderror
+                                                                            </div>
+
                                                                         <div class="col-md-6">
                                                                             <div class="form-group">
                                                                                 <label for="moradfaat">إضافة مرادفات وأضداد للكلمة</label>

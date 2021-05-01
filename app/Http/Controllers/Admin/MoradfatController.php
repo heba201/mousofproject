@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\MoradfatRequest;
 use App\Models\Moradfat;
 use App\Models\Word;
+use App\Models\Wordname;
 use DB;
 use Auth;
 
@@ -31,7 +32,7 @@ class MoradfatController extends Controller
 
     public function store(MoradfatRequest $request, $id){
         try{
-        $word=Word::Selection()->find($id);
+        $word=Wordname::Selection()->find($id);
         if (!$word){
             return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة ']);
         }

@@ -17,7 +17,7 @@ class Moradfat extends Model
     }
     public function word()
     {
-        return $this->belongsTo('App\Models\Word', 'word_id', 'id');
+        return $this->belongsTo('App\Models\Wordname', 'word_id', 'id');
     }
     public function admin()
     {

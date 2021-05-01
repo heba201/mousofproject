@@ -81,6 +81,29 @@
                                                                     @enderror
                                                                 </div>
                                                             </div>
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1">لغة المعجم</label>
+                                                                    <select name="language_id" class="select2 form-control" id="selectId0" disabled>
+                                                                        <optgroup label="لغة المعجم">
+                                                                            @foreach ($languages as $language)
+                                                                            <option value="{{$language->id}}" {{$mojjam->language_id==$language->id ? 'selected':''}} >{{$language->language}}</option>
+                                                                            @endforeach
+
+                                                                    </select>
+                                                                    @error("language_id")
+                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+
+
+
+
+
+
+
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1">نوع ترتيب المعجم</label>

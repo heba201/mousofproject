@@ -23,7 +23,7 @@ class MoradfatController extends Controller
     public function create($id)
     {
 
-        $word=Word::Selection()->find($id);
+        $word=Wordname::Selection()->find($id);
         if (!$word){
             return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة ']);
         }

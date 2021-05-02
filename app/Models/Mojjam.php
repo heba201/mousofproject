@@ -31,8 +31,27 @@ class Mojjam extends Model
         return $this->belongsTo('App\Models\Admin', 'admin_id', 'id');
     }
 
+    public function language()
+    {
+        return $this->belongsTo('App\Models\Language', 'language_id', 'id');
+    }
+
     public function mojjamauthor()
     {
         return $this->belongsTo('App\Models\MojjamAuthor', 'author_id', 'id');
+    }
+    public function mojjamarrangetype()
+    {
+        return $this->belongsTo('App\Models\MojjamArrangetype', 'mojjamarrangetype_id', 'id');
+    }
+
+    public function mojjammethod()
+    {
+        return $this->belongsTo('App\Models\MojjamMethod', 'mojjammethod_id', 'id');
+    }
+
+    public function mojjamspecialty()
+    {
+        return $this->belongsTo('App\Models\MojjamSpecialty', 'mojjamspecialty_id', 'id');
     }
 }

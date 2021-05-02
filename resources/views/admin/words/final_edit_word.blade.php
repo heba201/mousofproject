@@ -52,10 +52,10 @@
                                               {{ csrf_field() }}
 
                                             <div class="form-body">
-                                                <h2 class="form-section"><i class="ft-home"></i>{{$word->word->word}}</h2>
+                                                <h2 class="form-section"><i class="ft-home"></i>{{$word->word->word}} - word_id={{$word->word_id}}</h2>
                                                         <div class="row">
                                                             <div class="col-md-12 text-center">
-                                                                <h2>اضف خصائص اخري للكلمة</h2>
+                                                                <h2>اضف خصائص اخري للكلمة {{$word->id}}</h2>
                                                                 <h2>[ الجمع/المفرد - صفة - مؤنث/مذكر...........]
                                                             </div>
                                                                <div class="col-md-5">

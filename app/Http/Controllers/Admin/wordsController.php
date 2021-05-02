@@ -104,7 +104,7 @@ class wordsController extends Controller
                     'admin_id' =>Auth::user()->id,
                 ]);
         }
-            return redirect()->route('admin.words.seccreate',['id' =>$word_id,'mojjam_id' => $word->mojjam_id])->with(['success' => 'تم الحفظ بنجاح']);
+            return redirect()->route('admin.words.seccreate',['id' =>$word_id,'mojjam_id' => $request->mojjam_id])->with(['success' => 'تم الحفظ بنجاح']);
        }
        catch (\Exception $ex) {
         DB::rollback();
@@ -157,7 +157,7 @@ class wordsController extends Controller
             ]);
             }
             DB::commit();
-              return redirect()->route('admin.words.thirdedit',['id'=>$word->word_id,'mojjam_id'=>$word->mojjam_id])->with(['success' => 'تم الحفظ بنجاح']);
+              return redirect()->route('admin.words.thirdedit',['id'=>$id,'mojjam_id'=>$word->mojjam_id])->with(['success' => 'تم الحفظ بنجاح']);
             } catch (\Exception $exception) {
                 DB::rollback();
                 return $exception;

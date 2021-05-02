@@ -26,7 +26,7 @@ class otherWordPropertiesRequest extends FormRequest
         return [
             'other_word_properties' => 'required|array|min:1',
             'wother_word_properties.*' =>'required|string|distinct',
-            'word_meaning' => 'required'
+           // 'word_meaning' => 'required'
         ];
     }
     public function messages(){
@@ -35,7 +35,7 @@ class otherWordPropertiesRequest extends FormRequest
             'string'  =>'الاسم لابد ان يكون حروف فقط ',
            'other_word_properties.*.required' => 'هذا الحقل مطلوب ',
            'other_word_properties.*.distinct' => 'ادخل بيانات مختلفة',
-           'word_meaning.required' => 'هذا الحقل مطلوب '
+          // 'word_meaning.required' => 'هذا الحقل مطلوب '
         ];
 
     }

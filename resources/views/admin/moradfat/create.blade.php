@@ -47,7 +47,7 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.moradfat.store',$word->word_id)}}"
+                                        <form class="form" action="{{route('admin.moradfat.store',$word->id)}}"
                                               method="POST">
                                               {{ csrf_field() }}
 
@@ -58,7 +58,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1">  الكلمة </label>
-                                                                    <input type="text" value="{{$word->word->word}}" id="word"
+                                                                    <input type="text" value="{{$word->word}}" id="word"
                                                                            class="form-control"
                                                                            placeholder="" readonly
                                                                            name="word">

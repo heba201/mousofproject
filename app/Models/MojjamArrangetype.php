@@ -24,6 +24,7 @@ class MojjamArrangetype extends Model
         return $this -> hasMany('App\Models\Mojjam','mojjamarrangetype_id','id');
     }
 
+
     public function admin()
     {
         return $this->belongsTo('App\Models\Admin', 'admin_id', 'id');

@@ -75,63 +75,75 @@ background:#edf4f6;
 
                             <p><i class="fas fa-arrow-alt-circle-left"></i><span style="font-size:20px;margin-left:15px;"> جذر الكلمة</span>    <span style="color:#d82a4e;font-size:20px;margin-right:15px">
 
-                                @if($word->word_gzer == 0)
-                                أب
-                                @else
-                                أم
-                                @endif
+                                <?php
+                                $word_info=App\Models\Word::where('word_id',$word->id)->selection()->first();
+                                $word_gzer_id=$word_info->word_gzer;
+                                $gzer_type_id=$word_info->gzer_type;
+                                $gzer_weight_id=$word_info->gzer_weight;
+                                $weight_indication_id=$word_info->weight_indication;
+                                $word_source_id=$word_info->word_source;
+                                $word_time_id=$word_info->time;
+                                $word_gazer=App\Models\Wordgazer::where('id',$word_gzer_id)->selection()->first();
+                                $gzer_type =App\Models\Gazertype::where('id',$gzer_type_id)->selection()->first();
+                                $gzer_weight =App\Models\Gazerweight::where('id',$gzer_weight_id)->selection()->first();
+                                $weight_indication= App\Models\Weightindication::where('id',$weight_indication_id)->selection()->first();
+                                $source=App\Models\Source::where('id',$word_source_id)->selection()->first();
+                                $time=App\Models\Time::where('id',$word_time_id)->selection()->first();
+                                ?>
+
+                               {{$word_gazer->word_gazer}}
                             </span></p>
-                            <p><i class="fas fa-arrow-alt-circle-left"></i> <span style="font-size:20px;margin-left:15px;">نوع الجذر </span>    <span style="color:#d82a4e;font-size:20px;margin-right:15px">{{$word->gzer_type}}</span></p>
-                            <p><i class="fas fa-arrow-alt-circle-left"></i> <span style="font-size:20px;margin-left:15px;">وزن الجذر </span>    <span style="color:#d82a4e;font-size:20px;margin-right:15px">{{$word->gzer_weight}}</span></p>
-                            <p><i class="fas fa-arrow-alt-circle-left"></i> <span style="font-size:20px;margin-left:15px;">وزن الجذر </span>    <span style="color:#d82a4e;font-size:20px;margin-right:15px">{{$word->weight_indication}}</span></p>
-                            @if($word->time !=null)
+                            <p><i class="fas fa-arrow-alt-circle-left"></i> <span style="font-size:20px;margin-left:15px;">نوع الجذر </span>    <span style="color:#d82a4e;font-size:20px;margin-right:15px">
+
+                                {{$gzer_type->gazer_type}}
+
+                            </span></p>
+                            <p><i class="fas fa-arrow-alt-circle-left"></i> <span style="font-size:20px;margin-left:15px;">وزن الجذر </span>    <span style="color:#d82a4e;font-size:20px;margin-right:15px">
+
+                                {{$gzer_weight->gazer_weight}}
+
+                            </span></p>
+                            <p><i class="fas fa-arrow-alt-circle-left"></i> <span style="font-size:20px;margin-left:15px;"> دلالة الوزن </span>    <span style="color:#d82a4e;font-size:20px;margin-right:15px">
+                                {{$weight_indication->weight_indication}}
+                            </span></p>
+
                             <p><i class="fas fa-arrow-alt-circle-left"></i> <span style="font-size:20px;margin-left:15px;"> الزمن </span>
                                 <span style="color:#d82a4e;font-size:20px;margin-right:15px">
-                                @if($word->time==0)
-
-                            ماضي
-                            @elseif ($word->time==1)
-                                مستقبل
-                                @elseif ($word->time==2)
-                                حاضر
-                            @else
-                               امر
-                            @endif
+                                {{$time->time}}
                                 </span></p>
-                            @endif
+
                             <p><i class="fas fa-arrow-alt-circle-left"></i> <span style="font-size:20px;margin-left:15px;">المصدر &nbsp; &nbsp;</span><span style="color:#d82a4e;font-size:20px;margin-right:15px">
 
-
-                              @if($word->word_source==0)
-                              ثلاثية
-                              @elseif($word->word_source==1)
-                              رباعية
-                              @elseif($word->word_source==2)
-                              خماسية
-                              @else
-                              سداسية
-                              @endif
+                        {{$source->source}}
                             </span></p>
-                            <p style="margin-bottom: 10px"><i class="fas fa-arrow-alt-circle-left"></i><span style="font-size: 20px;margin-left:15px;" > دلالة أصلية علي &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span> <span style="color:#d82a4e;font-size:20px;">
+                            <p style="margin-bottom: 10px"><i class="fas fa-arrow-alt-circle-left"></i><span style="font-size: 20px;margin-left:15px;" > دلالة أصلية علي &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>
+
+                                <span style="color:#d82a4e;font-size:20px;">
+                                    <?php
+                                $word_info=App\Models\Word::where('word_id',$word->id)->selection()->first();
+                                    $word_indication_id=$word_info->word_indication;
+                                    $word_indication=App\Models\Wordindication::where('id',$word_indication_id)->selection()->first();
+                                    ?>
                                 @foreach ($word_indications as $wordindication)
-                                @if($word->word_indication==$wordindication->id)
+                                @if($word_indication_id==$wordindication->id)
                                 {{$wordindication->word_indication}}
                                 @endif
                                 @endforeach
                             </span></p>
                             <?php
-                            $word_derivatives=explode(",",$word->word_derivatives);
-                            $other_word_properties=explode(",",$word->other_word_properties);
+                             $word_info=App\Models\Word::where('word_id',$word->id)->selection()->first();
+                            $word_derivatives=explode(",",$word_info->word_derivatives);
+                            $other_word_properties=explode(",",$word_info->other_word_properties);
 
                             ?>
-                            @if($word->word_derivatives !=null)
+                            @if($word_info->word_derivatives !=null)
                             <span> <i class="fas fa-arrow-alt-circle-down"></i><strong style="font-size:20px">مشتقات الكلمة</strong></span>
                             @foreach ( $word_derivatives as $word_deriv)
                                 <p><span style="color:#d82a4e;font-size:20px;">{{$word_deriv}}</span></p>
                             @endforeach
 
                                 @endif
-                                @if($word->other_word_properties !=null)
+                                @if($word_info->other_word_properties !=null)
                             <span> <i class="fas fa-arrow-alt-circle-down"></i><strong style="font-size:20px">خصائص الكلمة</strong></span>
                             @foreach ( $other_word_properties as $word_prop)
                             <p><span style="color:#d82a4e;font-size:20px;">{{$word_prop}}</span></p>

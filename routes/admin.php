@@ -100,6 +100,98 @@ use Illuminate\Support\Facades\Route;
     });
      ######################### End   words Routes  ########################
 
+######################### Begin word gazer Routes ########################
+    Route::group(['prefix' => 'wordgazer'], function () {
+    Route::get('/','WordgazerController@index') -> name('admin.wordgazer');
+    Route::get('create','WordgazerController@create') -> name('admin.wordgazer.create');
+    Route::post('store','WordgazerController@store') -> name('admin.wordgazer.store');
+    Route::get('edit/{id}','WordgazerController@edit') -> name('admin.wordgazer.edit');
+    Route::post('update/{id}','WordgazerController@update') -> name('admin.wordgazer.update');
+    Route::get('show/{id}','WordgazerController@show') -> name('admin.wordgazer.show');
+    Route::get('delete/{id}','WordgazerController@destroy') -> name('admin.wordgazer.delete');
+
+    });
+     ######################### End   word gazer Routes  ########################
+
+######################### Begin gazer type Routes ########################
+    Route::group(['prefix' => 'gazertype'], function () {
+    Route::get('/','GazertypeController@index') -> name('admin.gazertype');
+    Route::get('create','GazertypeController@create') -> name('admin.gazertype.create');
+    Route::post('store','GazertypeController@store') -> name('admin.gazertype.store');
+    Route::get('edit/{id}','GazertypeController@edit') -> name('admin.gazertype.edit');
+    Route::post('update/{id}','GazertypeController@update') -> name('admin.gazertype.update');
+    Route::get('show/{id}','GazertypeController@show') -> name('admin.gazertype.show');
+    Route::get('delete/{id}','GazertypeController@destroy') -> name('admin.gazertype.delete');
+
+    });
+     ######################### End    gazer type Routes  ########################
+
+
+  ######################### Begin gazer weight Routes ########################
+    Route::group(['prefix' => 'gazerweight'], function () {
+    Route::get('/','GazerweightController@index') -> name('admin.gazerweight');
+    Route::get('create','GazerweightController@create') -> name('admin.gazerweight.create');
+    Route::post('store','GazerweightController@store') -> name('admin.gazerweight.store');
+    Route::get('edit/{id}','GazerweightController@edit') -> name('admin.gazerweight.edit');
+    Route::post('update/{id}','GazerweightController@update') -> name('admin.gazerweight.update');
+    Route::get('show/{id}','GazerweightController@show') -> name('admin.gazerweight.show');
+    Route::get('delete/{id}','GazerweightController@destroy') -> name('admin.gazerweight.delete');
+
+    });
+     ######################### End    gazer weight Routes  ########################
+
+      ######################### Begin  weight indication Routes ########################
+        Route::group(['prefix' => 'weightindication'], function () {
+        Route::get('/','WeightindicationController@index') -> name('admin.weightindication');
+        Route::get('create','WeightindicationController@create') -> name('admin.weightindication.create');
+        Route::post('store','WeightindicationController@store') -> name('admin.weightindication.store');
+        Route::get('edit/{id}','WeightindicationController@edit') -> name('admin.weightindication.edit');
+        Route::post('update/{id}','WeightindicationController@update') -> name('admin.weightindication.update');
+        Route::get('show/{id}','WeightindicationController@show') -> name('admin.weightindication.show');
+        Route::get('delete/{id}','WeightindicationController@destroy') -> name('admin.weightindication.delete');
+
+        });
+         ######################### End weight indication Routes  ########################
+
+    ######################### Begin  time Routes ########################
+    Route::group(['prefix' => 'time'], function () {
+    Route::get('/','TimeController@index') -> name('admin.time');
+    Route::get('create','TimeController@create') -> name('admin.time.create');
+    Route::post('store','TimeController@store') -> name('admin.time.store');
+    Route::get('edit/{id}','TimeController@edit') -> name('admin.time.edit');
+    Route::post('update/{id}','TimeController@update') -> name('admin.time.update');
+    Route::get('show/{id}','TimeController@show') -> name('admin.time.show');
+    Route::get('delete/{id}','TimeController@destroy') -> name('admin.time.delete');
+
+    });
+     ######################### End time Routes  ########################
+
+     ######################### Begin  source Routes ########################
+        Route::group(['prefix' => 'source'], function () {
+        Route::get('/','SourceController@index') -> name('admin.source');
+        Route::get('create','SourceController@create') -> name('admin.source.create');
+        Route::post('store','SourceController@store') -> name('admin.source.store');
+        Route::get('edit/{id}','SourceController@edit') -> name('admin.source.edit');
+        Route::post('update/{id}','SourceController@update') -> name('admin.source.update');
+        Route::get('show/{id}','SourceController@show') -> name('admin.source.show');
+        Route::get('delete/{id}','SourceController@destroy') -> name('admin.source.delete');
+
+        });
+         ######################### End source Routes  ########################
+
+
+          ######################### Begin  word indication Routes ########################
+             Route::group(['prefix' => 'wordindication'], function () {
+            Route::get('/','WordindicationController@index') -> name('admin.wordindication');
+            Route::get('create','WordindicationController@create') -> name('admin.wordindication.create');
+            Route::post('store','WordindicationController@store') -> name('admin.wordindication.store');
+            Route::get('edit/{id}','WordindicationController@edit') -> name('admin.wordindication.edit');
+            Route::post('update/{id}','WordindicationController@update') -> name('admin.wordindication.update');
+            Route::get('show/{id}','WordindicationController@show') -> name('admin.wordindication.show');
+            Route::get('delete/{id}','WordindicationController@destroy') -> name('admin.wordindication.delete');
+
+            });
+             ######################### End word indication Routes  ########################
 
      ######################### Begin sentences Routes ########################
      Route::group(['prefix' => 'sentences'], function () {

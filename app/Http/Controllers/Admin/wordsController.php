@@ -8,7 +8,14 @@ use App\Http\Requests\WordRequest;
 use App\Http\Requests\WordFirstupdate;
 use App\Http\Requests\otherWordPropertiesRequest;
 use App\Models\Word;
+use App\Models\Wordgazer;
+use App\Models\Gazertype;
+use App\Models\Gazerweight;
+use App\Models\Weightindication;
+use App\Models\Time;
+use App\Models\Source;
 use App\Models\Wordname;
+use App\Models\Wordcount;
 use App\Models\Mojjam;
 use App\Models\MojjamArrangetype;
 use App\Models\MojjamMethod;
@@ -38,9 +45,15 @@ class wordsController extends Controller
     {
        $word_indications=Wordindication::selection()->get();
        $mojjams = Mojjam::selection()->get();
+       $words_gazer = Wordgazer::selection()->get();
+       $gazer_types =Gazertype::selection()->get();
+       $gazer_weights =Gazerweight::selection()->get();
+       $weight_indications = Weightindication::selection()->get();
+       $times =Time::selection()->get();
+       $sources = Source::selection()->get();
        $mojjamarrangetypes=MojjamArrangetype::selection()->get();
        $mojjammethods=MojjamMethod::selection()->get();
-        return view('admin.words.create',compact('word_indications','mojjams','mojjamarrangetypes','mojjammethods'));
+        return view('admin.words.create',compact('word_indications','mojjams','words_gazer','gazer_types','gazer_weights','weight_indications','times','sources','mojjamarrangetypes','mojjammethods'));
     }
 
     public function store(WordRequest $request)
@@ -101,6 +114,7 @@ class wordsController extends Controller
                     'time' => $request->time,
                     'word_derivatives'=> 'n',
                     'other_word_properties' => 'n',
+                    'word_count_id' => 'n',
                     'admin_id' =>Auth::user()->id,
                 ]);
         }
@@ -117,10 +131,11 @@ class wordsController extends Controller
     {
         $word=Word::with('word')->where('word_id',$id)->where('mojjam_id',$mojjam_id)->Selection()->first();
         $mojjam = Mojjam::where('id',$word->mojjam_id)->selection()->first();
+        $word_count=Wordcount::Selection()->get();
         try{
             if (!$word)
             return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة او ربما تكون محذوفة ']);
-            return view('admin.words.create_word_2',compact('word','mojjam'));
+            return view('admin.words.create_word_2',compact('word','mojjam','word_count'));
 
         }catch(\Exception $exception){
             return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
@@ -153,7 +168,8 @@ class wordsController extends Controller
 
                 $word::where('word_id', $id)
             ->update([
-                'word_derivatives'=> $word_derivatives
+                'word_derivatives'=> $word_derivatives,
+                'word_count_id' =>$request->word_count
             ]);
             }
             DB::commit();
@@ -172,10 +188,16 @@ class wordsController extends Controller
             $word=Word::with('word')->where('word_id',$id)->Selection()->first();
             $mojjams = Word::with('mojjam')->where('word_id',$id)->selection()->get();
             $word_indications=Wordindication::selection()->get();
+            $words_gazer = Wordgazer::selection()->get();
+            $gazer_types =Gazertype::selection()->get();
+            $gazer_weights =Gazerweight::selection()->get();
+            $weight_indications = Weightindication::selection()->get();
+            $times =Time::selection()->get();
+            $sources = Source::selection()->get();
             if (!$word)
             return redirect()->route('admin.words')->with(['error' => 'هذه اكلمة غير موجودة او ربما تكون محذوفة ']);
 
-            return view('admin.words.edit', compact('word','mojjams','word_indications'));
+            return view('admin.words.edit', compact('word','mojjams','word_indications','words_gazer','gazer_types','gazer_weights','weight_indications','times','sources'));
 
         } catch (\Exception $exception) {
 
@@ -212,7 +234,7 @@ class wordsController extends Controller
                     'mojjam_id' => $request->mojjam_id,
                     'word_type'   => $request->word_type,
                     'word_gzer'   => $request->word_gzer,
-                     'gzer_type'  => $request->gzer_type,
+                     'gzer_type'  => $request->gazer_type,
                      'gzer_weight'  => $request->gzer_weight,
                     'word_source'   => $request->word_source,
                      'word_indication'  => $request->word_indication,
@@ -239,11 +261,11 @@ class wordsController extends Controller
         $word=Word::with('word')->where('word_id',$id)->where('mojjam_id',$mojjam_id)->Selection()->first();
         $word_derivatives= explode(", ",$word->word_derivatives);
         $meanings=Meaning::where('word_id','=',$word->id);
-
+        $word_count=Wordcount::Selection()->get();
         try{
             if (!$word)
             return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة او ربما تكون محذوفة ']);
-            return view('admin.words.edit_word_2',compact('word','word_derivatives','meanings'));
+            return view('admin.words.edit_word_2',compact('word','word_derivatives','meanings','word_count'));
 
         }catch(\Exception $exception){
 
@@ -274,6 +296,7 @@ class wordsController extends Controller
             $word::where('id', $wordupdate_id)
             ->update([
                 'word_derivatives'=> $word_derivatives,
+                'word_count_id' =>$request->word_count
             ]);
             }
           /*  if ($request->has('word_meaning')) {
@@ -406,10 +429,17 @@ class wordsController extends Controller
       /* foreach($word as $w){
        $word_derivatives=explode(",",$w-> word_derivatives);
        } */
+       $word_count=Wordcount::Selection()->get();
+       $words_gazer = Wordgazer::selection()->get();
+       $gazer_types =Gazertype::selection()->get();
+       $gazer_weights =Gazerweight::selection()->get();
+       $weight_indications = Weightindication::selection()->get();
+       $times =Time::selection()->get();
+       $sources = Source::selection()->get();
        if (!$word){
            return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة ']);
        }
-        return view('admin.words.show',compact('word','word_indications'));
+        return view('admin.words.show',compact('word','word_indications','word_count','words_gazer','gazer_types','gazer_weights','weight_indications','times','sources'));
         }
 
 

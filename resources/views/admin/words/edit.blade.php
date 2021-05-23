@@ -106,10 +106,10 @@
                                                                     <label for="projectinput1">  جذر الكلمة </label>
                                                                     <select name="word_gzer" class="select2 form-control" id="selectId">
                                                                         <optgroup label=" جذر الكلمة ">
-
-                                                                         <option value="0" {{$word->word_gzer==0 ? 'selected' : ' '}}>أب</option>
-                                                                         <option value="1" {{$word->word_gzer==1 ? 'selected' : ' '}}>أم</option>
-                                                                        </optgroup>
+                                                                                @foreach ($words_gazer as $word_gazer)
+                                                                                <option value="{{$word_gazer->id}}" {{$word->word_gzer ==$word_gazer->id? 'selected' : ' '}}>{{$word_gazer->word_gazer}}</option>
+                                                                                @endforeach
+                                                                                </optgroup>
                                                                     </select>
                                                                     @error("word_gzer")
                                                                     <span class="text-danger">{{$message}}</span>
@@ -119,11 +119,14 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1">  نوع الجذر </label>
-                                                                    <input type="text" value="{{$word->gzer_type}}"  id="gzer_type"
-                                                                           class="form-control"
-                                                                           placeholder="  "
-                                                                           name="gzer_type">
-                                                                    @error("gzer_type")
+                                                                    <select name="gazer_type" class="select2 form-control" id="gazer_type">
+                                                                        <optgroup label="نوع الجذر">
+                                                                                @foreach ($gazer_types as $gazer_type)
+                                                                                <option value="{{$gazer_type->id}}" {{$word->gzer_type ==$gazer_type->id? 'selected' : ' '}}>{{$gazer_type->	gazer_type}}</option>
+                                                                                @endforeach
+                                                                                </optgroup>
+                                                                    </select>
+                                                                    @error("gazer_type")
                                                                     <span class="text-danger">{{$message}}</span>
                                                                     @enderror
                                                                 </div>
@@ -131,10 +134,13 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1">  وزن الجذر </label>
-                                                                    <input type="text" value="{{$word->gzer_weight}}" id="gzer_weight"
-                                                                           class="form-control"
-                                                                           placeholder="  "
-                                                                           name="gzer_weight">
+                                                                    <select name="gzer_weight" class="select2 form-control" id="gzer_weight">
+                                                                        <optgroup label="وزن الجذر">
+                                                                                @foreach ($gazer_weights as $gazer_weight)
+                                                                                <option value="{{$gazer_weight->id}}" {{$word->gzer_weight ==$gazer_weight->id? 'selected' : ' '}}>{{$gazer_weight->gazer_weight}}</option>
+                                                                                @endforeach
+                                                                                </optgroup>
+                                                                    </select>
                                                                     @error("gzer_weight")
                                                                     <span class="text-danger">{{$message}}</span>
                                                                     @enderror
@@ -143,10 +149,13 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1">  دلالة الوزن </label>
-                                                                    <input type="text" value="{{$word->weight_indication}}" id="weight_indication"
-                                                                           class="form-control"
-                                                                           placeholder="  "
-                                                                           name="weight_indication">
+                                                                           <select name="weight_indication" class="select2 form-control" id="weight_indication">
+                                                                            <optgroup label="دلالة الوزن ">
+                                                                                    @foreach ($weight_indications as $weight_indication)
+                                                                                    <option value="{{$weight_indication->id}}" {{$word->weight_indication ==$weight_indication->id? 'selected' : ' '}}>{{$weight_indication-> weight_indication}}</option>
+                                                                                    @endforeach
+                                                                                    </optgroup>
+                                                                        </select>
                                                                     @error("weight_indication")
                                                                     <span class="text-danger">{{$message}}</span>
                                                                     @enderror
@@ -157,13 +166,12 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1">الزمن</label>
-                                                                    <select name="time" class="select2 form-control" id="selectId">
+                                                                    <select name="time" class="select2 form-control" id="time">
                                                                         <optgroup label="الزمن">
-                                                                         <option value="0" {{$word->time==0 ? 'selected' : ' '}}>ماضي</option>
-                                                                         <option value="1" {{$word->time==1 ? 'selected' : ' '}}>مستقبل</option>
-                                                                         <option value="2" {{$word->time==2 ? 'selected' : ' '}}>حاضر</option>
-                                                                         <option value="3" {{$word->time==3 ? 'selected' : ' '}}>امر</option>
-                                                                        </optgroup>
+                                                                                @foreach ($times as $time)
+                                                                                <option value="{{$time->id}}" {{$word->time==$time->id? 'selected' : ' '}}>{{$time-> time}}</option>
+                                                                                @endforeach
+                                                                                </optgroup>
                                                                     </select>
                                                                     @error("time")
                                                                     <span class="text-danger">{{$message}}</span>
@@ -175,10 +183,9 @@
                                                                     <label for="projectinput1">  المصدر  </label>
                                                                            <select name="word_source" class="select2 form-control" id="selectId">
                                                                             <optgroup label="المصدر">
-                                                                                <option value="0" {{$word->word_source==0 ? 'selected' : ' '}}>ثلاثية</option>
-                                                                                <option value="1" {{$word->word_source==1 ? 'selected' : ' '}}>رباعية</option>
-                                                                                <option value="2" {{$word->word_source==2 ? 'selected' : ' '}}>خماسية</option>
-                                                                                <option value="3" {{$word->word_source==3 ? 'selected' : ' '}}>سداسية</option>
+                                                                                @foreach ($sources as $source)
+                                                                                <option value="{{$source->id}}" {{$word->word_source==$source->id ? 'selected' : ' '}}>{{$source-> source}}</option>
+                                                                                @endforeach
                                                                             </optgroup>
                                                                         </select>
                                                                     @error("word_source")

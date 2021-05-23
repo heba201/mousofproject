@@ -21,5 +21,9 @@ class Wordindication extends Model
         return $this -> hasMany('App\Models\Word','word_indication','id');
     }
 
+    public function admin()
+    {
+        return $this->belongsTo('App\Models\Admin', 'admin_id', 'id');
+    }
 
 }

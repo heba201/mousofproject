@@ -55,6 +55,25 @@
 
                                                 <h2 class="form-section"><i class="ft-home"></i>{{$word->word->word}}</h2>
                                                         <div class="row">
+                                                            @if($word->word_type==0)
+                                                            <div class="col-md-12">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1">     العدد  </label>
+                                                                           <select name="word_count" class="select2 form-control" id="word_count">
+                                                                            <optgroup label="العدد">
+                                                                            @foreach ($word_count as $count)
+                                                                            <option value="{{$count->id}}">{{$count->word_count}}</option>
+                                                                            @endforeach
+                                                                            </optgroup>
+                                                                        </select>
+                                                                    @error("word_count")
+                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            @endif
                                                             <div class="col-md-5">
                                                                 <div class="form-group">
                                                                     @if($word->word_type==1 || $word->word_type==0)
@@ -68,6 +87,7 @@
                                                                     @enderror
                                                                 </div>
                                                             </div>
+
                                                             <div class="col-md-1">
                                                             <a href="javascript:void(0)"  class="btn btn-primary" id="add_button" style="margin-top: 25px;"><i class="fas fa-plus"></i></a>
                                                             </div>

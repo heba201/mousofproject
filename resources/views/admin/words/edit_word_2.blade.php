@@ -55,6 +55,26 @@
 
                                                 <h2 class="form-section"><i class="ft-home"></i>{{$word->word->word}}</h2>
                                                         <div class="row">
+                                                            @if($word->word_type==0)
+                                                            <div class="col-md-12">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1">     العدد  </label>
+                                                                           <select name="word_count" class="select2 form-control" id="word_count">
+                                                                            <optgroup label="العدد">
+                                                                            @foreach ($word_count as $count)
+                                                                            <option value="{{$count->id}}" {{$word->word_count_id==$count->id ? 'selected' : ''}}>{{$count->word_count}}</option>
+                                                                            @endforeach
+                                                                            </optgroup>
+                                                                        </select>
+                                                                    @error("word_count")
+                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            @endif
+
                                                                <div class="col-md-5">
                                                                 <div class="form-group">
 

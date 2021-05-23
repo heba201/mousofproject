@@ -180,18 +180,18 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput{{$index}}">  جذر الكلمة </label>
-
+                                                                                @foreach ($words_gazer as $word_gazer)
+                                                                                @endforeach
                                                                     <?php
-                                                                    if($wmojjam->word_gzer==0){
-                                                                        $word_gzer='أب';
-                                                                    }else{
-                                                                        $word_gzer='أم';
-                                                                    }
+                                                                    $wordgazer_id=$wmojjam->word_gzer;
+                                                                    $word_gazer=App\Models\Wordgazer::where('id',$wordgazer_id)->selection()->first();
                                                                     ?>
-                                                                    <input type="text" value="{{$word_gzer}}" id="word_gzer"
-                                                                               class="form-control" readonly
-                                                                               placeholder="  "
-                                                                               name="word_gzer">
+                                                                    @if($word_gazer)
+                                                                    <input type="text" value="{{$word_gazer->word_gazer}}" id="word_gazer"
+                                                                    class="form-control" readonly
+                                                                    placeholder="  "
+                                                                    name="word_gazer">
+                                                                    @endif
                                                                     @error("word_gzer")
                                                                     <span class="text-danger">{{$message}}</span>
                                                                     @enderror
@@ -201,10 +201,19 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput{{$index}}">  نوع الجذر </label>
-                                                                    <input type="text" value="{{$wmojjam->gzer_type}}"  id="gzer_type"
-                                                                           class="form-control" readonly
-                                                                           placeholder="  "
-                                                                           name="gzer_type">
+                                                                           @foreach ($gazer_types as $gazer_type)
+                                                                           @endforeach
+                                                               <?php
+                                                               $gazertype_id=$wmojjam->gzer_type;
+                                                               $gazer_type=App\Models\Gazertype::where('id',$gazertype_id)->selection()->first();
+                                                               ?>
+                                                               @if($gazer_type)
+                                                               <input type="text" value="{{$gazer_type->gazer_type}}" id="gazer_type"
+                                                               class="form-control" readonly
+                                                               placeholder="  "
+                                                               name="gazer_type">
+                                                               @endif
+
                                                                     @error("gzer_type")
                                                                     <span class="text-danger">{{$message}}</span>
                                                                     @enderror
@@ -214,10 +223,19 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput{{$index}}">  وزن الجذر </label>
-                                                                    <input type="text" value="{{$wmojjam->gzer_weight}}" id="gzer_weight"
-                                                                           class="form-control"
-                                                                           placeholder="  " readonly
-                                                                           name="gzer_weight">
+                                                                           @foreach ($gazer_weights as $gazer_weight)
+                                                                           @endforeach
+                                                               <?php
+                                                               $gazerweight_id=$wmojjam->gzer_weight;
+                                                               $gazer_weight=App\Models\Gazerweight::where('id',$gazerweight_id)->selection()->first();
+                                                               ?>
+                                                               @if($gazer_weight)
+                                                               <input type="text" value="{{$gazer_weight->	gazer_weight}}" id="gzer_weight"
+                                                               class="form-control" readonly
+                                                               placeholder="  "
+                                                               name="gzer_weight">
+                                                               @endif
+
                                                                     @error("gzer_weight")
                                                                     <span class="text-danger">{{$message}}</span>
                                                                     @enderror
@@ -227,38 +245,42 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput{{$index}}">  دلالة الوزن </label>
-                                                                    <input type="text" value="{{$wmojjam->weight_indication}}" id="weight_indication"
-                                                                           class="form-control"
-                                                                           placeholder="  " readonly
-                                                                           name="weight_indication">
+
+                                                                           @foreach ($weight_indications as $weight_indication)
+                                                                           @endforeach
+                                                               <?php
+                                                               $weightindication_id=$wmojjam->weight_indication;
+                                                               $weight_indication=App\Models\Weightindication::where('id',$weightindication_id)->selection()->first();
+                                                               ?>
+                                                               @if($weight_indication)
+                                                               <input type="text" value="{{$weight_indication->	weight_indication}}" id="weight_indication"
+                                                               class="form-control" readonly
+                                                               placeholder="  "
+                                                               name="weight_indication">
+                                                               @endif
                                                                     @error("weight_indication")
                                                                     <span class="text-danger">{{$message}}</span>
                                                                     @enderror
                                                                 </div>
                                                             </div>
 
-
-
-
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput{{$index}}">الزمن</label>
-                                                                    <?php
-                                                                    if($wmojjam->time==0){
-                                                                        $time='ماضي';
-                                                                    }elseif($wmojjam->time==1){
-                                                                        $time='مستقبل';
-                                                                    }elseif($wmojjam->time==2){
-                                                                        $time='حاضر';
-                                                                    }
-                                                                    else{
-                                                                        $time='امر';
-                                                                    }
-                                                                    ?>
-                                                                    <input type="text" value="{{$time}}" id="time"
-                                                                               class="form-control" readonly
-                                                                               placeholder="  "
-                                                                               name="time">
+                                                                               @foreach ($times as $time)
+                                                                               @endforeach
+                                                                   <?php
+                                                                   $time_id=$wmojjam->time;
+                                                                   $time=App\Models\Time::where('id',$time_id)->selection()->first();
+                                                                   ?>
+                                                                   @if($time)
+                                                                   <input type="text" value="{{$time->	time}}" id="time"
+                                                                   class="form-control" readonly
+                                                                   placeholder="  "
+                                                                   name="time">
+                                                                   @endif
+
+
                                                                     @error("time")
                                                                     <span class="text-danger">{{$message}}</span>
                                                                     @enderror
@@ -270,22 +292,19 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput{{$index}}">  المصدر  </label>
-                                                                        <?php
-                                                                    if($wmojjam->word_source==0){
-                                                                        $word_source='ثلاثية';
-                                                                    }elseif($wmojjam->word_source==1){
-                                                                        $word_source='رباعية';
-                                                                    }elseif($wmojjam->word_source==2){
-                                                                        $word_source='خماسية';
-                                                                    }
-                                                                    else{
-                                                                        $word_source='سداسية';
-                                                                    }
-                                                                    ?>
-                                                                    <input type="text" value="{{$word_source}}" id="word_source"
-                                                                               class="form-control" readonly
-                                                                               placeholder="  "
-                                                                               name="word_source">
+                                                                               @foreach ($sources as $source)
+                                                                               @endforeach
+                                                                   <?php
+                                                                   $source_id=$wmojjam->word_source;
+                                                                   $source=App\Models\Source::where('id',$source_id)->selection()->first();
+                                                                   ?>
+                                                                   @if($source)
+                                                                   <input type="text" value="{{$source-> source}}" id="word_source"
+                                                                   class="form-control" readonly
+                                                                   placeholder="  "
+                                                                   name="word_source">
+                                                                   @endif
+
                                                                     @error("word_source")
                                                                     <span class="text-danger">{{$message}}</span>
                                                                     @enderror
@@ -314,6 +333,20 @@
                                                                 </div>
                                                             </div>
 
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput{{$index}}">العدد</label>
+                                                                    <?php
+                                                                        $word_count_id=$wmojjam->word_count_id;
+                                                                        $word_count=App\Models\Wordcount::where('id',$word_count_id)->selection()->first();                                                                    ?>
+
+                                                                    <input type="text" value="{{$word_count->word_count}}"  id="word_count"
+                                                                    class="form-control" readonly
+                                                                    placeholder="  "
+                                                                    name="word_count">
+
+                                                                </div>
+                                                            </div>
 
                                                             <div class="col-md-6">
                                                                 <div class="form-group">

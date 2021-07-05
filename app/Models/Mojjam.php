@@ -26,6 +26,22 @@ class Mojjam extends Model
         return $this -> hasMany('App\Models\Word','mojjam_id','id');
     }
 
+    public function gzor(){
+
+        return $this -> hasMany('App\Models\Wordgazer','mojjam_id','id');
+    }
+
+
+    public function moradfaat()
+    {
+        return $this->hasMany('App\Models\Moradfat', 'mojjam_id', 'id');
+    }
+
+    public function modads()
+    {
+        return $this->hasMany('App\Models\Modad', 'mojjam_id', 'id');
+    }
+
     public function admin()
     {
         return $this->belongsTo('App\Models\Admin', 'admin_id', 'id');

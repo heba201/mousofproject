@@ -35,6 +35,11 @@ class Wordname extends Model
         return $this -> hasMany('App\Models\Moradfat','word_id','id');
     }
 
+    public function modads()
+    {
+        return $this->hasMany('App\Models\Modad', 'word_id', 'id');
+    }
+
 
     public function abyaat(){
 

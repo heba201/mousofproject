@@ -74,8 +74,117 @@
                                                             </div>
                                                             </div>
                                                             @endif
+                                                          <!--حالة الفعل الماضي-->
+                                                            <?php
+                                                            foreach ($times as $time) {
+                                                                if($time->time=='ماضي'){
+                                                                  $word_time=$time->id;
+                                                                }
+                                                            }
+                                                            ?>
+                                                            @if($word->word_type==1 && $word->time==$word_time)
 
-                                                               <div class="col-md-5">
+                                                            <div class="col-md-12">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="projectinput1">     حالة الفعل  </label>
+                                                                        <select name="verb_status" class="select2 form-control" id="verb_status">
+                                                                            <optgroup label="حالةالفعل ">
+                                                                                <option value="1">صحيح الاخر</option>
+                                                                                <option value="2"> (بالألف) معتل الاخر</option>
+                                                                                <option value="3"> فعل معتل متصل بتاء التأنيث  </option>
+                                                                                <option value="4">من الأفعال الخمسة</option>
+                                                                            </optgroup>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="col-md-12">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="projectinput1">     الضمائر  المتصلة  </label>
+                                                                        <select name="verb_status" class="select2 form-control" id="verb_status">
+                                                                            <optgroup label="  الضمائر المتصلة ">
+                                                                                <option value="1">تاء التأنيث </option>
+                                                                                <option value="2"> تاء المتكلم  </option>
+                                                                                <option value="3"> تاء المخاطب  </option>
+                                                                                <option value="4"> تاء المخاطبة </option>
+                                                                                <option value="5">  نون النسوة </option>
+                                                                                <option value="6">   نا المتكلمين </option>
+                                                                                <option value="7"> واو الجماعة </option>
+                                                                                <option value="8">  لا يوجد ضمائر متصلة </option>
+                                                                            </optgroup>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            @endif
+                                                            <!--نهاية حالة الفعل الماضي-->
+
+
+                                                            <!--حالة الفعل المضارع-->
+                                                            <?php
+                                                            foreach ($times as $time) {
+                                                                if($time->time=='مضارع'){
+                                                                  $word_time=$time->id;
+                                                                }
+                                                            }
+                                                            ?>
+                                                            @if($word->word_type==1 && $word->time==$word_time)
+
+                                                            <div class="col-md-12">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="projectinput1">     حالة الفعل  </label>
+                                                                        <select name="verb_status" class="select2 form-control" id="verb_status">
+                                                                            <optgroup label="حالةالفعل ">
+                                                                                <option value="1">صحيح الاخر</option>
+                                                                                <option value="2"> (بالياء) معتل الاخر</option>
+                                                                                <option value="3">من الأفعال الخمسة</option>
+                                                                            </optgroup>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="col-md-12">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="projectinput1">     الضمائر  المتصلة  </label>
+                                                                        <select name="verb_status" class="select2 form-control" id="verb_status">
+                                                                            <optgroup label="  الضمائر المتصلة ">
+
+                                                                                <option value="1">للمتكلم</option>
+                                                                                <option value="2"> تاء المخاطب  </option>
+                                                                                <option value="3">  تاء المخاطبة أول الفعل مع ياء ونون اخره </option>
+                                                                                <option value="4">  تاء المخاطبة أول الفعل مع ياء اخره </option>
+                                                                                <option value="5">  نون النسوة </option>
+                                                                                <option value="6">  نون التوكيد </option>
+                                                                                <option value="7">   نا المتكلمين أول الفعل </option>
+                                                                                <option value="8"> الف الاثنين  مع وجود النون </option>
+                                                                                <option value="9"> الف الاثنين  مع حذف النون </option>
+                                                                                <option value="10"> واو الجماعة مع وجود النون </option>
+                                                                                <option value="11"> واو الجماعة مع حذف النون </option>
+                                                                                <option value="12">  لا يوجد ضمائر متصلة </option>
+                                                                            </optgroup>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            @endif
+                                                      <!-- نهاية حالة الفعل المضارع-->
+
+
+
+
+
+
+                                                            <div class="col-md-5">
                                                                 <div class="form-group">
 
                                                                     @if($word->word_type==1 || $word->word_type==0)

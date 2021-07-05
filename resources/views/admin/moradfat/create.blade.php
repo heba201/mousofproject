@@ -15,9 +15,9 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="">الرئيسية </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href=""> مرادفات وأضداد </a>
+                                <li class="breadcrumb-item"><a href=""> مرادفات  </a>
                                 </li>
-                                <li class="breadcrumb-item active"> إضافة مرادفات وأضداد
+                                <li class="breadcrumb-item active"> إضافة مرادفات
                                 </li>
                             </ol>
                         </div>
@@ -31,7 +31,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> إضافة مرادفات وأضداد </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> إضافة مرادفات  </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -47,7 +47,7 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.moradfat.store',$word->id)}}"
+                                        <form class="form" action="{{route('admin.moradfat.store',['id'=>$word->id,'mojjam_id'=>$mojjam->id])}}"
                                               method="POST">
                                               {{ csrf_field() }}
 
@@ -67,7 +67,27 @@
                                                                     @enderror
                                                                 </div>
                                                             </div>
+
+
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1">  المعجم </label>
+                                                                    <input type="text" value="{{$mojjam->mojjam_name}}" id="mojjam_name"
+                                                                           class="form-control"
+                                                                           placeholder="" readonly
+                                                                           name="mojjam_name">
+                                                                    @error("mojjam_name")
+                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
                                                             </div>
+
+
+                                                        </div>
+
+
+                                                            </div>
+
                                                             <div class="row">
                                                             <div class="col-md-5">
                                                                 <div class="form-group">
@@ -91,24 +111,8 @@
                                                         <div class="row field-wrapper">
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-md-5">
-                                                                <div class="form-group">
-                                                                    <label for="projectinput1">المضاد</label>
-                                                                    <input type="text" value="" id="modad[]"
-                                                                           class="form-control"
-                                                                           placeholder=" "
-                                                                           name="modad[]">
-                                                                    @error("modad.*")
-                                                                    <span class="text-danger">{{$message}}</span>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-1">
-                                                                <a href="javascript:void(0)"  class="btn btn-primary" id="addmodad_button" style="margin-top: 25px;"><i class="fas fa-plus"></i></a>
-                                                                </div>
-                                                                <div class="col-md-1">
-                                                                    <a href="javascript:void(0)"  class="btn btn-danger" id="removemodad_button" style="margin-top: 25px;margin-left:10px"><i class="fas fa-minus"></i></a>
-                                                                    </div>
+
+
                                                                 </div>
                                                         <div class="row field-wrapper2">
                                                         </div>
@@ -152,15 +156,9 @@ $("#removemoradf_button").on("click", function() {
             });
 
 
-            $('#addmodad_button').click(function(){
-            $('.field-wrapper2').append(
-                '<div class="col-md-5" id="GFG_DIV"><input type="text" value="" id="modad[]" class="form-control" placeholder=" " name="modad[]" style="margin-bottom:15px"></div>'
-             );
-})
 
-$("#removemodad_button").on("click", function() {
-    $('.field-wrapper2').children().last().remove();
-            });
+
+
       });
  </script>
 @endsection

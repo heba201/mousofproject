@@ -11,6 +11,9 @@ use App\Models\MojjamSpecialty;
 use App\Models\MojjamArrangetype;
 use App\Models\MojjamMethod;
 use App\Models\Language;
+use App\Models\Word;
+use App\Models\Wordname;
+use App\Models\Wordgazer;
 use Auth;
 use DB;
 class mojjamsController extends Controller
@@ -151,17 +154,48 @@ class mojjamsController extends Controller
         return view('admin.mojjams.show',compact('mojjam','languages','mojjamsauthors','mojjamspecialties','mojjamarrangetypes','mojjammethods'));
     }
 
+
+    public function showwords($id)
+    {
+        $mojjam = Mojjam::Selection()->find($id);
+        if (!$mojjam)
+            return redirect()->route('admin.mojjams')->with(['error' => 'هذاالمعجم غير موجود او ربما يكون محذوفا ']);
+
+            $mojjamwordsexist=$mojjam->words();
+            $mojjamwords=Word::Selection()->where('mojjam_id','=',$id)->get();
+            if($mojjamwordsexist->count()>0){
+
+            return view('admin.mojjams.showwords',compact('mojjam','mojjamwords'));
+            }
+    }
+
+    public function showgzor($id)
+    {
+        $mojjam = Mojjam::Selection()->find($id);
+        if (!$mojjam)
+            return redirect()->route('admin.mojjams')->with(['error' => 'هذاالمعجم غير موجود او ربما يكون محذوفا ']);
+
+            $mojjamgazrexist=$mojjam->gzor()->selection()->get();
+
+            if($mojjamgazrexist->count()>0){
+
+            return view('admin.mojjams.showgzor',compact('mojjam','mojjamgazrexist'));
+            }
+    }
+
+
+
     public function destroy($id)
     {
 
         try {
             $mojjam = Mojjam::find($id);
             $meanings = $mojjam->mojjammeanings();
-
+            $words = $mojjam->words();
             if (!$mojjam){
                 return redirect()->route('admin.mojjams')->with(['error' => 'هذا المعجم غير موجود ']);
             }
-            if ($meanings->count()>0) {
+            if ($meanings->count()>0 || $words->count()>0) {
                 return redirect()->route('admin.mojjams')->with(['error' => 'لا يمكن حذف هذا المعجم']);
             }
 

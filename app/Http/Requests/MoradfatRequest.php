@@ -26,8 +26,6 @@ class MoradfatRequest extends FormRequest
         return [
             'moradf' => 'required|array|min:1',
             'moradf.*' =>'required|string|distinct',
-            'modad' => 'required|array|min:1',
-            'modad.*' =>'required|string|distinct',
         ];
     }
 
@@ -38,8 +36,6 @@ class MoradfatRequest extends FormRequest
             'string'  =>'الاسم لابد ان يكون حروف فقط ',
            'moradf.*.required' => 'هذا الحقل مطلوب ',
            'moradf.*.distinct' => 'ادخل بيانات مختلفة',
-           'modad.*.required' => 'هذا الحقل مطلوب ',
-           'modad.*.distinct' => 'ادخل بيانات مختلفة',
         ];
     }
 }

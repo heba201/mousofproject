@@ -65,6 +65,23 @@
                             تخصص  للمعجم </a>
 
                         </li>
+                        @endif
+                        <li class="active"><a class="menu-item" href="{{route('admin.mojjamarrangetypes')}}"
+                            data-i18n="nav.dash.ecommerce">  أنواع ترتيب المعجم </a>
+                        </li>
+                        @if( Auth::user()->role_id==2)
+                        <li class="active"><a class="menu-item" href="{{route('admin.mojjamarrangetypes.create')}}"
+                            data-i18n="nav.dash.ecommerce">  إضافة نوع ترتيب للمعجم </a>
+                        </li>
+                        @endif
+
+                        <li class="active"><a class="menu-item" href="{{route('admin.mojjammethods')}}"
+                            data-i18n="nav.dash.ecommerce"> مناهج المعجم </a>
+                        </li>
+                        @if( Auth::user()->role_id==2)
+                        <li class="active"><a class="menu-item" href="{{route('admin.mojjammethods.create')}}"
+                            data-i18n="nav.dash.ecommerce"> إضافة منهج للمعجم </a>
+                        </li>
                         <li><a class="menu-item" href="{{route('admin.mojjams.create')}}" data-i18n="nav.dash.crypto">إضافة
                             معجم  جديد </a>
                         </li>
@@ -75,6 +92,7 @@
 
 
 
+{{--
                 <li class="nav-item"><a href=""><i class="fas fa-folder-open"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">جذور الكلمات</span>
                     <span
@@ -86,13 +104,13 @@
                     </li>
                     @if( Auth::user()->role_id==2)
 
-                    <li><a class="menu-item" href="{{route('admin.wordgazer.create')}}" data-i18n="nav.dash.crypto">إضافة
+                    <li><a class="menu-item" href="{{route('admin.wordgazer.create',1)}}" data-i18n="nav.dash.crypto">إضافة
                         جذر </a>
                 </li>
 
                     @endif
                 </ul>
-            </li>
+            </li> --}}
 
 
             <li class="nav-item"><a href=""><i class="fas fa-folder-open"></i>
@@ -228,12 +246,12 @@
                 <li class="active"><a class="menu-item" href="{{route('admin.words')}}"
                                       data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                 </li>
-                @if( Auth::user()->role_id==2)
+                {{-- @if( Auth::user()->role_id==2)
 
-                <li><a class="menu-item" href="{{route('admin.words.create')}}" data-i18n="nav.dash.crypto">إضافة
+                <li><a class="menu-item" href="{{route('admin.words.create',1)}}" data-i18n="nav.dash.crypto">إضافة
                         كلمة </a>
                 </li>
-                @endif
+                @endif --}}
             </ul>
         </li>
 
@@ -251,7 +269,7 @@
             </li>
             <li class="nav-item  open ">
                 <a href=""><i class="la la-home"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main">مرادفات وأضداد</span>
+                    <span class="menu-title" data-i18n="nav.dash.main">مرادفات</span>
                     <span
                         class="badge badge badge-light badge-pill float-right mr-2">{{App\Models\Moradfat::count()}}</span>
                 </a>
@@ -261,6 +279,22 @@
                     </li>
                 </ul>
             </li>
+
+
+            <li class="nav-item  open ">
+                <a href=""><i class="la la-home"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">أضداد</span>
+                    <span
+                        class="badge badge badge-light badge-pill float-right mr-2">{{App\Models\Modad::count()}}</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="active"><a class="menu-item" href="{{route('admin.modad')}}"
+                                          data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                    </li>
+                </ul>
+            </li>
+            
+
             <li class="nav-item  open ">
                 <a href=""><i class="la la-group"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">الشعراء</span>

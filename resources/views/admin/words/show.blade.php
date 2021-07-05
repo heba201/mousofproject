@@ -31,7 +31,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form">  كلمة </h4>
+                                    <h4 class="card-title" id="basic-layout-form">  كلمة <a href="#">  {{$word[0]->word->word}} </a> </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -48,7 +48,7 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body">
                                         <form class="form">
-
+                                            @csrf
 
                                             <!-- tab -->
 
@@ -140,15 +140,17 @@
 
                                                                 <div class="col-md-6">
                                                                     <?php
-                                                                        $word_meaning=App\Models\Meaning::where('word_id',$wmojjam->word_id)->where('mojjam_id',$wmojjam->mojjam_id)->Selection()->first();
+                                                                        $word_meanings=App\Models\Meaning::where('word_id',$wmojjam->word_id)->where('mojjam_id',$wmojjam->mojjam_id)->Selection()->get();
                                                                     ?>
                                                                     <div class="form-group">
                                                                         <label for="projectinput{{$index}}">   معني الكلمة  </label>
-                                                                        <input type="text" value="{{$word_meaning->word_meaning}}" id="word_meaning"
+                                                                        @foreach($word_meanings as $word_meaning)
+                                                                        <textarea type="text" value="" id="word_meaning[]" style="margin-bottom: 10px;"
                                                                                class="form-control" readonly
                                                                                placeholder="  "
-                                                                               name="word_meaning">
-                                                                        @error("word_meaning")
+                                                                               name="word_meaning[]">{{$word_meaning->word_meaning}}</textarea>
+                                                                               @endforeach
+                                                                        @error("word_meaning.*")
                                                                         <span class="text-danger">{{$message}}</span>
                                                                         @enderror
                                                                     </div>
@@ -263,7 +265,7 @@
                                                                     @enderror
                                                                 </div>
                                                             </div>
-
+                                                                @if($wmojjam->word_type==1)
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput{{$index}}">الزمن</label>
@@ -286,7 +288,7 @@
                                                                     @enderror
                                                                 </div>
                                                             </div>
-
+                                                            @endif
 
 
                                                             <div class="col-md-6">
@@ -332,14 +334,15 @@
                                                                     @enderror
                                                                 </div>
                                                             </div>
+                                                            <?php
+                                                            $word_count_id=$wmojjam->word_count_id;
 
+                                                            $word_count=App\Models\Wordcount::where('id',$word_count_id)->selection()->first();
+                                                            ?>
+                                                            @if( $word_count_id)
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput{{$index}}">العدد</label>
-                                                                    <?php
-                                                                        $word_count_id=$wmojjam->word_count_id;
-                                                                        $word_count=App\Models\Wordcount::where('id',$word_count_id)->selection()->first();                                                                    ?>
-
                                                                     <input type="text" value="{{$word_count->word_count}}"  id="word_count"
                                                                     class="form-control" readonly
                                                                     placeholder="  "
@@ -347,7 +350,7 @@
 
                                                                 </div>
                                                             </div>
-
+                                                            @endif
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput{{$index}}">مشتقات الكلمة</label>
@@ -401,7 +404,6 @@
 
 
                                             <!-- tab end -->
-                                        </form>
                                     </div>
                                 </div>
                             </div>

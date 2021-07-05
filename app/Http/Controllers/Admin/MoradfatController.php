@@ -7,63 +7,76 @@ use Illuminate\Http\Request;
 use App\Http\Requests\MoradfatRequest;
 use App\Models\Moradfat;
 use App\Models\Word;
+use App\Models\Mojjam;
 use App\Models\Wordname;
 use DB;
 use Auth;
-
+use Redirect;
 class MoradfatController extends Controller
 {
     public function index()
     {
 
-        $moradfat = Moradfat::with('word')->selection()->get();
+        $moradfat = Moradfat::with('word','mojjam')->selection()->get();
 
         return view('admin.moradfat.index',compact('moradfat'));
     }
-    public function create($id)
+    public function create($id,$mojjamid)
     {
 
         $word=Wordname::Selection()->find($id);
-        if (!$word){
-            return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة ']);
+        $mojjam=Mojjam::Selection()->find($mojjamid);
+        if (!$mojjam){
+            return redirect()->route('admin.mojjams')->with(['error' => 'هذا المعجم غير موجود ']);
         }
-        return view('admin.moradfat.create',compact('word'));
+
+        if (!$word){
+            return redirect()->route('admin.mojjams')->with(['error' => 'هذه الكلمة غير موجودة ']);
+        }
+        return view('admin.moradfat.create',compact('word','mojjam'));
     }
 
-    public function store(MoradfatRequest $request, $id){
+    public function store(MoradfatRequest $request, $id,$mojjam_id){
         try{
         $word=Wordname::Selection()->find($id);
-        if (!$word){
-            return redirect()->route('admin.words')->with(['error' => 'هذه الكلمة غير موجودة ']);
+        $mojjam=Mojjam::Selection()->find($mojjam_id);
+        if (!$mojjam){
+            return redirect()->route('admin.mojjams')->with(['error' => 'هذا المعجم غير موجود ']);
         }
 
-        if(isset($_POST["moradf"]) && is_array($_POST["moradf"])){
-            $moradf= implode(", ", $_POST["moradf"]);
+        if (!$word){
+            return redirect()->route('admin.mojjams')->with(['error' => 'هذه الكلمة غير موجودة ']);
         }
-        else{
-            $moradf=$request->moradf;
+        $count=count($_POST["moradf"]);
+        if(isset($_POST["moradf"])){
+            for($i=0;$i<$count;$i++){
+         $moradfsexist=Moradfat::where('word_id',$id)->where('mojjam_id',$mojjam_id)->where('moradf',$_POST["moradf"][$i])->selection()->first();
+           if($moradfsexist){
+         if($moradfsexist->moradf == $_POST["moradf"][$i]){
+                return redirect()->route('admin.moradfat.create',['id'=>$id,'mojjamid'=>$mojjam->id])->with(['error' => 'هذا المرادف تم إضافته من قبل ']);
+            }
+            }
+          }
         }
-        if(isset($_POST["modad"]) && is_array($_POST["modad"])){
-            $modad= implode(", ", $_POST["modad"]);
-        }
-        else{
-            $modad=$request->modad;
-        }
+    for($i=0;$i<$count;$i++){
         $moradfat = Moradfat::create([
             'word_id' =>$word->id,
-              'moradf'   => $moradf,
-              'modad'   => $modad,
+              'moradf'   => $_POST["moradf"][$i],
+              'mojjam_id' =>$mojjam_id,
                 'admin_id' =>Auth::user()->id
             ]);
-            return redirect()->route('admin.words')->with(['success' => 'تم الحفظ بنجاح']);
+        }
+
+            return redirect()->route('admin.mojjams.showwords',$mojjam_id)->with(['success' => 'تم الحفظ بنجاح']);
         }
         catch (\Exception $ex){
             return $ex;
-            return redirect()->route('admin.words')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+            return redirect()->route('admin.mojjams.showwords',$mojjam_id)->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
     }
 
-    public function edit($id)
+    // update moradf by id ---
+    public function editby($id)
     {
         try {
 
@@ -81,40 +94,31 @@ class MoradfatController extends Controller
         }
     }
 
-    public function update(MoradfatRequest $request , $id)
+    public function update(MoradfatRequest $request ,$id,$mojjam_id)
     {
 
         try {
-            $moradfrow= Moradfat::with('word')->Selection()->find($id);
-            if (!$moradfrow){
-                return redirect()->route('admin.moradfat')->with(['error' => 'هذه المرادفات غير موجودة او ربما تكون محذوفة ']);
-            }
-              if ($moradfrow) {
-                if(isset($_POST["moradf"]) && is_array($_POST["moradf"])){
-                    $moradf= implode(", ", $_POST["moradf"]);
-                }
-                else{
-                    $moradf=$request->moradf;
-                }
-                if(isset($_POST["modad"]) && is_array($_POST["modad"])){
-                    $modad= implode(", ", $_POST["modad"]);
-                }
-                else{
-                    $modad=$request->modad;
-                }
 
-                $moradfrow::where('id', $id)
+
+            $moradfs= Moradfat::with('word')->where('word_id',$id)->where('mojjam_id',$mojjam_id)->Selection()->get();
+            $mojjam = Mojjam::find($id);
+            if (!$moradfs){
+                return redirect()->route('admin.mojjams.showwords',$request->mojjam_id)->with(['error' => 'هذه المرادفات غير موجودة او ربما تكون محذوفة ']);
+            }
+
+            // update moradfs ...
+            $i=0;
+            foreach ($moradfs as $moradf) {
+                $moradf::where('id',$moradf->id)
                 ->update([
-                    'word_id' => $moradfrow->word_id,
-                    'moradf'   => $moradf,
-                    'modad'   => $modad,
-                    'admin_id' =>Auth::user()->id
+                    'moradf'=>$_POST['moradf'][$i]
                 ]);
-              }
-            return redirect()->route('admin.moradfat')->with(['success' => 'تم التحديث بنجاح']);
+                $i++;
+          }
+            return redirect()->route('admin.mojjams.showwords',$request->mojjam_id)->with(['success' => 'تم التحديث بنجاح']);
         } catch (\Exception $exception) {
             return $exception;
-            return redirect()->route('admin.moradfat')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+            return redirect()->route('admin.mojjams.showwords',$request->mojjam_id)->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
 }
 

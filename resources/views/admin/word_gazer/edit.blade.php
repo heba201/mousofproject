@@ -17,7 +17,7 @@
                                 </li>
                                 <li class="breadcrumb-item"><a href="">جذر الكلمة </a>
                                 </li>
-                                <li class="breadcrumb-item active"> تعديل جذر
+                                <li class="breadcrumb-item active"> تعديل جذر معجم
                                 </li>
                             </ol>
                         </div>
@@ -31,7 +31,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> تعديل جذر </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> تعديل جذر  معجم <a href="#" >    {{$mojjam->mojjam_name}} </a></h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -47,7 +47,7 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.wordgazer.update',$word_gazer ->id)}}"
+                                        <form class="form" action="{{route('admin.wordgazer.update',['id'=>$word_gazer ->id,'mojjam_id' =>$mojjam->id])}}"
                                               method="POST">
                                               {{ csrf_field() }}
 

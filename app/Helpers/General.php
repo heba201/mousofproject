@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Config;
 use App\Models\Mojjam;
+use App\Models\MojjamArrangetype;
 use App\Http\Requests\MojjamRequest;
 
 

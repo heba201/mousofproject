@@ -5,13 +5,13 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title"> مرادفات وأضداد </h3>
+                    <h3 class="content-header-title"> مرادفات  </h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية</a>
                                 </li>
-                                <li class="breadcrumb-item active">  مرادفات وأضداد
+                                <li class="breadcrumb-item active">  مرادفات
 
                                 </li>
                             </ol>
@@ -26,7 +26,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title"> جميع المرادفات والأضداد </h4>
+                                    <h4 class="card-title"> جميع المرادفات  </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -50,7 +50,7 @@
                                             <tr>
                                                 <th>الكلمة</th>
                                                 <th>المرادفات</th>
-                                                <th>الأضداد</th>
+                                                <th>المعجم</th>
                                                 <th>الإجراءات</th>
                                             </tr>
                                             </thead>
@@ -59,16 +59,16 @@
                                                     <tr>
                                                         <td>{{$moradf ->word->word}}</td>
                                                         <td>{{$moradf ->moradf}}</td>
-                                                        <td>{{$moradf ->modad}}</td>
+                                                        <td>{{$moradf ->mojjam->mojjam_name}}</td>
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
-                                                                 <a href="{{route('admin.moradfat.show',$moradf->id)}}"
+                                                                 {{-- <a href="{{route('admin.moradfat.show',$moradf->id)}}"
                                                                     class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">عرض</a>
-                                                                 @if( Auth::user()->role_id==2)
-                                                                <a href="{{route('admin.moradfat.edit',$moradf->id)}}"
-                                                                   class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
 
+                                                                <a href="{{route('admin.moradfat.editbyid',$moradf->id])}}"
+                                                                   class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a> --}}
+                                                                   @if( Auth::user()->role_id==2)
                                                                 <a href="{{route('admin.moradfat.delete',$moradf->id)}}"
                                                                    class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1" onclick="return confirm('هل تريد الحذف?')">حذف</a>
                                                             @endif

@@ -31,7 +31,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form">  جذر  الكلمة</h4>
+                                    <h4 class="card-title" id="basic-layout-form">   جذر الكلمة -  المعجم  <a href="#"> {{$mojjam->mojjam_name}}</a></h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">

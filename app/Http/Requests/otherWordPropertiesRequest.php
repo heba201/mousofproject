@@ -25,7 +25,7 @@ class otherWordPropertiesRequest extends FormRequest
     {
         return [
             'other_word_properties' => 'required|array|min:1',
-            'wother_word_properties.*' =>'required|string|distinct',
+            'other_word_properties.*' =>'required|string|distinct',
            // 'word_meaning' => 'required'
         ];
     }

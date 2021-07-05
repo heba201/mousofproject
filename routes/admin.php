@@ -48,6 +48,8 @@ use Illuminate\Support\Facades\Route;
     Route::get('edit/{id}','mojjamsController@edit') -> name('admin.mojjams.edit');
     Route::post('update/{id}','mojjamsController@update') -> name('admin.mojjams.update');
     Route::get('show/{id}','mojjamsController@show') -> name('admin.mojjams.show');
+    Route::get('showwords/{id}','mojjamsController@showwords') -> name('admin.mojjams.showwords');
+    Route::get('showgzor/{id}','mojjamsController@showgzor') -> name('admin.mojjams.showgzor');
     Route::get('delete/{id}','mojjamsController@destroy') -> name('admin.mojjams.delete');
 
     });
@@ -78,24 +80,60 @@ use Illuminate\Support\Facades\Route;
     });
      ######################### End   mojjamspecialties Routes  ########################
 
+ ######################### Begin mojjamarrangetypes Routes ########################
+ Route::group(['prefix' => 'mojjamarrangetypes'], function () {
+    Route::get('/','MojjamarrangetypesController@index') -> name('admin.mojjamarrangetypes');
+    Route::get('create','MojjamarrangetypesController@create') -> name('admin.mojjamarrangetypes.create');
+    Route::post('store','MojjamarrangetypesController@store') -> name('admin.mojjamarrangetypes.store');
+    Route::get('edit/{id}','MojjamarrangetypesController@edit') -> name('admin.mojjamarrangetypes.edit');
+    Route::post('update/{id}','MojjamarrangetypesController@update') -> name('admin.mojjamarrangetypes.update');
+    Route::get('show/{id}','MojjamarrangetypesController@show') -> name('admin.mojjamarrangetypes.show');
+    Route::get('delete/{id}','MojjamarrangetypesController@destroy') -> name('admin.mojjamarrangetypes.delete');
+
+    });
+     ######################### End   mojjamarrangetypes Routes  ########################
+
+
+     ######################### Begin mojjammethods Routes ########################
+    Route::group(['prefix' => 'mojjammethods'], function () {
+    Route::get('/','MojjammethodsController@index') -> name('admin.mojjammethods');
+    Route::get('create','MojjammethodsController@create') -> name('admin.mojjammethods.create');
+    Route::post('store','MojjammethodsController@store') -> name('admin.mojjammethods.store');
+    Route::get('edit/{id}','MojjammethodsController@edit') -> name('admin.mojjammethods.edit');
+    Route::post('update/{id}','MojjammethodsController@update') -> name('admin.mojjammethods.update');
+    Route::get('show/{id}','MojjammethodsController@show') -> name('admin.mojjammethods.show');
+    Route::get('delete/{id}','MojjammethodsController@destroy') -> name('admin.mojjammethods.delete');
+
+    });
+     ######################### End   mojjammethods Routes  ########################
+
+
 
      ######################### Begin words Routes ########################
     Route::group(['prefix' => 'words'], function () {
     Route::get('/','wordsController@index') -> name('admin.words');
-    Route::get('create','wordsController@create') -> name('admin.words.create');
+    Route::get('create/{mojjam_id}','wordsController@create') -> name('admin.words.create');
     Route::post('store','wordsController@store') -> name('admin.words.store');
     Route::get('seccreate/{id}/{mojjam_id}','wordsController@seccreate') -> name('admin.words.seccreate');
     Route::post('firstupdate/{id}/{mojjam_id}','wordsController@firstupdate') -> name('admin.words.firstupdate');
-    Route::get('edit/{id}','wordsController@edit') -> name('admin.words.edit');
-    Route::post('update/{id}','wordsController@update') -> name('admin.words.update');
+    Route::get('edit/{id}/{mojjam_id}','wordsController@edit') -> name('admin.words.edit');
+    Route::post('update/{id}/{mojjam_id}','wordsController@update') -> name('admin.words.update');
     Route::get('secedit/{id}/{mojjam_id}','wordsController@secedit') -> name('admin.words.secedit');
-    Route::post('secupdate/{id}/{mojjam_id}','wordsController@secupdate') -> name('admin.words.secupdate');
+    Route::post('updatederivatives/{id}/{mojjam_id}','wordsController@updatederivatives') -> name('admin.words.updatederivatives');
     Route::get('thirdedit/{id}/{mojjam_id}','wordsController@thirdedit') -> name('admin.words.thirdedit');
-    Route::post('thirdupdate/{id}/{mojjam_id}','wordsController@thirdupdate') -> name('admin.words.thirdupdate');
+    Route::post('updateotherwordprop/{id}/{mojjam_id}','wordsController@updateotherwordprop') -> name('admin.words.updateotherwordprop');
     Route::get('finaledit/{id}/{mojjam_id}','wordsController@finaledit') -> name('admin.words.finaledit');
     Route::post('finalupdate/{id}/{mojjam_id}','wordsController@finalupdate') -> name('admin.words.finalupdate');
     Route::get('show/{id}','wordsController@show') -> name('admin.words.show');
-    Route::get('delete/{id}','wordsController@destroy') -> name('admin.words.delete');
+    Route::get('showwordmojjam/{id}/{mojjam_id}','wordsController@showwordmojjam') -> name('admin.words.showwordmojjam');
+    Route::get('getaddprop/{id}/{mojjam_id}','wordsController@getaddprop') -> name('admin.words.getaddprop');
+    Route::post('addprop/{id}/{mojjam_id}','wordsController@addprop') -> name('admin.words.addprop');
+
+    Route::get('getaddderivatives/{id}/{mojjam_id}','wordsController@getaddderivatives') -> name('admin.words.derivatives');
+    Route::post('addderivatives/{id}/{mojjam_id}','wordsController@addderivatives') -> name('admin.words.addderivatives');
+
+
+    Route::get('delete/{id}/{mojjam_id}','wordsController@destroy') -> name('admin.words.delete');
 
     });
      ######################### End   words Routes  ########################
@@ -103,12 +141,12 @@ use Illuminate\Support\Facades\Route;
 ######################### Begin word gazer Routes ########################
     Route::group(['prefix' => 'wordgazer'], function () {
     Route::get('/','WordgazerController@index') -> name('admin.wordgazer');
-    Route::get('create','WordgazerController@create') -> name('admin.wordgazer.create');
+    Route::get('create/{id}','WordgazerController@create') -> name('admin.wordgazer.create');
     Route::post('store','WordgazerController@store') -> name('admin.wordgazer.store');
-    Route::get('edit/{id}','WordgazerController@edit') -> name('admin.wordgazer.edit');
-    Route::post('update/{id}','WordgazerController@update') -> name('admin.wordgazer.update');
-    Route::get('show/{id}','WordgazerController@show') -> name('admin.wordgazer.show');
-    Route::get('delete/{id}','WordgazerController@destroy') -> name('admin.wordgazer.delete');
+    Route::get('edit/{id}/{mojjam_id}','WordgazerController@edit') -> name('admin.wordgazer.edit');
+    Route::post('update/{id}/{mojjam_id}','WordgazerController@update') -> name('admin.wordgazer.update');
+    Route::get('show/{id}/{mojjam_id}','WordgazerController@show') -> name('admin.wordgazer.show');
+    Route::get('delete/{id}/{mojjam_id}','WordgazerController@destroy') -> name('admin.wordgazer.delete');
 
     });
      ######################### End   word gazer Routes  ########################
@@ -328,15 +366,32 @@ use Illuminate\Support\Facades\Route;
          ######################### Begin moradfat Routes ########################
         Route::group(['prefix' => 'moradfat'], function () {
             Route::get('/','MoradfatController@index') -> name('admin.moradfat');
-        Route::get('create/{id}','MoradfatController@create') -> name('admin.moradfat.create');
-        Route::post('store/{id}','MoradfatController@store') -> name('admin.moradfat.store');
-        Route::get('edit/{id}','MoradfatController@edit') -> name('admin.moradfat.edit');
-        Route::post('update/{id}','MoradfatController@update') -> name('admin.moradfat.update');
+        Route::get('create/{id}/{mojjamid}','MoradfatController@create') -> name('admin.moradfat.create');
+        Route::post('store/{id}/{mojjam_id}','MoradfatController@store') -> name('admin.moradfat.store');
+        Route::get('editbyid/{id}','MoradfatController@editbyid') -> name('admin.moradfat.edit');
+        Route::post('update/{id}/{mojjam_id}','MoradfatController@update') -> name('admin.moradfat.update');
         Route::get('show/{id}','MoradfatController@show') -> name('admin.moradfat.show');
         Route::get('delete/{id}','MoradfatController@destroy') -> name('admin.moradfat.delete');
 
 });
     ######################### End  moradfat Routes ########################
+
+    ######################### Begin modad Routes ########################
+            Route::group(['prefix' => 'modad'], function () {
+            Route::get('/','ModadController@index') -> name('admin.modad');
+            Route::get('create/{id}/{mojjamid}','ModadController@create') -> name('admin.modad.create');
+            Route::post('store/{id}/{mojjam_id}','ModadController@store') -> name('admin.modad.store');
+            Route::get('edit/{id}','ModadController@edit') -> name('admin.modad.edit');
+            Route::post('update/{id}/{mojjam_id}','ModadController@update') -> name('admin.modad.update');
+            Route::get('show/{id}','ModadController@show') -> name('admin.modad.show');
+            Route::get('delete/{id}','ModadController@destroy') -> name('admin.modad.delete');
+
+    });
+        ######################### End  moradfat Routes ########################
+
+
+
+
 
     ######################### Begin poets Routes ########################
   Route::group(['prefix' => 'poets'], function () {

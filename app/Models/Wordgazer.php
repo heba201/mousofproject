@@ -9,16 +9,21 @@ class Wordgazer extends Model
 {
     use HasFactory;
     protected $table='word_gazer';
-    protected $fillable = [ 'word_gazer','admin_id','created_at','updated_at'];
+    protected $fillable = [ 'word_gazer','mojjam_id','admin_id','created_at','updated_at'];
     public function scopeSelection($query)
     {
 
-        return $query->select('id','word_gazer','admin_id');
+        return $query->select('id','word_gazer','mojjam_id','admin_id');
     }
 
     public function words(){
 
-        return $this -> hasMany('App\Models\Word','word_gzer','id');
+        return $this -> hasMany('App\Models\Word','	word_gzer','id');
+    }
+
+    public function mojjam()
+    {
+        return $this->belongsTo('App\Models\Mojjam', 'mojjam_id', 'id');
     }
 
     public function admin()

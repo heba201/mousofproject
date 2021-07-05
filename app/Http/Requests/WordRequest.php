@@ -26,6 +26,8 @@ class WordRequest extends FormRequest
         return [
             'word' => 'required|string',
             'word_type'  =>'required',
+            'word_meaning' =>'required',
+            'mojjam_id' =>'required|exists:mojjams,id',
             'word_gzer'  =>'required|exists:word_gazer,id',
             'gazer_type'  =>'required|exists:gazer_type,id',
            'gzer_weight' =>'required|exists:gazer_weight,id',
@@ -33,6 +35,7 @@ class WordRequest extends FormRequest
            'word_indication'  =>'required|exists:word_indication,id',
            'weight_indication'=>'required|exists:weight_indication,id',
            'time'=>'required|exists:time,id',
+           'word_meaning.*' =>'required|string|distinct',
         ];
     }
 
@@ -40,7 +43,10 @@ class WordRequest extends FormRequest
 
         return [
             'word.required'  => 'هذا الحقل مطلوب ',
-            'string'  =>'الاسم لابد ان يكون حروف فقط ',
+            'word_meaning.*.required'  => 'هذا الحقل مطلوب ',
+            'word_meaning.*.distinct' => 'ادخل بيانات مختلفة',
+            'mojjam_id.exists'  => 'المعجم غير موجود',
+            'string'  =>'هذا الحقل لابد ان يكون حروف فقط ',
             'word_type.required' => 'من فضلك حدد نوع الكلمة',
             'word_gzer.required'  => 'هذا الحقل مطلوب ',
             'word_gzer.exists'  => 'جذر الكلمة غير موجود',

@@ -1,6 +1,18 @@
 @extends('layouts.admin')
 
 @section('content')
+<script>
+  function show_select(){
+ var main_select = document.getElementById("word_type");
+  var selecttime = document.getElementById("time");
+  var desired_box = main_select.options[main_select.selectedIndex].value;
+  if(desired_box == 1) {
+    selecttime.style.display = '';
+  }else{
+    selecttime.style.display = 'none';
+  }
+  }
+    </script>
 <style>
     .switchery{
         background-color: green;
@@ -31,7 +43,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> إضافة كلمة حسب معجم </h4>
+                                    <h4 class="card-title" id="basic-layout-form">  إضافة كلمة  في   <a href="#">{{$mojjam->mojjam_name}}</a> </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -57,13 +69,10 @@
 
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label for="projectinput1">اختر المعجم</label>
-                                                                           <select name="mojjam_id" class="select2 form-control" id="selectId0">
-                                                                            <optgroup label=" اختر المعجم">
-                                                                            @foreach ($mojjams as $mojjam)
+                                                                    <label for="projectinput1">المعجم</label>
+                                                                    <input  name="mojjam_id" type="hidden" value="{{$mojjam->id}}">
+                                                                           <select name="mojjam_id_select" class="select2 form-control" id="selectId0" disabled>
                                                                             <option value="{{$mojjam->id}}">{{$mojjam->mojjam_name}}</option>
-                                                                            @endforeach
-                                                                            </optgroup>
                                                                         </select>
                                                                     @error("mojjam_id")
                                                                     <span class="text-danger">{{$message}}</span>
@@ -87,7 +96,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="projectinput2">نوع الكلمة</label>
-                                                                    <select name="word_type" class="select2 form-control" id="selectId">
+                                                                    <select name="word_type" class="select2 form-control" id="word_type" onchange="show_select()">
                                                                         <optgroup label=" نوع الكلمة ">
 
                                                                                     <option value="0">إسم</option>
@@ -162,10 +171,10 @@
                                                                     @enderror
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-6" style="display: none;" id="time">
                                                                 <div class="form-group">
                                                                     <label for="projectinput1">الزمن</label>
-                                                                    <select name="time" class="select2 form-control" id="time">
+                                                                    <select name="time" class="select2 form-control">
                                                                         <optgroup label="الزمن">
                                                                                 @foreach ($times as $time)
                                                                                 <option value="{{$time->id}}">{{$time-> time}}</option>
@@ -206,14 +215,40 @@
                                                                     @error("word_indication")
                                                                     <span class="text-danger">{{$message}}</span>
                                                                     @enderror
-                                                                </div>
                                                             </div>
                                                             </div>
 
+                                                            </div>
+                                                            <div class="row">
+                                                            <div class="col-md-5">
+                                                                <div class="form-group">
+                                                                    <label for="projectinput1">  معني الكلمة في {{$mojjam->mojjam_name}}  </label>
+                                                                    <textarea  value="" id="word_meaning[]"
+                                                                           class="form-control"
+                                                                           placeholder="  "
+                                                                           name="word_meaning[]"></textarea>
+                                                                           <input type="hidden" value="{{$mojjam->id}}" name="mojjam_id">
+                                                                           @error("word_meaning.*")
+                                                                           <span class="text-danger">{{$message}}</span>
+                                                                           @enderror
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-1">
+                                                                <a href="javascript:void(0)"  class="btn btn-primary" id="addmeaning_button" style="margin-top: 25px;"><i class="fas fa-plus"></i></a>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <a href="javascript:void(0)"  class="btn btn-danger" id="removemeaning_button" style="margin-top: 25px;margin-left:10px"><i class="fas fa-minus"></i></a>
+                                                                    </div>
+                                                            </div>
+
+                                                            <div class="row field-wrapper">
+
+                                                            </div>
 
                                                             <div class="form-actions">
                                                                 <button type="submit" class="btn btn-primary">
-                                                                    <i class="la la-check-square-o"></i> التالي
+                                                                    <i class="la la-check-square-o"></i> حفظ
                                                                 </button>
                                                                 <button type="button" class="btn btn-warning mr-1"
                                                                 onclick="history.back();">
@@ -234,4 +269,22 @@
         </div>
     </div>
 
+@endsection
+@section('script')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+      $(document).ready(function(){
+        $('#addmeaning_button').click(function(){
+
+            $('.field-wrapper').append(
+                '<div class="col-md-5"><div class="form-group"><textarea  value="" id="word_meaning[]" class="form-control" placeholder="  " name="word_meaning[]"></textarea><input type="hidden" value="{{$mojjam->id}}" name="mojjam_id">@error("word_meaning.*")<span class="text-danger">{{$message}}</span>@enderror</div></div>'
+             );
+})
+$("#removemeaning_button").on("click", function() {
+    $('.field-wrapper').children().last().remove();
+            });
+      });
+ </script>
 @endsection

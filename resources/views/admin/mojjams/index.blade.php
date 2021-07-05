@@ -63,9 +63,37 @@
                                                                  aria-label="Basic example">
                                                                  <a href="{{route('admin.mojjams.show',$mojjam->id)}}"
                                                                     class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">عرض</a>
+
+                                                                    @if( Auth::user()->role_id==2)
+                                                                    <a href="{{route('admin.mojjams.edit',$mojjam ->id)}}"
+                                                                        class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
+                                                                        @endif
+                                                                   <?php
+                                                                    $words=$mojjam->words();
+                                                                    $gzor=$mojjam->gzor();
+                                                                    ?>
+                                                                    @if($words->count()>0)
+                                                                    <a href="{{route('admin.mojjams.showwords',$mojjam->id)}}"
+                                                                        class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1"> عرض الكلمات</a>
+
+                                                                        @else
+                                                                        <a href="{{route('admin.words.create',$mojjam ->id)}}"
+                                                                            class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1"> إضافة كلمات</a>
+
+                                                                        @endif
+
+                                                                        <!-- condition for elgzor -->
+                                                                        @if($gzor->count()>0)
+                                                                        <a href="{{route('admin.mojjams.showgzor',$mojjam->id)}}"
+                                                                            class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1"> عرض الجذور</a>
+
+                                                                            @else
+                                                                            <a href="{{route('admin.wordgazer.create',$mojjam ->id)}}"
+                                                                                class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1"> إضافة جذور</a>
+
+                                                                            @endif
+
                                                                  @if( Auth::user()->role_id==2)
-                                                                <a href="{{route('admin.mojjams.edit',$mojjam ->id)}}"
-                                                                   class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
                                                                 <a href="{{route('admin.mojjams.delete',$mojjam ->id)}}"
                                                                    class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1" onclick="return confirm('هل تريد الحذف?')">حذف</a>
                                                             @endif

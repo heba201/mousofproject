@@ -10,11 +10,11 @@ class Word extends Model
     use HasFactory;
     protected $table='words';
     protected $fillable = ['word_type','admin_id','gzer_type','gzer_weight','weight_indication','other_word_properties','time',
-    'word_source','word_indication','word_derivatives','search_no','word_gzer','word_id','mojjam_id','word_count_id','created_at','updated_at'];
+    'word_source','word_indication','word_derivatives','derivatives_meaning','search_no','word_gzer','word_id','mojjam_id','word_count_id','created_at','updated_at'];
     public function scopeSelection($query)
     {
 
-        return $query->select('id','word_type','word_id','mojjam_id','time','admin_id','gzer_type','gzer_weight','weight_indication','word_source','word_indication','word_derivatives','search_no','word_gzer','other_word_properties','word_count_id');
+        return $query->select('id','word_type','word_id','mojjam_id','time','admin_id','gzer_type','gzer_weight','weight_indication','word_source','word_indication','word_derivatives','derivatives_meaning','search_no','word_gzer','other_word_properties','word_count_id');
     }
 
 
@@ -32,6 +32,8 @@ class Word extends Model
     {
         return $this->belongsTo('App\Models\Wordname', 'word_id', 'id');
     }
+
+
 
     public function wordgazer()
     {

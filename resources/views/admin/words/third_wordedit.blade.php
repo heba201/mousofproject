@@ -17,7 +17,7 @@
                                 </li>
                                 <li class="breadcrumb-item"><a href="">الكلمات </a>
                                 </li>
-                                <li class="breadcrumb-item active"> تعديل كلمة
+                                <li class="breadcrumb-item active"> اضافة كلمة
                                 </li>
                             </ol>
                         </div>

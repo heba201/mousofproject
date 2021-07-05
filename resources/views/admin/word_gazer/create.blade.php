@@ -31,7 +31,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> إضافة جذر </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> إضافة جذر  -  المعجم  <a href="#">{{$mojjam->mojjam_name}} </a></h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -52,7 +52,7 @@
                                               {{ csrf_field() }}
 
                                             <div class="form-body">
-
+                                                <input type="hidden" name="mojjam_id" value="{{$mojjam->id}}">
                                                 <h4 class="form-section"><i class="ft-home"></i> بيانات الجذر </h4>
                                                         <div class="row">
                                                             <div class="col-md-6">

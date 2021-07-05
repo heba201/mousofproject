@@ -63,12 +63,15 @@
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
-                                                                 <a href="{{route('admin.meanings.show',$meaning ->id)}}"
+                                                                 {{-- <a href="{{route('admin.meanings.show',$meaning ->id)}}"
                                                                     class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">عرض</a>
-                                                                 @if( Auth::user()->role_id==2)
+
                                                                 <a href="{{route('admin.meanings.edit',$meaning ->id)}}"
-                                                                   class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
-                                                                        <a href="{{route('admin.meanings.delete',$meaning ->id)}}"
+                                                                   class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a> --}}
+
+
+                                                                   @if( Auth::user()->role_id==2)
+                                                                   <a href="{{route('admin.meanings.delete',$meaning ->id)}}"
                                                                    class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1" onclick="return confirm('هل تريد الحذف?')">حذف</a>
                                                             @endif
                                                                 </div>

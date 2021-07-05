@@ -64,19 +64,12 @@
                                                                  <a href="{{route('admin.words.show',$word->word_id)}}"
                                                                     class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">عرض</a>
                                                                  @if( Auth::user()->role_id==2)
-                                                                <a href="{{route('admin.words.edit',$word ->word_id)}}"
-                                                                   class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
-
-                                                                   <a href="{{route('admin.moradfat.create',$word->word_id)}}"
-                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">إضافة  مرادفات وأضداد  للكلمة</a>
-
                                                                     <a href="{{route('admin.sentences.addsentence',$word ->word_id)}}"
                                                                     class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">إضافة جملة سياقية للكلمة</a>
 
                                                                     <a href="{{route('admin.abyaat.create',$word ->word_id)}}"
                                                                         class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">إضافة أبيات شعرية للكلمة</a>
-                                                                        <a href="{{route('admin.words.delete',$word ->word_id)}}"
-                                                                   class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1" onclick="return confirm('هل تريد الحذف?')">حذف</a>
+               
                                                             @endif
                                                                 </div>
                                                         </td>

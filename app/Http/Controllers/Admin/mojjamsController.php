@@ -53,6 +53,13 @@ class mojjamsController extends Controller
              else{
                     $example='لا يوجد مثال';
                 }
+
+                if(isset($_POST['hasgazer'])){
+                    $hasgazer=1;
+                }else{
+                    $hasgazer=0;
+                }
+
           $mojjam = Mojjam::create([
                 'mojjam_name' => $request->name,
                 'admin_id' =>Auth::user()->id,
@@ -61,7 +68,8 @@ class mojjamsController extends Controller
                 'mojjamarrangetype_id' =>$request->mojjamarrangetype_id,
                 'mojjammethod_id' =>$request->mojjammethod_id,
                 'example' =>$example,
-                'mojjamspecialty_id' => $request->mojjamspecialty_id
+                'mojjamspecialty_id' => $request->mojjamspecialty_id,
+                'hasgazer' => $hasgazer
             ]);
             return redirect()->route('admin.mojjams')->with(['success' => 'تم الحفظ بنجاح']);
        }
@@ -116,7 +124,11 @@ class mojjamsController extends Controller
                         $example='لا يوجد مثال';
                     }
                 }
-
+                if(isset($_POST['hasgazer'])){
+                    $hasgazer=1;
+                }else{
+                    $hasgazer=0;
+                }
 
               if ($mojjam) {
                 $mojjam::where('id', $id)
@@ -128,7 +140,8 @@ class mojjamsController extends Controller
                     'mojjamarrangetype_id' =>$request->mojjamarrangetype_id,
                     'mojjammethod_id' =>$request->mojjammethod_id,
                     'example' =>$example,
-                    'mojjamspecialty_id' => $request->mojjamspecialty_id
+                    'mojjamspecialty_id' => $request->mojjamspecialty_id,
+                    'hasgazer' => $hasgazer
                 ]);
               }
 

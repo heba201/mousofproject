@@ -159,11 +159,19 @@
                                                                     @enderror
                                                                 </div>
                                                             </div>
+                                                            <!-- new control -->
+                                                            <div class="col-md-6" style="margin-top:35px">
+                                                                <div class="form-group">
+                                                                    <input type="checkbox" name="hasgazer">
+                                                                    <label for="projectinput1">يحتوي علي جذور</label>
+                                                                    @error("hasgazer")
+                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
 
                                                         </div>
                                             </div>
-
-
                                             <div class="form-actions">
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="la la-check-square-o"></i> حفظ

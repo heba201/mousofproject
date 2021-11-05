@@ -23,10 +23,16 @@ class WordgazerController extends Controller
 
     public function create($id)
     {
+        try{
         $mojjam = Mojjam::Selection()->find($id);
         if (!$mojjam)
         return redirect()->route('admin.mojjams')->with(['error' => 'هذاالمعجم غير موجود او ربما يكون محذوفا ']);
         return view('admin.word_gazer.create',compact('mojjam'));
+        }
+        catch(\Exception $exception){
+        return redirect()->route('admin.mojjams')->with(['error' => 'هذاالمعجم غير موجود او ربما يكون محذوفا ']);
+
+        }
     }
 
     public function store(WordgazerRequest $request)

@@ -9,11 +9,11 @@ class Mojjam extends Model
 {
     use HasFactory;
     protected $table='mojjams';
-    protected $fillable = [ 'mojjam_name','admin_id','author_id','mojjamarrangetype_id','mojjammethod_id','mojjamspecialty_id','example','language_id','created_at','updated_at'];
+    protected $fillable = [ 'mojjam_name','hasgazer','admin_id','author_id','mojjamarrangetype_id','mojjammethod_id','mojjamspecialty_id','example','language_id','created_at','updated_at'];
     public function scopeSelection($query)
     {
 
-        return $query->select('id','mojjam_name','author_id','mojjamarrangetype_id','mojjammethod_id','mojjamspecialty_id','admin_id','example','language_id');
+        return $query->select('id','mojjam_name','author_id','hasgazer','mojjamarrangetype_id','mojjammethod_id','mojjamspecialty_id','admin_id','example','language_id');
     }
 
     public function mojjammeanings(){

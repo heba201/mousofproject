@@ -5,13 +5,13 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title"> كلمات معجم </h3>
+                    <h3 class="content-header-title"> جذور معجم </h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية</a>
                                 </li>
-                                <li class="breadcrumb-item active">  كلمات معجم {{$mojjam->mojjam_name}}
+                                <li class="breadcrumb-item active">  جذور معجم {{$mojjam->mojjam_name}}
 
                                 </li>
                             </ol>
@@ -21,25 +21,18 @@
                 </div>
             </div>
             <div class="content-body">
-
                 <!-- DOM - jQuery events table -->
                 <section id="dom">
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">كلمات معجم {{$mojjam->mojjam_name}}  -
+                                    <h4 class="card-title">جذور معجم {{$mojjam->mojjam_name}}  -
                                         <a href="{{route('admin.mojjams')}}" class="btn btn-primary"><i class="la la-check-square-o"></i> عودة إلي المعاجم</a>
 
 
+                                    </h4>
 
-                                    </h4>
-                                    @if( Auth::user()->role_id==2)
-                                    <h4 class="card-title">
-                                        <a href="{{route('admin.words.create',$mojjam ->id)}}"
-                                            class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1"><i class="fas fa-plus-circle" style="color: white"></i> إضافة كلمة </a>
-                                    </h4>
-                                    @endif
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -50,79 +43,50 @@
                                             <li><a data-action="close"><i class="ft-x"></i></a></li>
                                         </ul>
                                     </div>
+
+
                                 </div>
 
                                 @include('admin.includes.alerts.success')
                                 @include('admin.includes.alerts.errors')
 
                                 <div class="card-content collapse show">
-                                    <div class="card-body card-dashboard">
 
+                                    <a href="{{route('admin.wordgazer.create',$mojjam ->id)}}" style="margin-right: 10px;"
+                                        class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1"> <i class="fas fa-plus-circle" style="color: white"></i> إضافة جذر</a>
+
+                                    <div class="card-body card-dashboard">
                                         <table
                                             class="table display nowrap table-striped table-bordered scroll-horizontal">
                                             <thead class="">
                                             <tr>
-                                                <th>الكلمات </th>
+                                                <th>الجذور </th>
                                                 <th>الإجراءات</th>
                                             </tr>
                                             </thead>
                                             <tbody>
 
-                                                @foreach($mojjamwords as $mojjamword)
+                                                @foreach($mojjamgazrexist as $wordgazer)
                                                     <tr>
-
-                                                            <?php
-                                                        $words = App\Models\Wordname::Selection()->where('id',$mojjamword->word_id)->get();
-                                                            ?>
-                                                        @foreach ($words as $word)
-
-
-                                                           <td> {{$word->word}}</td>
+                                                           <td> {{$wordgazer->word_gazer}}</td>
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
-                                                                 <a href="{{route('admin.words.showwordmojjam',['id'=>$word->id,'mojjam_id'=>$mojjam->id])}}"
+                                                                 <a href="{{route('admin.wordgazer.show',['id' =>$wordgazer ->id, 'mojjam_id' => $mojjam->id])}}"
                                                                     class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">عرض</a>
                                                                  @if( Auth::user()->role_id==2)
+                                                                <a href="{{route('admin.wordgazer.edit',['id' =>$wordgazer ->id, 'mojjam_id' => $mojjam->id])}}"
+                                                                   class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
 
-
-                                                                 <a href="{{route('admin.words.edit',['id' =>$word->id,'mojjam_id'=>$mojjam->id])}}"
-                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
-
-                                                                    <a href="{{route('admin.tabweebelgazer',['id' =>$word->id,'mojjam_id'=>$mojjam->id])}}"
-                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تبويب جذر الكلمة</a>
-                                                                   
-                                                                   
-                                                                    <a href="{{route('admin.words.derivatives',['id'=>$word->id,'mojjam_id'=>$mojjam->id])}}"
-                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">إضافة مشتقات </a>
-
-
-                                                                    <a href="{{route('admin.words.getaddprop',['id'=>$word->id,'mojjam_id'=>$mojjam->id])}}"
-                                                                        class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">إضافة  خصائص أخري  </a>
-
-
-                                                                   <a href="{{route('admin.moradfat.create',['id'=>$word->id,'mojjamid'=>$mojjam->id])}}"
-                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">إضافة  مرادفات   </a>
-
-
-                                                                    <a href="{{route('admin.modad.create',['id'=>$word->id,'mojjamid'=>$mojjam->id])}}"
-                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">إضافة  أضداد  </a>
-
-
-
-                                                                <a href="{{route('admin.words.delete',['id'=>$word ->id,'mojjam_id'=>$mojjam->id])}}"
+                                                                <a href="{{route('admin.wordgazer.delete',['id' =>$wordgazer ->id, 'mojjam_id' => $mojjam->id])}}"
                                                                    class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1" onclick="return confirm('هل تريد الحذف?')">حذف</a>
                                                             @endif
                                                                 </div>
                                                         </td>
                                                     </tr>
                                                 @endforeach
-                                                @endforeach
-
-
                                             </tbody>
                                         </table>
-
                                         <div class="justify-content-center d-flex">
 
                                         </div>

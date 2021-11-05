@@ -83,6 +83,7 @@
                                                                         @endif
 
                                                                         <!-- condition for elgzor -->
+                                                                        @if( $mojjam->hasgazer)
                                                                         @if($gzor->count()>0)
                                                                         <a href="{{route('admin.mojjams.showgzor',$mojjam->id)}}"
                                                                             class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1"> عرض الجذور</a>
@@ -92,7 +93,7 @@
                                                                                 class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1"> إضافة جذور</a>
 
                                                                             @endif
-
+                                                                            @endif
                                                                  @if( Auth::user()->role_id==2)
                                                                 <a href="{{route('admin.mojjams.delete',$mojjam ->id)}}"
                                                                    class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1" onclick="return confirm('هل تريد الحذف?')">حذف</a>

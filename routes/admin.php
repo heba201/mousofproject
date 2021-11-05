@@ -231,7 +231,21 @@ use Illuminate\Support\Facades\Route;
             });
              ######################### End word indication Routes  ########################
 
-     ######################### Begin sentences Routes ########################
+     ######################### Begin  tabweeb elgazer Routes ########################
+      Route::group(['prefix' => 'tabweebelgazer'], function () {
+      Route::get('/{id}/{mojjam_id}','TabweebelgazerController@index') -> name('admin.tabweebelgazer');
+      Route::get('create/{word_id}/{mojjam_id}','TabweebelgazerController@create') -> name('admin.tabweebelgazer.create');
+
+
+      });
+       ######################### End word indication Routes  ########################
+     
+
+
+
+
+     
+             ######################### Begin sentences Routes ########################
      Route::group(['prefix' => 'sentences'], function () {
         Route::get('/','sentencesController@index') -> name('admin.sentences');
         Route::get('addsentence/{id}','sentencesController@addsentence') -> name('admin.sentences.addsentence');

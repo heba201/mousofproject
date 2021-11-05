@@ -89,11 +89,8 @@
                                                                  <a href="{{route('admin.words.edit',['id' =>$word->id,'mojjam_id'=>$mojjam->id])}}"
                                                                     class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
 
-                                                                    <a href="{{route('admin.tabweebelgazer',['id' =>$word->id,'mojjam_id'=>$mojjam->id])}}"
-                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تبويب جذر الكلمة</a>
-                                                                   
-                                                                   
-                                                                    <a href="{{route('admin.words.derivatives',['id'=>$word->id,'mojjam_id'=>$mojjam->id])}}"
+
+                                                                   <a href="{{route('admin.words.derivatives',['id'=>$word->id,'mojjam_id'=>$mojjam->id])}}"
                                                                     class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">إضافة مشتقات </a>
 
 
